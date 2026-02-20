@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://crme6l84ntp3f"]
+
+[ext_resource type="Texture2D" uid="uid://cen3rrdn856sp" path="res://environment/moss.png" id="1_f31go"]
+
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyr0r"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_f31go")
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_15klv"]
+
+[node name="moss" type="Node3D"]
+transform = Transform3D(3.3600004, 0, 0, 0, 1, 0, 0, 0, 2.38, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(9.408002, 0, 0, 0, 1, 0, 0, 0, 14.400001, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_vyr0r")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_15klv")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.4349704, 0, -13.909332, 0, 1, 0, 9.087432, 0, 3.7269948, 0, -0.002, 10)
+material_override = SubResource("StandardMaterial3D_vyr0r")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_15klv")

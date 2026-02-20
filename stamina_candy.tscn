@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://7anpcq60g7rp"]
+
+[ext_resource type="Script" uid="uid://cn4kfjldf8o0j" path="res://stamina_candy.gd" id="1_candy_script"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_col"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_candy"]
+albedo_color = Color(0.84663993, 0.4928165, 0, 1)
+emission_enabled = true
+emission = Color(0.1, 0.4, 0.8, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_candy"]
+material = SubResource("StandardMaterial3D_candy")
+radius = 0.25
+height = 0.5
+
+[node name="StaminaCandy" type="Area3D"]
+collision_layer = 0
+script = ExtResource("1_candy_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6.6000004, 0, 0, 0, 16.9344, 0, 0, 0, 16.24, 0, 0, 0)
+shape = SubResource("SphereShape3D_col")
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(6.6000004, 0, 0, 0, 16.9344, 0, 0, 0, 16.24, 0, 0, 0)
+
+[node name="CandyMesh" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(2.6, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("SphereMesh_candy")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(0.15151514, 0, 0, 0, 0.059051402, 0, 0, 0, 0.06157636, 0, 0.29389846, 0)
+layers = 1023
+light_color = Color(0.4648643, 0.633438, 0.98121184, 1)
+light_energy = 300.0
+light_size = 0.6
+omni_range = 21.0

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciepx3w5fd2gg"]
+
+[ext_resource type="Texture2D" uid="uid://bi4kqwvnywpjk" path="res://environment/vines.png" id="1_ihfxk"]
+
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8vosk"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_ihfxk")
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_elxeu"]
+
+[node name="vines" type="Node3D"]
+
+[node name="Sprite3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3.8868144, 0, 0, 0, 0.017050583, -2.3186185, 0, 0.9768285, 0.040471584, 0, 3.1456828, 0)
+material_override = SubResource("StandardMaterial3D_8vosk")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_elxeu")
+
+[node name="Sprite3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-3.8868144, 8.539706e-08, 3.5381382e-09, 0, 0.017050581, -2.3186183, -3.3979612e-07, -0.97682863, -0.04047159, -7.7427425, 3.1456828, 0)
+material_override = SubResource("StandardMaterial3D_8vosk")
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_elxeu")

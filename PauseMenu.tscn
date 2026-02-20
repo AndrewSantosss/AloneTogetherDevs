@@ -1,0 +1,149 @@
+[gd_scene load_steps=2 format=3 uid="uid://utcu6mm68xcq"]
+
+[ext_resource type="Script" uid="uid://c2deymibnbhqw" path="res://PauseMenu.gd" id="1_nov15"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+process_priority = 1
+process_physics_priority = 1
+auto_translate_mode = 1
+script = ExtResource("1_nov15")
+
+[node name="ColorRect3" type="ColorRect" parent="."]
+process_mode = 3
+offset_top = -12.0
+offset_right = 480.9801
+offset_bottom = 106.19579
+scale = Vector2(2.2537315, 5.3401523)
+color = Color(0.20392157, 0.20392157, 0.20392157, 0.31764707)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+process_mode = 3
+offset_top = -4.0
+offset_right = 121.13244
+offset_bottom = 112.66327
+scale = Vector2(2.7737312, 5.340152)
+color = Color(0.20392157, 0.20392157, 0.20392157, 0.8156863)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+process_mode = 3
+offset_top = -14.0
+offset_right = 480.9801
+offset_bottom = 104.578926
+scale = Vector2(2.288111, 5.300152)
+color = Color(0.20392157, 0.20392157, 0.20392157, 0.31764707)
+
+[node name="OBJECTIVES" type="Label" parent="."]
+visible = false
+offset_left = 381.00006
+offset_top = 54.0
+offset_right = 470.00006
+offset_bottom = 78.0
+scale = Vector2(1.5189005, 1.6800003)
+text = "Controls"
+
+[node name="MenuContainer" type="CenterContainer" parent="."]
+offset_left = 83.0
+offset_top = 11.0
+offset_right = 201.0
+offset_bottom = 338.0
+scale = Vector2(1.615686, 1.5488434)
+
+[node name="MainMenu" type="VBoxContainer" parent="MenuContainer"]
+process_mode = 3
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenuContainer/MainMenu"]
+layout_mode = 2
+text = "  PAUSED"
+
+[node name="ResumeButton" type="Button" parent="MenuContainer/MainMenu"]
+process_mode = 3
+layout_mode = 2
+text = "RESUME"
+
+[node name="SettingsButton" type="Button" parent="MenuContainer/MainMenu"]
+layout_mode = 2
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="MenuContainer/MainMenu"]
+layout_mode = 2
+text = "QUIT"
+
+[node name="SettingsMenu" type="VBoxContainer" parent="."]
+offset_left = 121.0
+offset_top = 107.0
+offset_right = 239.0
+offset_bottom = 434.0
+
+[node name="SETTINGS" type="Label" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="MasterVolume" type="Label" parent="SettingsMenu"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="MasterSlider" type="HSlider" parent="SettingsMenu"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="SFXVolume" type="Label" parent="SettingsMenu"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXSlider" type="HSlider" parent="SettingsMenu"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="BackButton" type="Button" parent="SettingsMenu"]
+layout_mode = 2
+text = "Back"
+
+[node name="SettingsMenu2" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="GrassCheck" type="CheckBox" parent="SettingsMenu/SettingsMenu2"]
+layout_mode = 2
+text = "Grass"
+
+[node name="SettingsMenu3" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="TreesCheck" type="CheckBox" parent="SettingsMenu/SettingsMenu3"]
+layout_mode = 2
+text = "Vegetation"
+
+[node name="SettingsMenu4" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="ShadowsCheck" type="CheckBox" parent="SettingsMenu/SettingsMenu4"]
+layout_mode = 2
+text = "Shadows"
+
+[node name="SettingsMenu5" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="GlowCheck" type="CheckBox" parent="SettingsMenu/SettingsMenu5"]
+layout_mode = 2
+text = "Bloom"
+
+[node name="SettingsMenu6" type="VBoxContainer" parent="SettingsMenu"]
+layout_mode = 2
+
+[node name="FogCheck" type="CheckBox" parent="SettingsMenu/SettingsMenu6"]
+layout_mode = 2
+text = "Fog"
+
+[connection signal="pressed" from="MenuContainer/MainMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MainMenu/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SettingsMenu/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="SettingsMenu/SettingsMenu2/GrassCheck" to="." method="_on_grass_check_pressed"]
+[connection signal="pressed" from="SettingsMenu/SettingsMenu3/TreesCheck" to="." method="_on_trees_check_pressed"]
+[connection signal="pressed" from="SettingsMenu/SettingsMenu4/ShadowsCheck" to="." method="_on_shadows_check_pressed"]
+[connection signal="pressed" from="SettingsMenu/SettingsMenu5/GlowCheck" to="." method="_on_glow_check_pressed"]
+[connection signal="pressed" from="SettingsMenu/SettingsMenu6/FogCheck" to="." method="_on_fog_check_pressed"]

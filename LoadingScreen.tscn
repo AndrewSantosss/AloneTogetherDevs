@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://p6ajcv61aqyw"]
+
+[ext_resource type="Script" uid="uid://d1n1tkrgmgc4l" path="res://SceneLoader.gd" id="1_ghsbh"]
+[ext_resource type="Texture2D" uid="uid://br27jih24e2e3" path="res://misc/AloneTogether.jpg" id="2_dhqi2"]
+
+[node name="LoadingScreen" type="Node3D"]
+script = ExtResource("1_ghsbh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1082.0
+offset_bottom = 615.0
+color = Color(0, 0, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 339.0
+offset_top = -2.0
+offset_right = 1063.0
+offset_bottom = 1022.0
+scale = Vector2(0.554282, 0.48284364)
+texture = ExtResource("2_dhqi2")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = 444.0
+offset_top = 470.0
+offset_right = 656.0
+offset_bottom = 497.0

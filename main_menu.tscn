@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfop58tgnvixx"]
+
+[ext_resource type="Script" uid="uid://dmf3kphetxmsh" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Texture2D" uid="uid://dcbyppygo7itf" path="res://misc/Main menu 2.jpg" id="3_jix8l"]
+[ext_resource type="AudioStream" uid="uid://dknb4enm0iydd" path="res://sfx/SOUNDTRACK_BACKGROUND_1.mp3" id="4_glbon"]
+[ext_resource type="Texture2D" uid="uid://dx3ddydx5p8ri" path="res://misc/IMG_20251129_130100.png" id="4_jix8l"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 419.0
+offset_top = 398.99997
+offset_right = -343.0
+offset_bottom = 114.76514
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.8296895, 0.8530098)
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_top = -2.0000012
+offset_right = 2776.0
+offset_bottom = 1160.0
+scale = Vector2(0.55267453, 0.56249475)
+texture = ExtResource("3_jix8l")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 317.0
+offset_top = -79.0
+offset_right = 3213.0
+offset_bottom = 4017.0
+scale = Vector2(0.15709579, 0.15709579)
+texture = ExtResource("4_jix8l")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 404.95627
+offset_top = 515.8623
+offset_right = 698.9563
+offset_bottom = 564.8623
+text = "Press any key to continue
+"
+horizontal_alignment = 1
+
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_glbon")
+autoplay = true
+parameters/looping = false

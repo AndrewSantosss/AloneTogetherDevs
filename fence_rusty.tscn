@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjxkkbd7mkl0j"]
+
+[ext_resource type="Texture2D" uid="uid://fax8dilvgsf2" path="res://environment/1762883658602.png" id="1_7lg02"]
+[ext_resource type="PackedScene" uid="uid://ciepx3w5fd2gg" path="res://vines.tscn" id="2_181td"]
+
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_181td"]
+size = Vector3(2.10495, 1.1235962, 2.1437988)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_181td"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("1_7lg02")
+texture_filter = 2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_103vk"]
+
+[node name="fenceRusty" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(48.2088, 0, 0, 0, -2.53185e-07, -19.7587, 0, 5.7922, -8.63681e-07, -0.92181486, 2.139791, 0.10697979)
+shape = SubResource("BoxShape3D_181td")
+
+[node name="Mesh31" type="MeshInstance3D" parent="."]
+transform = Transform3D(48.2088, 0, 0, 0, -2.53185e-07, -19.7587, 0, 5.7922, -8.63681e-07, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_181td")
+mesh = SubResource("PlaneMesh_103vk")
+
+[node name="vines" parent="." instance=ExtResource("2_181td")]
+transform = Transform3D(4.10571, 0, 0, 0, 33.892303, 0, 0, 0, 1, 34, -147, 1)
+
+[node name="vines2" parent="." instance=ExtResource("2_181td")]
+transform = Transform3D(4.10571, 0, 0, 0, 33.892303, 0, 0, 0, 1, -3, -153, 1)
+
+[node name="vines3" parent="." instance=ExtResource("2_181td")]
+transform = Transform3D(4.10571, 0, 0, 0, 33.892303, 0, 0, 0, 1, 34, -147, 0)
+
+[node name="vines4" parent="." instance=ExtResource("2_181td")]
+transform = Transform3D(4.10571, 0, 0, 0, 33.892303, 0, 0, 0, 1, -3, -153, 0)

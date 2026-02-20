@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://doqkbldrkgs5p"]
+
+[ext_resource type="Script" uid="uid://bkjhfmr8lfq1n" path="res://medkit.gd" id="1_script"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_red"]
+albedo_color = Color(0.85, 0.1, 0.1, 1)
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_box"]
+material = SubResource("StandardMaterial3D_red")
+size = Vector3(0.6, 0.4, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_white"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_cross_v"]
+material = SubResource("StandardMaterial3D_white")
+size = Vector3(0.15, 0.25, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cross_h"]
+material = SubResource("StandardMaterial3D_white")
+size = Vector3(0.25, 0.15, 0.3)
+
+[node name="Medkit" type="Area3D"]
+transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, 0, 0, 0)
+collision_layer = 0
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_collision")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MainBox" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_box")
+
+[node name="CrossVertical" type="MeshInstance3D" parent="Visuals/MainBox"]
+mesh = SubResource("BoxMesh_cross_v")
+
+[node name="CrossHorizontal" type="MeshInstance3D" parent="Visuals/MainBox"]
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(0.038676944, 0, 0, 0, 0.046992473, 0, 0, 0, 0.03779289, 0, 0.47105265, 0)
+layers = 1023
+light_color = Color(0.2, 1, 0.2, 1)
+light_energy = 300.0
+light_size = 0.6
+omni_range = 21.0

@@ -1,0 +1,136 @@
+[gd_scene load_steps=19 format=3 uid="uid://br1ptgiw23cnr"]
+
+[ext_resource type="Script" uid="uid://2r7hxbtdilrn" path="res://npc.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://tgjng2fafktf" path="res://character/npc_idle.png" id="2_ll5ud"]
+[ext_resource type="Texture2D" uid="uid://cuy300tkfpju5" path="res://character/npc_idle_to_wave.png" id="3_u1jv5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_npc"]
+radius = 19.0
+height = 38.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1jv5"]
+atlas = ExtResource("2_ll5ud")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tciug"]
+atlas = ExtResource("2_ll5ud")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bksm8"]
+atlas = ExtResource("2_ll5ud")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jc52h"]
+atlas = ExtResource("2_ll5ud")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sao2"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5vbj"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru7ao"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7isa0"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1478n"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6m5aw"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1hoc"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(0, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i48ha"]
+atlas = ExtResource("3_u1jv5")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6sao2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1jv5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tciug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bksm8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jc52h")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sao2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5vbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru7ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7isa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1478n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m5aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1hoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i48ha")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 1.0
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ll5ud"]
+size = Vector3(1.8496399, 1, 0.44142258)
+
+[node name="NPC" type="CharacterBody3D"]
+script = ExtResource("1_script")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_npc")
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(72.18664, 0, 0, 0, 62.982513, 0, 0, 0, 1.0000006, 0, 0, 0)
+billboard = 2
+alpha_cut = 2
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_6sao2")
+animation = &"talk"
+
+[node name="Label3D" type="Label3D" parent="Sprite3D"]
+transform = Transform3D(0.20280991, 0, 0, 0, 0.1786817, 0, 0, 0, 0.6597252, 0, 0.25850928, 0)
+billboard = 1
+text = "Survivor"
+font_size = 64
+
+[node name="NPCTriggerArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="NPCTriggerArea"]
+transform = Transform3D(21.518248, 0, 0, 0, 27.68389, 0, 0, 0, 129.31522, -1.6028395, 0.85539246, -9.488086)
+shape = SubResource("BoxShape3D_ll5ud")

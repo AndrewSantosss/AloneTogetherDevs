@@ -1,0 +1,2008 @@
+[gd_scene load_steps=97 format=3 uid="uid://kswxbx8geroo"]
+
+[ext_resource type="Script" uid="uid://depaygkgmdkuo" path="res://player_code.gd" id="1_oywoi"]
+[ext_resource type="Shader" uid="uid://w8aa6otll8eq" path="res://psprocess.gdshader" id="1_u7h62"]
+[ext_resource type="Texture2D" uid="uid://rbb8vuqn5a7a" path="res://character/TEST.png" id="2_ms8cb"]
+[ext_resource type="Script" uid="uid://w4yuhki0w1bp" path="res://camera_pivot.gd" id="3_0ma15"]
+[ext_resource type="Texture2D" uid="uid://bdp43yt5aqdsx" path="res://environment/maxresdefault.jpg" id="4_xmk38"]
+[ext_resource type="Texture2D" uid="uid://c0gc8ixue0kdn" path="res://environment/road.jpg" id="5_ntcbc"]
+[ext_resource type="PackedScene" uid="uid://dkf7vpr6fkkya" path="res://enemy.tscn" id="6_8r331"]
+[ext_resource type="Texture2D" uid="uid://bj6yftknmyg75" path="res://background/Gemini_Generated_Image_bddi05bddi05bddi.png" id="6_gtohy"]
+[ext_resource type="Texture2D" uid="uid://njmusk55r3b6" path="res://background/Gemini_Generated_Image_87rvxc87rvxc87rv.png" id="6_x5852"]
+[ext_resource type="Texture2D" uid="uid://cabrnt6cu7jdn" path="res://background/Screenshot (1242).png" id="7_x5852"]
+[ext_resource type="Texture2D" uid="uid://dkoxm4sspk7nh" path="res://environment/images (1).jpg" id="8_em0q1"]
+[ext_resource type="Texture2D" uid="uid://cduk80jgl4ebf" path="res://background/Picsart_25-11-08_02-45-25-317.jpg" id="11_sq3e3"]
+[ext_resource type="Texture2D" uid="uid://cdinqk4v37fop" path="res://environment/barrier.png" id="12_gtohy"]
+[ext_resource type="Texture2D" uid="uid://c4w88dhqk3ct8" path="res://background/Picsart_25-11-08_02-45-47-767.jpg" id="12_m8303"]
+[ext_resource type="Texture2D" uid="uid://bq3odcfjpnyic" path="res://environment/Road AI (1).png" id="12_mhmwo"]
+[ext_resource type="Texture2D" uid="uid://kqtluphi6mfw" path="res://background/AsphaltDamaged0059_1_350.jpg" id="12_vgut2"]
+[ext_resource type="Texture2D" uid="uid://dheic02g5s5dc" path="res://background/Picsart_25-11-08_02-46-29-430.png" id="13_o4ynb"]
+[ext_resource type="Texture2D" uid="uid://dfd8rtw7d33k0" path="res://background/IMG_20251108_030007.jpg" id="14_em0q1"]
+[ext_resource type="Texture2D" uid="uid://du7jy6s5l3foq" path="res://environment/BPI_Background_asset.png" id="14_u7h62"]
+[ext_resource type="Texture2D" uid="uid://bpw5hwlruu35x" path="res://background/1762542971236.png" id="16_xmk38"]
+[ext_resource type="Texture2D" uid="uid://rj8veectxunw" path="res://background/1762542996388.png" id="17_kdq6o"]
+[ext_resource type="Texture2D" uid="uid://2gxa73rcq8b6" path="res://environment/1762881663010.png" id="21_r24b8"]
+[ext_resource type="Texture2D" uid="uid://cvud0ef2qt3jf" path="res://environment/1762881704657.png" id="22_kosqh"]
+[ext_resource type="Texture2D" uid="uid://d3sfaei6ec374" path="res://environment/1762865184038.png" id="22_mhmwo"]
+[ext_resource type="Texture2D" uid="uid://vqbvr5gd3fwr" path="res://environment/1762882889460.png" id="23_cag37"]
+[ext_resource type="Texture2D" uid="uid://bwh0hu6ie8ry7" path="res://environment/COLOURBOX7482737.webp" id="23_on4kr"]
+[ext_resource type="Texture2D" uid="uid://fax8dilvgsf2" path="res://environment/1762883658602.png" id="27_nfngs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6e1fn"]
+disable_ambient_light = true
+albedo_texture = ExtResource("23_on4kr")
+uv1_scale = Vector3(50, 50, 50)
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u7h62"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6nvw1"]
+material = SubResource("StandardMaterial3D_u7h62")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_on4kr"]
+shader = ExtResource("1_u7h62")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 16
+shader_parameter/dither_size = 2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_u7h62"]
+radius = 3.1171875
+height = 17.210693
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7h62"]
+atlas = ExtResource("2_ms8cb")
+region = Rect2(0, 0, 2160, 2430)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_on4kr"]
+atlas = ExtResource("2_ms8cb")
+region = Rect2(2160, 0, 2160, 2430)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5k7eh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7h62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_on4kr")
+}],
+"loop": false,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_sreuk"]
+panorama = ExtResource("4_xmk38")
+
+[sub_resource type="Sky" id="Sky_tq6uv"]
+sky_material = SubResource("PanoramaSkyMaterial_sreuk")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_12c36"]
+background_mode = 2
+background_energy_multiplier = 2.21
+sky = SubResource("Sky_tq6uv")
+ambient_light_source = 2
+ambient_light_color = Color(0.34781694, 0.34781697, 0.3478169, 1)
+glow_enabled = true
+glow_intensity = 1.28
+glow_bloom = 0.18
+fog_light_energy = 0.52
+fog_density = 0.001
+fog_aerial_perspective = 0.758
+fog_height = -1024.0
+fog_height_density = 0.0005
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rnf13"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ckns8"]
+size = Vector3(722.69135, 1, 1103.6353)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_on4kr"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_efyaj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5k7eh"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r24b8"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kosqh"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cag37"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nfngs"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbgmv"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qftyy"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tq6uv"]
+albedo_texture = ExtResource("5_ntcbc")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fksyc"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptlo0"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2je80"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0fvd0"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gfulj"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gi2pq"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3td8q"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cnhau"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7dpkn"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jj0y"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hli1d"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g63mw"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5jgc"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlpbp"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkltp"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yo1n3"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_js6ub"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y06q4"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nsn4l"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sm481"]
+albedo_texture = ExtResource("8_em0q1")
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6nvw1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y7n1g"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_gtohy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_se874"]
+albedo_texture = ExtResource("12_vgut2")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xmk38"]
+cull_mode = 2
+albedo_texture = ExtResource("11_sq3e3")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8r331"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdq6o"]
+albedo_texture = ExtResource("12_m8303")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgut2"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("13_o4ynb")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mhmwo"]
+albedo_texture = ExtResource("14_em0q1")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_os3md"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("16_xmk38")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vx5tq"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("17_kdq6o")
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r12a8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x5852"]
+albedo_color = Color(0.28485027, 0.28485027, 0.28485027, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6nvw1"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("14_u7h62")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6dam4"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("6_x5852")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgnds"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("6_gtohy")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_00r6h"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("21_r24b8")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bnq6i"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("22_kosqh")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f13vw"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("23_cag37")
+texture_filter = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j2j1y"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("12_gtohy")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nx2qk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gwddi"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("22_mhmwo")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_r12a8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mnagh"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("12_mhmwo")
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6e1fn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kk0gh"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+albedo_texture = ExtResource("27_nfngs")
+texture_filter = 2
+
+[node name="Scene3" type="Node3D"]
+
+[node name="groundMain" type="Node3D" parent="."]
+
+[node name="groundMain" type="MeshInstance3D" parent="groundMain"]
+transform = Transform3D(5347.47, 0, 0, 0, 4.41823, 0, 0, 0, 4670.5195, 1, 0, 0)
+material_override = SubResource("StandardMaterial3D_6e1fn")
+mesh = SubResource("PlaneMesh_6nvw1")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_on4kr")
+offset_right = 320.0
+offset_bottom = 240.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(1080, 608)
+render_target_update_mode = 4
+
+[node name="entities" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="playerMain" type="Node3D" parent="SubViewportContainer/SubViewport/entities"]
+
+[node name="Player" type="CharacterBody3D" parent="SubViewportContainer/SubViewport/entities/playerMain" node_paths=PackedStringArray("camera_pivot", "camera") groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -694.7396, 2.854927, 7.1807556)
+script = ExtResource("1_oywoi")
+camera_pivot = NodePath("../CameraPivot")
+camera = NodePath("../CameraPivot/SpringArm3D/Camera3D")
+
+[node name="HitLabel3D" type="Label3D" parent="SubViewportContainer/SubViewport/entities/playerMain/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 15.5476265, -3.538269)
+visible = false
+billboard = 1
+text = "Aray Hah"
+font_size = 450
+
+[node name="HitTimer" type="Timer" parent="SubViewportContainer/SubViewport/entities/playerMain/Player"]
+wait_time = 0.5
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/entities/playerMain/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.82995605, 5.6812963, -3.5929718)
+shape = SubResource("CapsuleShape3D_u7h62")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SubViewportContainer/SubViewport/entities/playerMain/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9049072, 8.171827, -3.81073)
+cast_shadow = 2
+billboard = 1
+shaded = true
+texture_filter = 0
+sprite_frames = SubResource("SpriteFrames_5k7eh")
+animation = &"move"
+
+[node name="AttackRayOrigin" type="Marker3D" parent="SubViewportContainer/SubViewport/entities/playerMain/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.614258, 6.4876184, 7.9766197)
+
+[node name="Crosshair" type="Node3D" parent="SubViewportContainer/SubViewport/entities/playerMain/Player/AttackRayOrigin"]
+
+[node name="Crosshair" type="Label" parent="SubViewportContainer/SubViewport/entities/playerMain/Player/AttackRayOrigin/Crosshair"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 46.0
+offset_top = 58.0
+offset_right = 67.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 37
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CameraPivot" type="Node3D" parent="SubViewportContainer/SubViewport/entities/playerMain" node_paths=PackedStringArray("target")]
+transform = Transform3D(0.99998, 0, -0.00640531, 0, 1, 0, 0.00640531, 0, 0.99998, 0, 0, 0)
+script = ExtResource("3_0ma15")
+target = NodePath("../Player")
+third_person_pitch_min = -89.0
+third_person_pitch_max = 89.0
+first_person_pitch_min = -4.0
+first_person_pitch_max = 0.0
+first_person_fov = 75.0
+
+[node name="SpringArm3D" type="SpringArm3D" parent="SubViewportContainer/SubViewport/entities/playerMain/CameraPivot"]
+transform = Transform3D(1, 0, 3.1664968e-08, 0, 1, 0, -3.1664968e-08, 0, 1, 0, 16.627, 0)
+spring_length = 100.0
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/entities/playerMain/CameraPivot/SpringArm3D"]
+transform = Transform3D(-0.9999993, 0.00082742365, 7.1381684e-05, 0.00082875264, 0.9886359, 0.15032706, 5.381368e-05, 0.15032694, -0.98863596, 0, 0, 0)
+keep_aspect = 0
+doppler_tracking = 2
+
+[node name="enemyMain" type="Node3D" parent="SubViewportContainer/SubViewport/entities"]
+
+[node name="Enemy" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("6_8r331")]
+transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -947.8875, 15.464119, 217.3454)
+
+[node name="worldEnvironment" type="Node3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1544.7417, -1.8913, 259.89966)
+
+[node name="graphics" type="Node3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics"]
+environment = SubResource("Environment_12c36")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics"]
+transform = Transform3D(0.3468187, 0.87893665, 0.32739457, 0.4129402, -0.45649785, 0.78809273, 0.84213847, -0.13813089, -0.5212703, -249.25366, 104.86711, -79.880844)
+light_energy = 1.085
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_opacity = 0.9
+directional_shadow_max_distance = 689.6
+
+[node name="groundCollision" type="StaticBody3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
+transform = Transform3D(-2.63033, 0, -2.89932e-07, 0, 0.50552, 0, 2.29951e-07, 0, -3.31644, 1.89378, 1.8913, -42.5569)
+physics_material_override = SubResource("PhysicsMaterial_rnf13")
+
+[node name="mainColllision" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/worldEnvironment/groundCollision"]
+transform = Transform3D(2.98711, 0, -5.4427574e-12, 0, 1, 0, 7.7733375e-12, 0, 0.9999998, 0, 0, 0)
+shape = SubResource("BoxShape3D_ckns8")
+
+[node name="road" type="Node3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 8.05261, 1.8913, -39.4303)
+visible = false
+
+[node name="MeshInstance3D111" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 34.517456, 0.133744, -36.344223)
+layers = 17
+material_override = SubResource("StandardMaterial3D_on4kr")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D112" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -57.076416, 0.133744, -36.344315)
+layers = 17
+material_override = SubResource("StandardMaterial3D_5k7eh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D113" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -148.34021, 0.133744, -36.344254)
+layers = 17
+material_override = SubResource("StandardMaterial3D_r24b8")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D114" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -239.9342, 0.133744, -36.344254)
+layers = 17
+material_override = SubResource("StandardMaterial3D_kosqh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D115" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -331.33032, 0.133744, -36.344254)
+layers = 17
+material_override = SubResource("StandardMaterial3D_cag37")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D116" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -422.92322, 0.133744, -36.344284)
+layers = 17
+material_override = SubResource("StandardMaterial3D_nfngs")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D117" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -513.3973, 0.133744, -36.344223)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gbgmv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D118" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, -604.9913, 0.133744, -36.344254)
+layers = 17
+material_override = SubResource("StandardMaterial3D_qftyy")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D120" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.616309, 0, 38.2108, 0, 34.532, 0, -45.8568, 0, 0.513549, -685.872, 0.4124992, -54.668503)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D121" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-19.9205, 0, 34.4209, 0, 34.532, 0, -41.3086, 0, -16.599, -702.174, 0.133744, -125.083)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D122" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-37.9059, 0, 21.5099, 0, 34.532, 0, -25.8141, 0, -31.5856, -747.1739, 0.34591746, -178.08302)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D123" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.7345, 0, 2.83532, 0, 34.532, 0, -3.40268, 0, -38.1089, -812.1739, 0.38913035, -200.083)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D124" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8568, 0, 0.513547, 0, 34.532, 0, -0.616307, 0, -38.2108, -901.03687, 0.37921977, -203.45601)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D125" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-41.3086, 0, -16.599, 0, 34.532, 0, 19.9205, 0, -34.4209, -971.45197, 0.65226054, -187.154)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D126" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-25.814, 0, -31.5856, 0, 34.532, 0, 37.9059, 0, -21.5099, -1024.45, 0.32328486, -142.15404)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D127" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-3.40267, 0, -38.1089, 0, 34.532, 0, 45.7345, 0, -2.83532, -1046.45, 0.133744, -77.1543)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D128" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.616305, 0, -38.2108, 0, 34.532, 0, 45.8568, 0, -0.513546, -1049.82, 0.5431564, 10.709)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D129" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(19.9205, 0, -34.4209, 0, 34.532, 0, 41.3086, 0, 16.599, -1033.52, 0.26405787, 81.12399)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D130" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(37.9059, 0, -21.5099, 0, 34.532, 0, 25.814, 0, 31.5856, -988.523, 0.29347873, 134.124)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D131" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(45.7345, 0, -2.83532, 0, 34.532, 0, 3.40267, 0, 38.1089, -923.523, 0.133744, 156.124)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D132" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(45.8568, 0, -0.513544, 0, 34.532, 0, 0.616303, 0, 38.2108, -834.66, 0.6341255, 159.496)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D133" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(41.3086, 0, 16.599, 0, 34.532, 0, -19.9205, 0, 34.4209, -764.245, 0.133744, 143.195)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D134" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(25.814, 0, 31.5856, 0, 34.532, 0, -37.9059, 0, 21.5099, -711.245, 0.3233955, 98.19489)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D135" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(3.40267, 0, 38.1089, 0, 34.532, 0, -45.7345, 0, 2.83532, -689.245, 0.133744, 33.1949)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D119" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 4.21222e-06, 0, 34.532, 0, -3.17984e-06, 0, -38.2142, -1124.88, 0.133744, -18.6431)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D136" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 4.21222e-06, 0, 34.532, 0, -3.17984e-06, 0, -38.2142, -1216.27, 0.133744, -18.6431)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D137" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 4.21222e-06, 0, 34.532, 0, -3.17984e-06, 0, -38.2142, -1307.87, 0.133744, -18.6431)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D138" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 4.21222e-06, 0, 34.532, 0, -3.17984e-06, 0, -38.2142, -1398.34, 0.133744, -18.6431)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D139" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -946.99207, 0.133744, -232.79602)
+layers = 17
+material_override = SubResource("StandardMaterial3D_fksyc")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D143" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0, 0, 38.2142, 0, 34.532, 0, -45.8609, 0, 9.536743e-06, -1025.5125, 0.133744, 416.64728)
+layers = 17
+material_override = SubResource("StandardMaterial3D_ptlo0")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D144" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0, 0, 38.2142, 0, 34.532, 0, -45.8609, 0, 9.536743e-06, -1025.5127, 0.133744, 325.25128)
+layers = 17
+material_override = SubResource("StandardMaterial3D_2je80")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D145" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0, 0, 38.2142, 0, 34.532, 0, -45.8609, 0, 9.536743e-06, -1025.5125, 0.133744, 233.65729)
+layers = 17
+material_override = SubResource("StandardMaterial3D_0fvd0")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D146" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0, 0, 38.2142, 0, 34.532, 0, -45.8609, 0, 9.536743e-06, -1025.5126, 0.133744, 143.18439)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gfulj")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D150" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-41.711376, 0, 15.884177, 0, 34.532, 0, -19.062675, 0, -34.756584, -741.60376, -0.27262807, 243.3909)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D155" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 124.583984, 0.133744, -36.344193)
+layers = 17
+material_override = SubResource("StandardMaterial3D_3td8q")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D156" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -994.83966, 0.18292308, -310.32208)
+layers = 17
+material_override = SubResource("StandardMaterial3D_cnhau")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D157" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -1042.1946, 0.18292308, -388.076)
+layers = 17
+material_override = SubResource("StandardMaterial3D_7dpkn")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D158" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -1090.0422, 0.133744, -465.602)
+layers = 17
+material_override = SubResource("StandardMaterial3D_8jj0y")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D159" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -1001.7535, 0.13375163, -376.61438)
+layers = 17
+material_override = SubResource("StandardMaterial3D_hli1d")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D160" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -988.93866, 0.13375163, -467.4112)
+layers = 17
+material_override = SubResource("StandardMaterial3D_g63mw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D161" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -976.27484, 0.13375163, -557.0799)
+layers = 17
+material_override = SubResource("StandardMaterial3D_j5jgc")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D162" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(4.827213, 0, 38.0019, 0, 34.531994, 0, -45.606205, 0, 4.022325, -964.7488, 0.13375163, -645.54456)
+layers = 17
+material_override = SubResource("StandardMaterial3D_dlpbp")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D163" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.6899449, 0, 38.20985, 0, 34.531994, 0, -45.855774, 0, 0.57489777, -958.8589, 0.13375163, -733.4657)
+layers = 17
+material_override = SubResource("StandardMaterial3D_qkltp")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D164" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.11686666, 0, 38.214054, 0, 34.531994, 0, -45.860813, 0, 0.097373724, -958.136, 0.13375163, -824.17456)
+layers = 17
+material_override = SubResource("StandardMaterial3D_yo1n3")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D165" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -1136.3165, 0.133744, -541.59015)
+layers = 17
+material_override = SubResource("StandardMaterial3D_js6ub")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D166" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -1184.1642, 0.133744, -619.1161)
+layers = 17
+material_override = SubResource("StandardMaterial3D_y06q4")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D167" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -1230.964, 0.133744, -695.3353)
+layers = 17
+material_override = SubResource("StandardMaterial3D_nsn4l")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D168" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-24.001175, 0, 32.563057, 0, 34.531998, 0, -39.079044, 0, -19.999256, -1278.8116, 0.133744, -772.86127)
+layers = 17
+material_override = SubResource("StandardMaterial3D_sm481")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D169" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.856174, 0, -0.552896, 0, 34.531998, 0, 0.6635235, 0, -38.210175, -1145.4552, 0.133744, -916.897)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D170" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.856174, 0, -0.552896, 0, 34.531998, 0, 0.6635235, 0, -38.210175, -1236.545, 0.133744, -915.3795)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D172" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.856174, 0, -0.552896, 0, 34.531998, 0, 0.6635235, 0, -38.210175, -1058.085, 0.133744, -918.45154)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D174" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.11686666, 0, 38.214054, 0, 34.531994, 0, -45.860813, 0, 0.097373724, -958.13586, 0.133744, -1007.2246)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D175" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.58761, 0, 4.166222, 0, 34.531998, 0, -4.999908, 0, -37.98639, -788.5868, 0.133744, -899.2562)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D176" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.58761, 0, 4.166222, 0, 34.531998, 0, -4.999908, 0, -37.98639, -879.1677, 0.133744, -908.9905)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D177" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -621.05585, 0.133744, -891.1172)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D178" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -712.12714, 0.133744, -893.49976)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D179" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -442.22705, 0.133744, -886.67285)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D180" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -533.2982, 0.133744, -889.0554)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D181" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -350.48096, 0.133744, -883.82874)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D182" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -171.65222, 0.133744, -879.3844)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D183" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.84256, 0, 1.0830011, 0, 34.531998, 0, -1.2997222, 0, -38.19883, -262.7234, 0.133744, -881.76697)
+layers = 17
+material_override = SubResource("StandardMaterial3D_tq6uv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D151" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -663.0307, -0.28, 268.58246)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D152" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-34.669346, 0, 25.015354, 0, 34.531998, 0, -30.021004, 0, -28.888735, -808.7444, -0.28, 200.01447)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D153" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -573.9555, -0.28, 286.37152)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D154" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -484.0968, -0.28, 304.2168)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D184" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -395.02173, -0.28, 322.00592)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D171" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -926.9047, 0.13375163, -376.61432)
+layers = 17
+material_override = SubResource("StandardMaterial3D_hli1d")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D173" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -914.0899, 0.13375163, -467.4112)
+layers = 17
+material_override = SubResource("StandardMaterial3D_g63mw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D185" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -901.4261, 0.13375163, -557.0799)
+layers = 17
+material_override = SubResource("StandardMaterial3D_j5jgc")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D186" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(4.827213, 0, 38.0019, 0, 34.531994, 0, -45.606205, 0, 4.022325, -889.89996, 0.13375163, -645.54456)
+layers = 17
+material_override = SubResource("StandardMaterial3D_dlpbp")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D187" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.6899449, 0, 38.20985, 0, 34.531994, 0, -45.855774, 0, 0.57489777, -884.0101, 0.13375163, -733.4657)
+layers = 17
+material_override = SubResource("StandardMaterial3D_qkltp")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D188" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.11686666, 0, 38.214054, 0, 34.531994, 0, -45.860813, 0, 0.097373724, -883.2872, 0.13375163, -824.17456)
+layers = 17
+material_override = SubResource("StandardMaterial3D_yo1n3")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D189" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -851.8752, 0.13375163, -362.71198)
+layers = 17
+material_override = SubResource("StandardMaterial3D_hli1d")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D190" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -839.06036, 0.13375163, -453.50885)
+layers = 17
+material_override = SubResource("StandardMaterial3D_g63mw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D191" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -826.39655, 0.13375163, -543.17755)
+layers = 17
+material_override = SubResource("StandardMaterial3D_j5jgc")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D192" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(4.827213, 0, 38.0019, 0, 34.531994, 0, -45.606205, 0, 4.022325, -814.8704, 0.13375163, -631.6422)
+layers = 17
+material_override = SubResource("StandardMaterial3D_dlpbp")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D193" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.6899449, 0, 38.20985, 0, 34.531994, 0, -45.855774, 0, 0.57489777, -808.9805, 0.13375163, -719.56335)
+layers = 17
+material_override = SubResource("StandardMaterial3D_qkltp")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D194" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(0.11686666, 0, 38.214054, 0, 34.531994, 0, -45.860813, 0, 0.097373724, -808.2576, 0.13375163, -810.2721)
+layers = 17
+material_override = SubResource("StandardMaterial3D_yo1n3")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D196" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -937.8271, -0.5449116, -285.477)
+layers = 17
+material_override = SubResource("StandardMaterial3D_hli1d")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D197" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(6.6527905, 0, 37.80996, 0, 34.531998, 0, -45.37586, 0, 5.543509, -862.7976, 0.22750354, -271.57465)
+layers = 17
+material_override = SubResource("StandardMaterial3D_hli1d")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D195" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -305.05383, -0.28, 339.68915)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D198" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -215.19519, -0.28, 357.53442)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D199" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -126.12012, -0.28, 375.3235)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D200" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, -38.24048, -0.28, 392.7273)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D201" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 50.834717, -0.28, 410.51636)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D202" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 140.69348, -0.28, 428.36163)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D203" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 229.76843, -0.28, 446.15073)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D204" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 319.73645, -0.28, 463.83398)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D205" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 409.5951, -0.28, 481.67926)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D206" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 498.67004, -0.28, 499.46832)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D140" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 763.24036, 0.133744, -36.344162)
+layers = 17
+material_override = SubResource("StandardMaterial3D_on4kr")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D141" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 671.64636, 0.133744, -36.344254)
+layers = 17
+material_override = SubResource("StandardMaterial3D_5k7eh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D142" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 580.3827, 0.133744, -36.344193)
+layers = 17
+material_override = SubResource("StandardMaterial3D_r24b8")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D147" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 488.7887, 0.133744, -36.344193)
+layers = 17
+material_override = SubResource("StandardMaterial3D_kosqh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D148" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 397.39258, 0.133744, -36.344193)
+layers = 17
+material_override = SubResource("StandardMaterial3D_cag37")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D149" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 305.79968, 0.133744, -36.344223)
+layers = 17
+material_override = SubResource("StandardMaterial3D_nfngs")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D207" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 215.32556, 0.133744, -36.344162)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gbgmv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D208" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 853.307, 0.133744, -36.344162)
+layers = 17
+material_override = SubResource("StandardMaterial3D_3td8q")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D211" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 1309.1371, 0.133744, -36.34413)
+layers = 17
+material_override = SubResource("StandardMaterial3D_r24b8")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D212" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 1217.5431, 0.133744, -36.34413)
+layers = 17
+material_override = SubResource("StandardMaterial3D_kosqh")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D213" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 1126.1471, 0.133744, -36.34413)
+layers = 17
+material_override = SubResource("StandardMaterial3D_cag37")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D214" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 1034.5541, 0.133744, -36.344162)
+layers = 17
+material_override = SubResource("StandardMaterial3D_nfngs")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D215" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.8609, 0, 8.381971e-06, 0, 34.532, 0, -6.9248035e-06, 0, -55.511288, 944.07996, 0.133744, -36.3441)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gbgmv")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D217" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 699.90076, -0.28, 1143.3916)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D218" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 701.0956, -0.28, 1051.7858)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D219" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 702.37805, -0.28, 960.9608)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D220" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 703.3937, -0.28, 869.27716)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D221" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 704.58875, -0.28, 777.6714)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D222" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 705.871, -0.28, 686.8465)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D223" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 706.99207, -0.28, 597.26715)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D224" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 708.2743, -0.28, 506.44208)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D225" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 709.46936, -0.28, 414.83615)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D226" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 710.75183, -0.28, 324.01154)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D227" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 711.76746, -0.28, 232.32756)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D228" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 712.9625, -0.28, 140.72206)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D229" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-0.46108267, 0, -38.212296, 0, 34.531998, 0, 45.8586, 0, -0.38414717, 714.24475, -0.28, 49.89705)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D230" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 588.7106, -0.28, 517.01056)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D231" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/worldEnvironment/road"]
+transform = Transform3D(-45.008976, 0, 7.331532, 0, 34.531998, 0, -8.798643, 0, -37.50434, 678.50525, -0.50661016, 534.3189)
+layers = 17
+material_override = SubResource("StandardMaterial3D_gi2pq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_efyaj")
+skeleton = NodePath("")
+
+[node name="REFRENCE" type="Sprite3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
+transform = Transform3D(-318.8416, -296.7633, -1.2971936e-05, 0, -1.9039731e-05, 435.57828, -296.7633, 318.8416, 1.39370095e-05, 393.75195, -0.85899186, 12.979553)
+texture = ExtResource("7_x5852")
+
+[node name="mapEnvironment" type="Node3D" parent="SubViewportContainer/SubViewport"]
+
+[node name="buildings" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
+
+[node name="Market" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -2544.777, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -2227.4963, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3131.6162, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3404.364, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -2814.3354, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3644.2998, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3917.0476, 33.58767, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -2544.777, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -2227.4963, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3131.6162, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3404.364, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -2814.3354, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3644.2998, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D14" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(17.172663, 0, 0, 0, 121.8203, 0, 0, 0, 14.638416, -3917.0476, 33.58767, -288.00186)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D15" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(1773.0195, 0, 0, 0, 5.356356, -16.646759, 0, 1.3664129, 65.25549, -3085.1184, 96.59551, -61.27394)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D16" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(1773.0195, 0, 0, 0, 0.13814557, -67.32431, 0, 5.5261693, 1.6829987, -3085.1184, 135.08496, -94.405014)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="MeshInstance3D17" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
+transform = Transform3D(1773.0195, 0, 0, 0, 6.3036957, -28.188028, 0, 1.6080804, 110.497406, -3085.1184, 180.16623, -149.32413)
+mesh = SubResource("BoxMesh_6nvw1")
+
+[node name="victoryLiner" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+transform = Transform3D(0.9999999, 0, 0.00050616264, 0, 1, 0, -0.00050616264, 0, 0.9999999, -1091.5261, 0, 377.23868)
+
+[node name="MeshInstance3D23" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.24254921, 0, -16.203665, 0, 97.450066, 0, 18.830463, 0, -0.20875117, 457.21637, 3.102913, 708.1056)
+material_override = SubResource("StandardMaterial3D_y7n1g")
+mesh = SubResource("BoxMesh_gtohy")
+
+[node name="MeshInstance3D24" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.24254921, 0, -16.203665, 0, 97.450066, 0, 18.830463, 0, -0.20875117, 445.44562, 3.5224533, 448.03452)
+material_override = SubResource("StandardMaterial3D_se874")
+mesh = SubResource("BoxMesh_gtohy")
+
+[node name="MeshInstance3D223455" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(3.6536229, 1.9806418, 3.7120196e-07, 2.0454904e-06, -1.5168066e-14, -108.767136, -46.65265, 0.15511474, -4.7398503e-06, 478.1668, 108.999245, 346.426)
+material_override = SubResource("StandardMaterial3D_xmk38")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstance3grthyjukD223456" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.31664157, 1.8961241, -2.9267775e-09, 7.018478e-06, -1.3637043e-14, -33.94621, -160.56418, -0.0037395824, -1.4838345e-06, 454.18152, 82.80107, 551.1216)
+material_override = SubResource("StandardMaterial3D_kdq6o")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstance3fgD223456" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(46.46682, -0.23506168, 4.7209696e-06, 2.0454902e-06, -1.483956e-14, -108.76712, 5.536722, 1.9727509, 5.6252355e-07, 428.54297, 108.999245, 387.50522)
+material_override = SubResource("StandardMaterial3D_xmk38")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstanfgce3fgD223457" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-46.79544, 0.004646381, -4.7543526e-06, 2.0454902e-06, -1.742682e-14, -108.76711, -0.109446235, -1.9867013, -1.1119038e-08, 435.83105, 108.999245, 299.82663)
+material_override = SubResource("StandardMaterial3D_xmk38")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghance3grthyjukD223457" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-7.304468e-06, 1.8963187, -1.9616343e-06, 0, -8.289072e-08, -44.876965, -167.10675, -8.289072e-08, 8.574576e-14, 468.06927, 157.85426, 554.3994)
+material_override = SubResource("StandardMaterial3D_vgut2")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghance3grthyjukD223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(142.22054, 0, 0, 0, -8.265873e-08, -44.876957, 0, 1.8910112, -1.961634e-06, 326.1364, 157.85426, 720.995)
+material_override = SubResource("StandardMaterial3D_vgut2")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstafghjnce3grthyjukD223457" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.13384157, 1.8941559, -2.926777e-09, 2.966647e-06, -1.3622888e-14, -33.94621, -67.869026, -0.0037357004, -1.483833e-06, 468.1933, 82.80107, 651.7992)
+material_override = SubResource("StandardMaterial3D_mhmwo")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstafghjnce3grthyjukD223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-55.437443, 1.0380783, -1.2411253e-06, 2.8971247e-06, -1.3622205e-14, -33.946205, -36.325645, -1.5842369, -8.13252e-07, 412.86377, 82.80107, 545.79175)
+material_override = SubResource("StandardMaterial3D_mhmwo")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghavbnce3grthyjukD223459" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(142.22054, 0, 0, 0, -8.265873e-08, -44.876957, 0, 1.8910112, -1.961634e-06, 324.18134, 94.20265, 719.1127)
+material_override = SubResource("StandardMaterial3D_vgut2")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hystance3D223456" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-45.925064, 1.8776731, -3.4572931e-06, 3.6251404e-06, -2.3773501e-14, -142.8314, -69.05735, -1.2487066, -5.198729e-06, 419.07697, 141.27621, 234.36288)
+material_override = SubResource("StandardMaterial3D_os3md")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223457" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-106.66585, 0.599963, -5.290924e-06, 5.5018168e-06, -1.5059233e-14, -142.8314, -66.82067, -0.9577219, -3.314481e-06, 267.16125, 141.7826, 101.161194)
+material_override = SubResource("StandardMaterial3D_vx5tq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghance3grthyjukD223459" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-7.2941184e-06, 0, 138.26634, 0, 1.8580652, 0, -167.11789, 0, -6.042421e-06, 322.26685, 173.42294, 554.3253)
+material_override = SubResource("StandardMaterial3D_r12a8")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghance3grthyjukD223460" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(142.18257, 0.043693952, 1.9611132e-06, 6.2166373e-06, -1.34274306e-14, -44.876957, -3.2861464, 1.8905064, -4.532606e-08, 326.3011, 157.85426, 395.7488)
+material_override = SubResource("StandardMaterial3D_vgut2")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghance3grthyjukD223461" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-7.301569e-06, 1.8963187, -1.9616343e-06, 0, -8.289072e-08, -44.876965, -167.10677, -8.288771e-08, 8.570922e-14, 182.98877, 157.85426, 554.255)
+material_override = SubResource("StandardMaterial3D_vgut2")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstfghance3grthyjukD223462" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-7.301569e-06, 1.8963187, -1.9616343e-06, 0, -8.289072e-08, -44.876965, -167.10683, -8.288771e-08, 8.570922e-14, 182.98999, 91.96571, 551.91736)
+material_override = SubResource("StandardMaterial3D_vgut2")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshInstance3D25" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.24254921, 0, -16.203665, 0, 97.450066, 0, 18.830463, 0, -0.20875117, 311.77466, 3.102913, 708.032)
+material_override = SubResource("StandardMaterial3D_x5852")
+mesh = SubResource("BoxMesh_gtohy")
+
+[node name="MeshInstance3D26" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.24254921, 0, -16.203665, 0, 97.450066, 0, 18.830463, 0, -0.20875117, 197.93243, 3.102913, 707.97437)
+material_override = SubResource("StandardMaterial3D_x5852")
+mesh = SubResource("BoxMesh_gtohy")
+
+[node name="MeshInstance3D27" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(-0.24254921, 0, -16.203665, 0, 97.450066, 0, 18.830463, 0, -0.20875117, 197.05878, 3.5224533, 447.90897)
+material_override = SubResource("StandardMaterial3D_se874")
+mesh = SubResource("BoxMesh_gtohy")
+
+[node name="MeshIn4fg56hysghjtance3D223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/victoryLiner"]
+transform = Transform3D(55.61903, -2.0254304, -2.9180794e-06, -5.2015957e-06, -3.8299235e-14, -142.83139, -105.20128, -1.070827, 5.5194655e-06, 104.24158, 141.7826, 140.07861)
+material_override = SubResource("StandardMaterial3D_vx5tq")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="BPI" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+transform = Transform3D(0.9999999, 0, 0.00050616264, 0, 1, 0, -0.00050616264, 0, 0.9999999, -1630.1858, 0, 377.23868)
+
+[node name="MeshIn4fg56hysghjtance3D223457" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/BPI"]
+transform = Transform3D(-79.2966, -9.87784e-08, 2.952083e-13, 0, -4.9389413e-08, -77.12896, 6.9476664e-06, -1.1298981, 3.371414e-06, 338.43738, 66.78259, 59.418)
+material_override = SubResource("StandardMaterial3D_6nvw1")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/BPI"]
+transform = Transform3D(-3.4607947e-06, -1.1298981, 3.3714139e-06, 0, -4.9389413e-08, -77.12896, 79.29666, -4.9418304e-08, 1.473266e-13, 269.401, 66.78259, 131.38303)
+material_override = SubResource("StandardMaterial3D_6nvw1")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223459" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/BPI"]
+transform = Transform3D(-3.4607947e-06, -1.1298981, 3.3714139e-06, 0, -4.9389413e-08, -77.12896, 79.29668, -4.9418304e-08, 1.473266e-13, 411.1073, 66.78259, 131.45477)
+material_override = SubResource("StandardMaterial3D_6nvw1")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="Celtech" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+transform = Transform3D(-0.0005061038, 0, 1.4399999, 0, 1.3, 0, -0.99979734, 0, -0.0007289372, -1619.1858, 0, 195.23868)
+
+[node name="MeshIn4fg56hysghjtance3D223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Celtech"]
+transform = Transform3D(-1.0617077e-05, -1.0180922, 8.495968e-06, 0, -4.450222e-08, -194.36499, 242.66008, -4.452886e-08, 3.7125858e-13, 32.68048, 192.7826, 38.26245)
+material_override = SubResource("StandardMaterial3D_6dam4")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223459" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Celtech"]
+transform = Transform3D(-242.6601, 8.8941306e-08, -2.1231905e-12, -3.7719433e-20, -4.4502222e-08, -194.36499, -2.1234155e-05, -1.0180922, 8.495969e-06, 190.60608, 192.7826, 185.34247)
+material_override = SubResource("StandardMaterial3D_6dam4")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223460" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Celtech"]
+transform = Transform3D(-1.06319785e-05, -0.36651334, 8.495969e-06, -1.1315827e-19, -1.6020808e-08, -194.36496, 242.66006, -1.6007107e-08, 1.0609291e-12, 193.6815, 192.7826, 36.343994)
+material_override = SubResource("StandardMaterial3D_6dam4")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="Rotonda" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+transform = Transform3D(-0.00050620636, 0, 0.9999999, 0, 1, 0, -0.9999999, 0, -0.00050620636, -1001.1858, 0, 199.23868)
+
+[node name="MeshIn4fg56hysghjtance3D223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Rotonda"]
+transform = Transform3D(-1.0617077e-05, -1.0180922, 1.1044762e-05, 0, -4.450222e-08, -252.67448, 242.66008, -4.452886e-08, 4.8450133e-13, 32.75128, 251.7826, -101.737305)
+material_override = SubResource("StandardMaterial3D_rgnds")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223459" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Rotonda"]
+transform = Transform3D(-121.33004, -0.88169354, 9.565053e-06, 0, -4.450222e-08, -252.67448, 210.14964, -0.5090461, 5.5223895e-06, 234.73555, 251.7826, -70.635254)
+material_override = SubResource("StandardMaterial3D_rgnds")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="Jollibee" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+transform = Transform3D(0.07699919, 0, 1.4357232, 0, 1.3, 0, -0.99682796, 0, 0.11090131, -332.9576, 0, 148.83458)
+
+[node name="MeshIn4fg56hysghjtance3D223458" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Jollibee"]
+transform = Transform3D(-4.61936e-06, -1.0177518, 4.2115944e-06, 0, -4.4487347e-08, -96.350105, 107.06837, -4.444155e-08, 1.8329782e-13, 32.7221, 89.33413, -18.813599)
+material_override = SubResource("StandardMaterial3D_00r6h")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223459" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Jollibee"]
+transform = Transform3D(-160.60255, 8.876668e-08, -5.795364e-13, -1.8722277e-20, -4.449861e-08, -88.917076, -1.3854355e-05, -1.0180092, 3.8866847e-06, 158.42705, 80.398155, -92.70625)
+material_override = SubResource("StandardMaterial3D_bnq6i")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223460" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Jollibee"]
+transform = Transform3D(160.60257, -1.7770799e-07, 9.183765e-13, -7.104368e-20, -4.449861e-08, -88.917076, 2.7894974e-05, 1.0180092, -3.8866847e-06, 181.30208, 80.398155, 85.07954)
+material_override = SubResource("StandardMaterial3D_bnq6i")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223461" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Jollibee"]
+transform = Transform3D(1.3932586e-05, 1.0177518, -4.2115907e-06, -1.7440468e-20, -4.4487347e-08, -96.350105, -107.06837, 1.3344106e-07, -5.516698e-13, 307.75598, 89.33413, 11.14415)
+material_override = SubResource("StandardMaterial3D_00r6h")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="ArooCenter" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
+transform = Transform3D(0.99874336, 0, -0.066101, 0, 1.2999996, 0, 0.04589418, 0, 1.4384819, -1009.6161, 0, -339.7301)
+
+[node name="MeshIn4fg56hysghjtance3D223460" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/ArooCenter"]
+transform = Transform3D(160.60262, -1.7770805e-07, 2.2959416e-12, -7.104368e-20, -4.449862e-08, -222.29272, 2.7894981e-05, 1.0180097, -9.716715e-06, 181.30206, 217.32127, 85.07958)
+material_override = SubResource("StandardMaterial3D_f13vw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223461" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/ArooCenter"]
+transform = Transform3D(2.0874837e-05, 1.0180098, -9.716723e-06, -7.104368e-20, -4.449862e-08, -222.29272, -160.60277, 1.3320955e-07, -7.743466e-13, 339.33405, 217.32127, -76.72603)
+material_override = SubResource("StandardMaterial3D_f13vw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223462" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/ArooCenter"]
+transform = Transform3D(2.0874846e-05, 1.0180098, -9.716728e-06, -7.104368e-20, -4.449862e-08, -222.29272, -160.60284, 1.3320962e-07, -7.74347e-13, 22.269714, 217.32127, -76.72603)
+material_override = SubResource("StandardMaterial3D_f13vw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="MeshIn4fg56hysghjtance3D223463" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/ArooCenter"]
+transform = Transform3D(160.60263, -1.7770806e-07, 2.2959419e-12, -7.104368e-20, -4.449862e-08, -222.29272, 2.7894985e-05, 1.0180098, -9.716716e-06, 181.30206, 217.32127, -237.14272)
+material_override = SubResource("StandardMaterial3D_f13vw")
+cast_shadow = 2
+mesh = SubResource("PlaneMesh_8r331")
+
+[node name="barrier" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
+
+[node name="Mesh" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(5.661551, -7.0363107, 2.845036e-07, 0, -4.4732502e-07, -9.466225, 5.3609796, 7.4308133, -3.0045481e-07, -901.37415, 7.5471287, 279.60788)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(9.802628, -3.6234531, 3.2844656e-07, 0, -1.9953723e-07, -9.466225, 12.793054, 2.7764573, -2.5167094e-07, -926.04016, 7.5471287, 267.06668)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(7.2676363, 1.1070832, -7.236447e-08, 0, -2.767074e-07, -9.466225, -1.2908993, 6.2327695, -4.0740494e-07, -931.75775, 7.5471287, 250.3881)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(5.8502464, -6.4160504, 2.6635536e-07, 0, -4.3568474e-07, -9.466225, 4.9209576, 7.627678, -3.1665473e-07, -947.6063, 7.5471287, 231.184)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh5" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(1.9090034, 4.40459, -4.0675792e-07, 0, -1.9585532e-07, -9.466225, -10.228308, 0.82206917, -7.5917015e-08, -965.10516, 7.5471287, 280.52475)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(1.964634, -4.2004323, 4.08649e-07, 0, -1.8591287e-07, -9.466225, 12.356747, 0.6678385, -6.497229e-08, -966.3037, 7.5471287, 257.29037)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh7" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.041213e-07, -12.196716, 0, 6.9574847, -5.331354e-07, -1045.4535, 12.310579, 239.26976)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh8" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(3.275515, 4.4432945, -3.8867432e-07, 0, -2.0676886e-07, -9.466225, -8.969194, 1.6226739, -1.419424e-07, -972.586, 7.5471287, 227.52112)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh9" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1051.6768, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh10" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1079.2301, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh11" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1108.9128, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh12" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1138.7681, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh13" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1171.7322, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh14" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1199.2856, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh15" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1228.9683, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh16" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1258.8235, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh17" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1285.2103, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh18" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1312.7638, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh19" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1342.4464, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh20" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(13.410116, 0, 0, 0, -3.549802e-07, -12.196716, 0, 8.121, -5.331354e-07, -1372.3016, 11.396311, 197.11835)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh25" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(-0.7927013, -4.3089633, 4.130083e-07, -6.5140716e-14, -1.8870354e-07, -9.466224, 12.945716, -0.26384905, 2.528953e-08, -815.62915, 6.63286, 443.83792)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh26" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(-2.2285173, -4.4171615, 4.0380877e-07, -3.646502e-14, -1.9784885e-07, -9.466226, 9.965728, -0.98775715, 9.029886e-08, -825.50385, 7.5471287, 383.50507)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh27" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(5.8542266, -6.4022374, 2.6594063e-07, -4.7477933e-15, -4.3542465e-07, -9.466224, 4.911235, 7.6315117, -3.170031e-07, -821.2497, 7.5471287, 365.7234)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh28" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(-0.027034814, -4.3124585, 4.1378064e-07, 1.5597897e-14, -1.8850406e-07, -9.466224, 11.474135, -0.010160822, 9.749599e-10, -822.2988, 7.5471287, 333.78354)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh29" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(7.2927055, 2.6201456, -2.0288783e-07, 0, -2.3357977e-07, -9.466224, -4.1028585, 4.6572294, -3.6062707e-07, -856.974, 7.5471287, 343.8007)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh30" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(-5.3056693, -4.240492, 3.1213347e-07, -3.5446033e-15, -2.457207e-07, -9.466224, 6.0965934, -3.6903625, 2.716396e-07, -846.7043, 7.5471287, 327.40323)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh31" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/barrier"]
+transform = Transform3D(7.3368063, 1.9688836, -1.4065274e-07, -3.5095108e-15, -2.5318488e-07, -9.466225, -2.6518328, 5.4472957, -3.8914283e-07, -836.5931, 7.5471287, 300.5198)
+material_override = SubResource("StandardMaterial3D_j2j1y")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="roads" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
+
+[node name="roundabout" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/roundabout"]
+transform = Transform3D(248.50043, 0, 0, 0, 1.0485104, 0, 0, 0, 243.52208, -684.735, 0.3, 237.885)
+layers = 9
+material_override = SubResource("StandardMaterial3D_gwddi")
+mesh = SubResource("PlaneMesh_r12a8")
+
+[node name="highwayVictory" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayVictory"]
+transform = Transform3D(175.73706, 0, -238.5506, 0, 0.15625316, 0, 288.68463, 0, 145.21791, -60.60518, 0.2, 1285.7434)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayVictory"]
+transform = Transform3D(-175.73705, 0, 238.5506, 0, 0.15625316, 0, -288.6847, 0, -145.21788, 286.92694, 0.2, 1862.0248)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayVictory"]
+transform = Transform3D(-175.73705, 0, 238.5506, 0, 0.15625316, 0, -288.6847, 0, -145.21788, -420.49377, 0.2, 713.6988)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("../../../../worldEnvironment/road")
+
+[node name="highwayRizal" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8272705, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayRizal"]
+transform = Transform3D(337.968, 0, 4.8830036e-05, 0, 0.15625319, 0, -5.9092206e-05, 0, 279.2752, -1897.0402, 0.2, 253.56049)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayRizal"]
+transform = Transform3D(-337.968, 0, -2.4415023e-05, 0, 0.15625319, 0, 2.9546112e-05, 0, -279.2752, -1224.0834, 0.2, 256.362)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayRizal"]
+transform = Transform3D(-337.968, 0, -2.4415023e-05, 0, 0.15625319, 0, 2.9546112e-05, 0, -279.2752, -2572.8032, 0.2, 263.51694)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("../../../../worldEnvironment/road")
+
+[node name="highwayCentral" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.8272705, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayCentral"]
+transform = Transform3D(337.10767, 0, -19.913933, 0, 0.15625317, 0, 24.09907, 0, 278.5643, 474.10065, 0.2, 292.7959)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayCentral"]
+transform = Transform3D(-337.10767, 0, 19.913956, 0, 0.15625317, 0, -24.099098, 0, -278.5643, 1145.1447, 0.2, 343.5761)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayCentral"]
+transform = Transform3D(-337.10767, 0, 19.913956, 0, 0.15625317, 0, -24.099098, 0, -278.5643, -200.65231, 0.2, 254.54108)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("../../../../worldEnvironment/road")
+
+[node name="highwayJollibee" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads"]
+transform = Transform3D(-0.017923616, 0, 0.9998394, 0, 1, 0, -0.9998394, 0, -0.017923616, -829.6132, 0, -432.30118)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayJollibee"]
+transform = Transform3D(337.10767, 0, -19.913933, 0, 0.15625317, 0, 24.09907, 0, 278.5643, 474.10065, 0.2, 292.7959)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayJollibee"]
+transform = Transform3D(-337.10767, 0, 19.913956, 0, 0.15625317, 0, -24.099098, 0, -278.5643, 1145.1447, 0.2, 343.5761)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/roads/highwayJollibee"]
+transform = Transform3D(-337.10767, 0, 19.913956, 0, 0.15625317, 0, -24.099098, 0, -278.5643, -200.65231, 0.2, 254.54108)
+material_override = SubResource("StandardMaterial3D_mnagh")
+mesh = SubResource("PlaneMesh_6e1fn")
+skeleton = NodePath("../../../../worldEnvironment/road")
+
+[node name="fenceRusty" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
+
+[node name="Mesh31" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty"]
+transform = Transform3D(48.208805, 0, 0, 0, -2.531849e-07, -19.75871, 0, 5.792196, -8.636807e-07, -978.70197, 18.942543, 410.722)
+material_override = SubResource("StandardMaterial3D_kk0gh")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh32" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty"]
+transform = Transform3D(48.208805, 0, 0, 0, -2.531849e-07, -19.75871, 0, 5.792196, -8.636807e-07, -1075.5581, 18.942543, 410.722)
+material_override = SubResource("StandardMaterial3D_kk0gh")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh33" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty"]
+transform = Transform3D(24.1044, 5.0161886, -7.4796947e-07, 0, -2.531849e-07, -19.75871, -41.75005, 2.8960977, -4.3184025e-07, -1146.8081, 18.942543, 451.0858)
+material_override = SubResource("StandardMaterial3D_kk0gh")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Mesh34" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty"]
+transform = Transform3D(24.1044, 5.0161886, -7.4796947e-07, 0, -2.531849e-07, -19.75871, -41.75005, 2.8960977, -4.3184025e-07, -1194.3081, 18.942543, 533.3582)
+material_override = SubResource("StandardMaterial3D_kk0gh")
+mesh = SubResource("PlaneMesh_nx2qk")
+
+[node name="Healthbar" type="Node3D" parent="SubViewportContainer"]
+
+[node name="PlayerHealthBar" type="ProgressBar" parent="SubViewportContainer/Healthbar"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1056.0
+offset_top = 27.0
+offset_right = -856.0
+offset_bottom = 54.0
+grow_horizontal = 0
+value = 100.0
+show_percentage = false

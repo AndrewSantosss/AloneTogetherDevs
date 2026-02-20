@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0kpj5taicbgf"]
+
+[ext_resource type="Script" uid="uid://b1nfeo2w3bgxe" path="res://dialogue_ui.gd" id="1_njptv"]
+
+[node name="DialogueUI" type="CanvasLayer"]
+script = ExtResource("1_njptv")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="TextLabel" type="Label" parent="Background"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TutorialLable" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "[WASD] Move   [SHIFT] Sprint   [L-CLICK] Attack
+[T] Order Dog (Follow/Hunt)
+3.  In `Scene1_Cinematic.gd`, inside `end_cinematic()`, simply set `dialogue_ui.tutorial_label.visible = true`."

@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://bfop58tgnvixx"]
+
+[ext_resource type="Script" uid="uid://dmf3kphetxmsh" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="FontFile" uid="uid://dn2fpngrqpf6w" path="res://misc/vanilla_pancake/Vanilla Pancake.otf" id="3_fu7sn"]
+[ext_resource type="Texture2D" uid="uid://dcbyppygo7itf" path="res://misc/Main menu 2.jpg" id="3_jix8l"]
+[ext_resource type="Texture2D" uid="uid://dx3ddydx5p8ri" path="res://misc/IMG_20251129_130100.png" id="4_jix8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jix8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_glbon"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nlkkf"]
+
+[node name="Main_Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -7.0
+offset_right = -31.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_06t4h")
+
+[node name="Fade" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 3.0
+offset_right = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.003921569)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_top = 160.0
+offset_right = -897.8372
+offset_bottom = -124.234924
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.4648013, 1.2239859)
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_jix8l")
+
+[node name="Label" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_glbon")
+
+[node name="Play_Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 24
+text = "PLAY"
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+theme_override_styles/separator = SubResource("StyleBoxEmpty_nlkkf")
+
+[node name="Exit_Button" type="Button" parent="CanvasLayer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fu7sn")
+theme_override_font_sizes/font_size = 24
+text = "EXIT"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 3
+layout_mode = 0
+offset_left = 31.0
+offset_top = 3.9999998
+offset_right = 2807.0
+offset_bottom = 1166.0
+scale = Vector2(0.5168776, 0.5267791)
+texture = ExtResource("3_jix8l")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 839.0
+offset_top = 571.0
+offset_right = 7167.0
+offset_bottom = 1253.0
+scale = Vector2(0.04, 0.04)
+theme_override_font_sizes/font_size = 500
+text = "Splash Art: Jemzie Jimenez"
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 116.0
+offset_top = -65.0
+offset_right = 3012.0
+offset_bottom = 4031.0
+scale = Vector2(0.120000005, 0.120000005)
+texture = ExtResource("4_jix8l")

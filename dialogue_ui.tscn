@@ -1,0 +1,73 @@
+[gd_scene load_steps=4 format=3 uid="uid://c0kpj5taicbgf"]
+
+[ext_resource type="Script" uid="uid://b1nfeo2w3bgxe" path="res://dialogue_ui.gd" id="1_njptv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_njptv"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2x5cq"]
+
+[node name="DialogueUI" type="CanvasLayer"]
+script = ExtResource("1_njptv")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -137.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 0.5882353)
+
+[node name="TextLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.001
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -1.0
+offset_right = -1.0800781
+offset_bottom = -3.0
+label_settings = SubResource("LabelSettings_njptv")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="TutorialLable" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "[WASD] Move   [SHIFT] Sprint   [L-CLICK] Attack
+[T] Order Dog (Follow/Hunt)
+3.  In `Scene1_Cinematic.gd`, inside `end_cinematic()`, simply set `dialogue_ui.tutorial_label.visible = true`."
+
+[node name="CinematicLabel" type="Label" parent="."]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -50.0
+offset_right = -1.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+label_settings = SubResource("LabelSettings_2x5cq")
+
+[node name="SystemBackground" type="PanelContainer" parent="."]
+offset_left = 26.0
+offset_top = 490.0
+offset_right = 141.0
+offset_bottom = 513.0
+size_flags_vertical = 0
+size_flags_stretch_ratio = 89.6
+
+[node name="SystemLabel" type="Label" parent="SystemBackground"]
+layout_mode = 2
+text = "tetetetettetete"
+horizontal_alignment = 1

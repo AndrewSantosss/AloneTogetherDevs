@@ -1,0 +1,245 @@
+[gd_scene load_steps=25 format=3 uid="uid://lb0h0k378hdt"]
+
+[ext_resource type="Script" uid="uid://donmie8owxcwb" path="res://inventory_ui.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://vflohg1gla4y" path="res://misc/inventory-Sheet1.png" id="2_gf3dx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34y5v"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(256, 208, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r57pj"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(128, 208, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jn3b8"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 208, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bopx"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(256, 104, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6um4"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(128, 104, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5yu5"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 104, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbtsg"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(256, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4u5k"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(128, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjakb"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gf3dx"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohhls"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67xb0"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(128, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bo4r5"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(256, 0, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c46v5"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 104, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_irxrv"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(128, 104, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_568vy"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(256, 104, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebnwy"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(0, 208, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ybipx"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(128, 208, 128, 104)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlbii"]
+atlas = ExtResource("2_gf3dx")
+region = Rect2(256, 208, 128, 104)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6oj57"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34y5v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r57pj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jn3b8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bopx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6um4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5yu5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbtsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f4u5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjakb")
+}],
+"loop": false,
+"name": &"Close",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gf3dx")
+}],
+"loop": true,
+"name": &"Closed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohhls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67xb0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bo4r5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c46v5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_irxrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_568vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebnwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ybipx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlbii")
+}],
+"loop": false,
+"name": &"Open",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
+bg_color = Color(0.1, 0.1, 0.1, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="LabelSettings" id="LabelSettings_gf3dx"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="InventoryUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(79, 543)
+sprite_frames = SubResource("SpriteFrames_6oj57")
+animation = &"Open"
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -473.0
+offset_top = -76.0
+offset_right = -73.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bg")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+columns = 5
+
+[node name="Label2" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 57.0
+offset_right = 76.0
+offset_bottom = 80.0
+scale = Vector2(0.6399994, 0.6399994)
+text = "[ 1 ]"
+label_settings = SubResource("LabelSettings_gf3dx")
+uppercase = true
+
+[node name="Label3" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 105.0
+offset_top = 57.0
+offset_right = 145.0
+offset_bottom = 80.0
+scale = Vector2(0.6399994, 0.6399994)
+text = "[ 2 ]"
+label_settings = SubResource("LabelSettings_gf3dx")
+uppercase = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 588.0
+offset_right = 78.0
+offset_bottom = 611.0
+scale = Vector2(0.6399994, 0.6399994)
+text = "[ I ]"
+label_settings = SubResource("LabelSettings_gf3dx")
+uppercase = true

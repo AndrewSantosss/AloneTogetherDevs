@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://vfgepuvds4c4"]
+
+[ext_resource type="Script" uid="uid://dns0uwh8o5k04" path="res://pan_trigger.gd" id="1_ie7wf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wurth"]
+size = Vector3(5, 5, 22.1385)
+
+[node name="PanTrigger" type="Area3D"]
+script = ExtResource("1_ie7wf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(31.8994, 0, 0, 0, 30.2929, 0, 0, 0, 73.521, 0, 0, 0)
+shape = SubResource("BoxShape3D_wurth")
+
+[node name="CameraTarget" type="Marker3D" parent="."]

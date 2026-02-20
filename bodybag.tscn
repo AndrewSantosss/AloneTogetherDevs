@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5lv60n1r3t80"]
+
+[ext_resource type="Texture2D" uid="uid://c7jxhar1ktpg8" path="res://environment/bodybag.jpg" id="1_hsuor"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7covy"]
+albedo_texture = ExtResource("1_hsuor")
+texture_filter = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_w1o0p"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4llp2"]
+
+[node name="bodybag" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(423.64108, 0, 0, 0, 1, 0, 0, 0, 183.3975, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7covy")
+mesh = SubResource("BoxMesh_w1o0p")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.019739421, 43.966297, 0, -66.53702, 0.013043404, 0, 0, 0, 73.36538, 148.67778, -2.532692, 0)
+material_override = SubResource("StandardMaterial3D_7covy")
+mesh = SubResource("CapsuleMesh_4llp2")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.025282145, 81.40505, 0, -85.22025, 0.024150293, 0, 0, 0, 116.101974, 51.588303, -2.532692, 0)
+material_override = SubResource("StandardMaterial3D_7covy")
+mesh = SubResource("CapsuleMesh_4llp2")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.02528374, 89.804504, 0, -85.22563, 0.026642144, 0, 0, 0, 98.43694, -62.59027, -2.532692, 0)
+material_override = SubResource("StandardMaterial3D_7covy")
+mesh = SubResource("CapsuleMesh_4llp2")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.017627608, 39.604008, 0, -59.418583, 0.011749252, 0, 0, 0, 76.121185, -148.52084, -2.532692, 0)
+material_override = SubResource("StandardMaterial3D_7covy")
+mesh = SubResource("CapsuleMesh_4llp2")

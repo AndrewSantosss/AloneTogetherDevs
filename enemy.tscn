@@ -1,0 +1,264 @@
+[gd_scene load_steps=27 format=3 uid="uid://dkf7vpr6fkkya"]
+
+[ext_resource type="Script" uid="uid://otrqp15jukma" path="res://enemy.gd" id="1_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://b5jlekavsl451" path="res://character/idle_animation_monster_1.png" id="2_4gyqm"]
+[ext_resource type="Texture2D" uid="uid://fnwaamt215bd" path="res://character/bite_attack_monster_1.png" id="2_qi2p4"]
+[ext_resource type="AudioStream" uid="uid://cyob5ire0xqhf" path="res://sfx/Zombiesounds.mp3" id="4_iifgy"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7xaro"]
+radius = 0.537576
+height = 2.78906
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi2p4"]
+atlas = ExtResource("2_4gyqm")
+region = Rect2(0, 0, 70, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iifgy"]
+atlas = ExtResource("2_4gyqm")
+region = Rect2(70, 0, 70, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_epg4t"]
+atlas = ExtResource("2_4gyqm")
+region = Rect2(140, 0, 70, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3yqyl"]
+atlas = ExtResource("2_4gyqm")
+region = Rect2(210, 0, 70, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wujgv"]
+atlas = ExtResource("2_4gyqm")
+region = Rect2(280, 0, 70, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hb8ge"]
+atlas = ExtResource("2_4gyqm")
+region = Rect2(350, 0, 70, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e1ltt"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(0, 0, 131, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dxifv"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(131, 0, 131, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwjut"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(262, 0, 131, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0g06"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(393, 0, 131, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ar8e5"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(0, 66, 131, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_doop2"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(131, 66, 131, 66)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hcft"]
+atlas = ExtResource("2_qi2p4")
+region = Rect2(262, 66, 131, 66)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e1ltt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi2p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epg4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yqyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wujgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb8ge")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e1ltt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dxifv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwjut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0g06")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ar8e5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_doop2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hcft")
+}],
+"loop": true,
+"name": &"bite",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi2p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epg4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yqyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wujgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb8ge")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi2p4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iifgy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epg4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3yqyl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wujgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hb8ge")
+}],
+"loop": false,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fghij"]
+viewport_path = NodePath("HealthBarDisplay/SubViewport")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abcde"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_iifgy"]
+resource_name = "attack"
+
+[sub_resource type="Animation" id="Animation_4gyqm"]
+resource_name = "idle"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite3D")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+
+[sub_resource type="Animation" id="Animation_qi2p4"]
+resource_name = "walk"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qi2p4"]
+_data = {
+&"attack": SubResource("Animation_iifgy"),
+&"idle": SubResource("Animation_4gyqm"),
+&"walk": SubResource("Animation_qi2p4")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4gyqm"]
+
+[node name="Enemy" type="CharacterBody3D" groups=["enemies"]]
+transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 0, 3.58561, 0)
+script = ExtResource("1_4gyqm")
+health = 5000.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.18033, 0, 0, 0, 1.54477, 0, 0, 0, 9.81332, 0, 0.394531, 0)
+shape = SubResource("CapsuleShape3D_7xaro")
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 1.5
+one_shot = true
+
+[node name="Sprite3D" type="AnimatedSprite3D" parent="." groups=["enemies"]]
+transform = Transform3D(-6.864323, 0, 0, 0, -7.281336, 0, 0, 0, -45.652893, -0.06320101, 0.62217116, -0.00642705)
+billboard = 1
+shaded = true
+alpha_cut = 2
+alpha_antialiasing_mode = 1
+texture_filter = 2
+sprite_frames = SubResource("SpriteFrames_e1ltt")
+animation = &"attack"
+frame = 5
+frame_progress = 1.0
+
+[node name="HealthBarDisplay" type="Sprite3D" parent="."]
+transform = Transform3D(1.16537, 0, 0, 0, 1.16537, 0, 0, 0, 1.16537, -0.534926, 4.81185, -0.739549)
+pixel_size = 0.03
+billboard = 1
+texture = SubResource("ViewportTexture_fghij")
+
+[node name="SubViewport" type="SubViewport" parent="HealthBarDisplay"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(100, 12)
+render_target_update_mode = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="HealthBarDisplay/SubViewport"]
+offset_right = 100.0
+offset_bottom = 12.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_abcde")
+value = 100.0
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qi2p4")
+}
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(6.616629, 0, 0, 0, 18.399899, 0, 0, 0, 135.83449, 0, 0, 0)
+shape = SubResource("SphereShape3D_4gyqm")
+
+[node name="ScreamSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_iifgy")
+volume_db = -80.0
+autoplay = true
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="ObjectiveMarker" type="Label3D" parent="."]
+transform = Transform3D(0.17106217, 8.072642e-08, -8.74228e-08, 1.4954763e-08, -4.0363318e-08, 1.0000029, 1.4954722e-08, -0.9234025, -4.3711395e-08, 0, 71.2559, 0)
+rotation_order = 0
+pixel_size = 1.721
+double_sided = false
+modulate = Color(1, 1, 0.08627451, 1)
+text = "🔴"
+font_size = 100
+outline_size = 80
+uppercase = true

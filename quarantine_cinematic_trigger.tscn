@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://csyb4o2hgcv2s"]
+
+[ext_resource type="Script" uid="uid://na3gmxk1b364" path="res://CinematicSweepTrigger.gd" id="1_ai5jf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ai5jf"]
+size = Vector3(2.5908203, 24.552437, 37.606262)
+
+[node name="QuarantineCinematicTrigger" type="Area3D" node_paths=PackedStringArray("start_point", "end_point", "focus_point")]
+collision_mask = 7
+script = ExtResource("1_ai5jf")
+start_point = NodePath("CamStart")
+end_point = NodePath("CamEnd")
+focus_point = NodePath("CamFocus")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.6940918)
+shape = SubResource("BoxShape3D_ai5jf")
+
+[node name="CamStart" type="Marker3D" parent="."]
+
+[node name="CamEnd" type="Marker3D" parent="."]
+
+[node name="CamFocus" type="Marker3D" parent="."]
