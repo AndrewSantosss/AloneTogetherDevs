@@ -4,87 +4,113 @@ extends Control
 # --- STATUS FLAG ---
 var is_starting: bool = false
 
+# Target background (TextureRect)
+@onready var bg_texture: TextureRect = $CanvasLayer/TextureRect 
+# Gaano kalayo ang galaw
+@export var parallax_strength: float = 20.0
+
 # --- UI ELEMENTS ---
-@onready var fade: ColorRect = $TransitionLayer/Fade
-@onready var margin_container: Control = $CanvasLayer/MarginContainer # Kung nasaan ang "Press Any Key" label
-@onready var video_player: VideoStreamPlayer = $VideoStreamPlayer
+@onready var label_press_any = $CanvasLayer/Label
+@onready var label_story = $CanvasLayer/Label2
+@onready var fade: ColorRect = $TransitionLayer/FadeOverlay
+@onready var margin_container: Control = $CanvasLayer/MarginContainer
 
 # --- AUDIO ---
 @onready var menu_music: AudioStreamPlayer = get_node_or_null("MenuMusic")
 
 func _ready() -> void:
-	# 1. Setup Video Loop
-	if video_player:
-		if not video_player.finished.is_connected(_on_video_finished):
-			video_player.finished.connect(_on_video_finished)
-		video_player.play()
+	process_mode = PROCESS_MODE_ALWAYS
+	set_process_input(true)
 	
-	# 2. Play Music
+	# 1. Setup Initial States
+	if label_press_any:
+		label_press_any.modulate.a = 0.0 # Start invisible
+		setup_pulsing_label()
+		
+	if label_story:
+		label_story.modulate.a = 0.0 # Start invisible
+		fade_in_story()
+
 	if menu_music and not menu_music.playing:
 		menu_music.play()
 	
-	# 3. Intro Animation (Fade In)
 	cinematic_fade_in()
 
-# --- INPUT HANDLING (ANY KEY) ---
-func _input(event: InputEvent) -> void:
-	# Kung nag-start na, ignore inputs
-	if is_starting:
-		return
-		
-	# Check kung keyboard press or mouse click
-	if (event is InputEventKey and event.pressed) or (event is InputEventMouseButton and event.pressed):
-		start_game_sequence()
+func setup_pulsing_label() -> void:
+	# Fade in and out just like in main menu
+	if label_press_any:
+		var tween = create_tween().set_loops()
+		tween.tween_property(label_press_any, "modulate:a", 1.0, 1.5).set_trans(Tween.TRANS_SINE)
+		tween.tween_property(label_press_any, "modulate:a", 0.2, 1.5).set_trans(Tween.TRANS_SINE)
 
-# --- MAIN LOGIC ---
+func fade_in_story() -> void:
+	# Specific fade in for Label2 (the story text)
+	if label_story:
+		var tween = create_tween()
+		tween.tween_property(label_story, "modulate:a", 1.0, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+func _process(delta: float) -> void:
+	# Fish Eye / Distortion Shader Logic
+	if bg_texture and bg_texture.material:
+		var screen_size = get_viewport().get_visible_rect().size
+		var mouse_pos = get_viewport().get_mouse_position()
+		
+		var target_mouse_uv = Vector2(
+			mouse_pos.x / screen_size.x,
+			mouse_pos.y / screen_size.y
+		)
+		
+		var current_mouse_uv = bg_texture.material.get_shader_parameter("mouse_pos")
+		if current_mouse_uv == null: current_mouse_uv = Vector2(0.5, 0.5)
+		
+		var smooth_uv = current_mouse_uv.lerp(target_mouse_uv, 1.0 - exp(-5.0 * delta))
+		bg_texture.material.set_shader_parameter("mouse_pos", smooth_uv)
+
+# --- INPUT HANDLING ---
+func _unhandled_input(event: InputEvent) -> void:
+	if (event is InputEventKey or event is InputEventMouseButton):
+		if event.pressed and not event.is_echo() and not is_starting:
+			start_game_sequence()
+
+# --- THE TRANSITION (1s Fade + 2s Dark + Volume Out) ---
 func start_game_sequence() -> void:
 	is_starting = true
+	set_process_input(false)
 	
-	# Optional: Sound effect pag pumindot (Start Sound)
-	# if has_node("StartSound"): $StartSound.play()
+	# Hide the labels immediately on transition start
+	if label_press_any: label_press_any.visible = false
+	if label_story: label_story.visible = false
 	
-	print("Input detected! Starting game...")
+	# 1. GUMAWA NG CANVASLAYER PARA SA FADE
+	var fade_layer = CanvasLayer.new()
+	fade_layer.layer = 128 
+	get_tree().root.add_child(fade_layer)
 	
-	# 1. Start Fade Out
-	await cinematic_fade_out()
+	# 2. GUMAWA NG COLORRECT
+	var pure_fade = ColorRect.new()
+	pure_fade.color = Color(0, 0, 0, 0)
+	pure_fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	pure_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_layer.add_child(pure_fade)
 	
-	# 2. Reset Game Data (Optional)
-	if GameManager.has_method("start_new_game"):
-		GameManager.start_new_game()
+	# 3. ANIMATION: 1 SECOND FADE + VOLUME DOWN
+	var tween = create_tween()
+	tween.tween_property(pure_fade, "color:a", 1.0, 1.0).set_trans(Tween.TRANS_LINEAR)
 	
-	# 3. Load Name Selection (SceneLoader handles the Loading Screen)
-	SceneLoader.load_scene("res://NameSelectionUI.tscn")
+	if menu_music:
+		tween.parallel().tween_property(menu_music, "volume_db", -80.0, 1.0).set_trans(Tween.TRANS_SINE)
+	
+	# 4. STAY DARK FOR 2 SECONDS
+	tween.tween_interval(2.0)
+	
+	await tween.finished
+	get_tree().change_scene_to_file("res://IntroSequence.tscn")
+	fade_layer.queue_free()
 
-# --- VIDEO LOOP ---
-func _on_video_finished() -> void:
-	if video_player:
-		video_player.play()
-
-# --- ANIMATIONS ---
 func cinematic_fade_in(duration: float = 1.2) -> void:
 	if not fade: return
+	
 	fade.visible = true
-	fade.color.a = 1.0 # Start Black
-	
-	if margin_container: 
-		margin_container.modulate.a = 0.0
-	
+	fade.modulate.a = 1.0
 	var tween := create_tween()
-	tween.tween_property(fade, "color:a", 0.0, duration)
-	
-	if margin_container: 
-		tween.parallel().tween_property(margin_container, "modulate:a", 1.0, duration * 0.75)
-
-func cinematic_fade_out(duration: float = 0.9) -> void:
-	var tween := create_tween()
-	
-	# Fade Visuals (Black Screen)
-	if fade:
-		fade.visible = true
-		tween.tween_property(fade, "color:a", 1.0, duration)
-	
-	# Fade Music
-	if menu_music:
-		tween.parallel().tween_property(menu_music, "volume_db", -80.0, duration)
-		
-	await tween.finished
+	tween.tween_property(fade, "modulate:a", 0.0, duration)

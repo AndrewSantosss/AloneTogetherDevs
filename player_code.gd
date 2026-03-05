@@ -4,11 +4,15 @@ extends CharacterBody3D
 signal player_health_low
 signal dog_health_low
 
+# --- Weapon System ---
+enum Weapon { SHOTGUN }
+var current_weapon = Weapon.SHOTGUN
+
 # --- Player Stats ---
 @export var speed = 10.0 
 @export var sprint_speed = 20.0
 @export var jump_velocity = 120.0 
-@export var health = 150.0
+@export var health = 100.0
 
 # --- VISUAL SETTINGS ---
 @export var flip_default = false 
@@ -18,14 +22,14 @@ signal dog_health_low
 @export var friction = 300.0 
 
 # --- Combat Stats ---
-@export var attack_damage = 500.0
+@export var attack_damage = 45.0
 @export var min_attack_damage = 10.0 
 @export var attack_range = 300.0
 @export var attack_hit_frame := 1
 
 # --- Ammo ---
 @export var max_ammo := 5
-@export var reload_time := 1.5 
+@export var reload_time := 2
 var current_ammo: int
 var is_reloading := false
 var damage_dealt := false 
@@ -85,6 +89,7 @@ var is_sprinting := false
 var is_attacking := false 
 var is_executing := false 
 var is_picking_up := false 
+var is_dying := false
 
 # --- CINEMATIC SHAKE VARIABLES ---
 var shake_strength: float = 0.0
@@ -94,10 +99,33 @@ var shake_decay: float = 10.0
 var has_warned_player_low = false
 var has_warned_dog_low = false
 
+# --- SILHOUETTE / X-RAY SHADER ---
+const SILHOUETTE_SHADER = """
+shader_type spatial;
+render_mode unshaded, depth_test_disabled, cull_disabled;
+
+uniform sampler2D texture_albedo : source_color, filter_nearest;
+// Kulay ng Silhouette (Red, Green, Blue, Alpha). Naka-set sa Light Blue na may 50% transparency.
+uniform vec4 silhouette_color : source_color = vec4(0.0, 0.6, 1.0, 0.5);
+
+void fragment() {
+	vec4 tex = texture(texture_albedo, UV);
+	if (tex.a < 0.1) {
+		discard;
+	}
+	ALBEDO = silhouette_color.rgb;
+	ALPHA = silhouette_color.a;
+}
+"""
+var silhouette_material: ShaderMaterial
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	floor_snap_length = 0.2 
 	wall_min_slide_angle = deg_to_rad(15.0)
+	
+	if ammo_label:
+		ammo_label.top_level = true
 
 	if animated_sprite:
 		animated_sprite.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -107,6 +135,16 @@ func _ready():
 			animated_sprite.animation_finished.connect(_on_animation_finished)
 	
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	# --- SETUP SILHOUETTE MATERIAL ---
+	if animated_sprite:
+		var shader = Shader.new()
+		shader.code = SILHOUETTE_SHADER
+		silhouette_material = ShaderMaterial.new()
+		silhouette_material.shader = shader
+		# Mahalaga ito: render_priority = -1 para nasa likod lang siya ng main texture!
+		silhouette_material.render_priority = -1 
+		animated_sprite.material_overlay = silhouette_material
 	
 	# Safe connection to avoid crashes if timer is missing
 	if hit_timer:
@@ -134,18 +172,40 @@ func _on_hit_timer_timeout():
 
 func start_reload():
 	if is_reloading or is_executing or is_picking_up: return
+	
+	# Prevent reloading if the gun is already full
+	if current_ammo == max_ammo: return 
+	
+	# Prevent reloading if we have no reserve ammo
+	if Inventory.get_item_count("ammo") <= 0:
+		spawn_floating_text("No Ammo!")
+		return
+	
 	is_attacking = false 
 	is_reloading = true
 	update_ui()
+	
 	if reload_sound: reload_sound.play()
 	if animated_sprite and animated_sprite.sprite_frames.has_animation("reload"):
 		animated_sprite.play("reload")
+	
 	await get_tree().create_timer(reload_time).timeout
 	_finish_reload()
 
 func _finish_reload():
 	if not is_reloading: return 
-	current_ammo = max_ammo
+	
+	# Calculate how much ammo we need to fill the gun
+	var needed = max_ammo - current_ammo
+	var available = Inventory.get_item_count("ammo")
+	
+	# Take whichever is smaller: the ammo we need, or the ammo we actually have
+	var to_load = min(needed, available)
+	
+	if to_load > 0:
+		current_ammo += to_load
+		Inventory.remove_item("ammo", to_load) # Deduct from inventory
+	
 	is_reloading = false
 	update_ui()
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -161,6 +221,9 @@ func play_pickup_animation(item_name: String):
 	spawn_floating_text("+1 " + item_name)
 	
 	is_picking_up = true
+	velocity.x = 0 # Instant stop para hindi mag-slide
+	velocity.z = 0
+	
 	if animated_sprite and animated_sprite.sprite_frames.has_animation("pickup"):
 		animated_sprite.play("pickup")
 	else:
@@ -207,17 +270,33 @@ func apply_cinematic_shake(amount: float):
 	shake_strength = amount
 
 func _physics_process(delta):
+	if get_tree().paused or is_executing: 
+		velocity.x = 0
+		velocity.z = 0
+		if animated_sprite and animated_sprite.sprite_frames.has_animation("idle"):
+			animated_sprite.play("idle")
+		return
+		
 	check_dog_health()
 
+	# --- APPROACH 2: CAMERA SHAKE PARA SA LAHAT NG CAMERA ---
 	if shake_strength > 0:
 		shake_strength = lerp(shake_strength, 0.0, shake_decay * delta)
-		if cinematic_camera:
-			cinematic_camera.h_offset = randf_range(-shake_strength, shake_strength) * 0.5
-			cinematic_camera.v_offset = randf_range(-shake_strength, shake_strength) * 0.5
+		# Random offset para sa alog
+		var offset_h = randf_range(-shake_strength, shake_strength) * 0.1
+		var offset_v = randf_range(-shake_strength, shake_strength) * 0.1
+		
+		if cinematic_camera and cinematic_camera.current:
+			cinematic_camera.h_offset = offset_h
+			cinematic_camera.v_offset = offset_v
+		elif camera and camera.current:
+			camera.h_offset = offset_h
+			camera.v_offset = offset_v
 	else:
-		if cinematic_camera:
-			cinematic_camera.h_offset = 0
-			cinematic_camera.v_offset = 0
+		if cinematic_camera: cinematic_camera.h_offset = 0; cinematic_camera.v_offset = 0
+		if camera: camera.h_offset = 0; camera.v_offset = 0
+
+	# ... rest of your code (is_executing, etc.)
 
 	if is_executing: 
 		if cinematic_camera and cinematic_camera.current:
@@ -239,6 +318,9 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("change_view"):
 		is_first_person = !is_first_person 
+		# --- SYNC WEAPON CAMERA ---
+		if camera: camera.current = true
+		if cinematic_camera: cinematic_camera.current = false
 
 	var y_velocity = velocity.y
 	if not is_on_floor():
@@ -265,7 +347,10 @@ func _physics_process(delta):
 					await get_tree().create_timer(0.2).timeout
 					start_reload()
 			else:
-				start_reload()
+				if Inventory.get_item_count("ammo") > 0:
+					start_reload()
+				else:
+					spawn_floating_text("NO AMMO!")
 
 	if is_attacking:
 		if animated_sprite and animated_sprite.frame == attack_hit_frame and not damage_dealt:
@@ -320,9 +405,25 @@ func _physics_process(delta):
 			
 			if not is_executing:
 				_update_animation_state(input_dir)
+	else:
+		# PIGILAN ANG SLIDING HABANG PUMUPULOT O UMAATAKE
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
+		velocity.z = move_toward(velocity.z, 0, friction * delta)
 	
 	velocity.y = y_velocity
 	move_and_slide()
+	
+	# --- UPDATE SILHOUETTE TEXTURE ---
+	if animated_sprite and silhouette_material:
+		if is_attacking or is_reloading or is_picking_up:
+			silhouette_material.set_shader_parameter("silhouette_color", Color(0, 0, 0, 0))
+		else:
+			silhouette_material.set_shader_parameter("silhouette_color", Color(0.0, 0.6, 1.0, 0.5))
+			var anim = animated_sprite.animation
+			var frame_idx = animated_sprite.frame
+			var current_tex = animated_sprite.sprite_frames.get_frame_texture(anim, frame_idx)
+			if current_tex:
+				silhouette_material.set_shader_parameter("texture_albedo", current_tex)
 
 func _update_animation_state(input_dir: Vector2):
 	if is_executing or is_picking_up or not animated_sprite: return
@@ -448,26 +549,35 @@ func try_to_heal():
 			interact_label.visible = false
 			
 func _unhandled_input(event):
+	if is_dying: return
+
+	# Manual Reload
+	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
+		start_reload()
+
 	# Key 1: Medkit
-	if event.is_action_pressed("use_medkit"):
+	if event is InputEventKey and event.pressed and event.keycode == KEY_1:
 		if health >= 100:
 			show_warning("Health is already full!")
 		elif Inventory.consume_item("medkit"):
 			heal_player(25)
 			play_pickup_animation("Used Medkit")
 
-	# Key 2: Candy (UPDATED)
-	if event.is_action_pressed("use_candy"):
-		# We don't check for 'stamina full' anymore because speed boosts are always useful!
+	# Key 2: Candy
+	if event is InputEventKey and event.pressed and event.keycode == KEY_2:
 		if Inventory.consume_item("candy"):
-			activate_speed_boost() # <--- CALL THE NEW FUNCTION
+			activate_speed_boost()
 		else:
 			show_warning("No Candy left!")
+			
+	# --- DEV CHEAT: INSTANT KILL (X KEY) ---
+	if event is InputEventKey and event.pressed and event.keycode == KEY_X:
+		dev_kill_all_enemies()
 
 func _on_animation_finished():
 	if is_executing or not animated_sprite: return 
 	
-	if animated_sprite.animation == "attack":
+	if animated_sprite.animation in ["attack"]:
 		is_attacking = false
 		damage_dealt = false 
 		_update_animation_state(Input.get_vector("move_left", "move_right", "move_forward", "move_backward"))
@@ -480,8 +590,11 @@ func update_ui():
 	if health_bar: health_bar.value = health
 	if stamina_bar: stamina_bar.value = current_stamina
 	if ammo_label:
-		if is_reloading: ammo_label.text = "Reloading..."
-		else: ammo_label.text = "Ammo: " + str(current_ammo) + " / " + str(max_ammo)
+		if is_reloading: 
+			ammo_label.text = "Reloading..."
+		else:
+			var reserve = Inventory.get_item_count("ammo")
+			ammo_label.text = "Ammo: " + str(current_ammo) + " / " + str(reserve)
 
 func check_dog_health():
 	if is_instance_valid(dog_companion):
@@ -543,19 +656,27 @@ func check_interaction():
 	interact_label.visible = false
 
 func deal_damage():
-	if not camera: return 
+	var active_cam = camera 
+	if not active_cam: return 
+	
+	var current_range = attack_range
+	var current_dmg = attack_damage
+	
 	var space_state = get_world_3d().direct_space_state
 	var mouse_pos = get_viewport().get_visible_rect().size / 2
-	var ray_origin = camera.project_ray_origin(mouse_pos)
-	var ray_end = ray_origin + camera.project_ray_normal(mouse_pos) * attack_range
+	var ray_origin = active_cam.project_ray_origin(mouse_pos)
+	var ray_end = ray_origin + active_cam.project_ray_normal(mouse_pos) * current_range
+	
 	var query1 = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
 	query1.exclude = [self]
 	var aim_result = space_state.intersect_ray(query1)
 	var target_position = ray_end 
 	if aim_result: target_position = aim_result.position
+	
 	var attack_start_point = attack_ray_origin.global_position if attack_ray_origin else global_position
 	var attack_direction = (target_position - attack_start_point).normalized()
-	var attack_end_point = attack_start_point + (attack_direction * attack_range)
+	var attack_end_point = attack_start_point + (attack_direction * current_range)
+	
 	var query2 = PhysicsRayQueryParameters3D.create(attack_start_point, attack_end_point)
 	var exclusions = [self]
 	if is_instance_valid(dog_companion): exclusions.append(dog_companion)
@@ -567,28 +688,22 @@ func deal_damage():
 		if collider.is_in_group("enemies"):
 			if collider.has_method("take_damage"):
 				var distance_to_enemy = global_position.distance_to(collider.global_position)
-				var ratio = clamp(distance_to_enemy / attack_range, 0.0, 1.0)
-				var final_damage = lerp(attack_damage, min_attack_damage, ratio)
+				var ratio = clamp(distance_to_enemy / current_range, 0.0, 1.0)
+				var final_damage = lerp(current_dmg, current_dmg * 0.1, ratio) 
 				collider.take_damage(final_damage)
 				
-				# --- NEW: Play Sound ONLY when Player attacks ---
 				if hit_sound:
 					hit_sound.pitch_scale = randf_range(0.9, 1.1)
 					hit_sound.play()
-				# -----------------------------------------------
 
 func show_warning(text: String):
 	if popup_label:
 		popup_label.text = text
 		popup_label.visible = true
-		popup_label.modulate.a = 1.0 # Reset transparency
-		
-		# Create a detailed animation (Tween)
+		popup_label.modulate.a = 1.0 
 		var tween = create_tween()
-		# Wait for 1 second, then fade out over 1 second
 		tween.tween_interval(1.0) 
 		tween.tween_property(popup_label, "modulate:a", 0.0, 1.0)
-		# Hide it after fading
 		tween.tween_callback(popup_label.hide)
 
 func die():
@@ -597,6 +712,40 @@ func die():
 
 func take_damage(amount):
 	health -= amount
+	
+	# 1. VISION SHAKE
+	apply_cinematic_shake(50.0) 
+	
+	# 2. RED GLOW FLASH (Solid Red Silhouette Logic)
+	if animated_sprite and silhouette_material:
+		var flash_tween = create_tween()
+		
+		var blue_color = Color(0.0, 0.6, 1.0, 0.5) 
+		var red_flash_solid = Color(5.0, 0.0, 0.0, 1.0) 
+		
+		# Gawing SOLID RED agad ang silhouette at itago ang main texture
+		silhouette_material.set_shader_parameter("silhouette_color", red_flash_solid)
+		animated_sprite.modulate.a = 0.0
+		
+		# Fade back ang silhouette at ang main texture
+		flash_tween.tween_method(
+			func(c): silhouette_material.set_shader_parameter("silhouette_color", c),
+			red_flash_solid, 
+			blue_color, 
+			0.4
+		).set_trans(Tween.TRANS_SINE)
+		
+		flash_tween.parallel().tween_property(animated_sprite, "modulate:a", 1.0, 0.4)
+
+	# 3. HEALTH BAR RED FLASH
+	if health_bar:
+		var bar_tween = create_tween()
+		# Gawing pula ang buong health bar node agad
+		health_bar.modulate = Color(0.5, 0, 0, 1) # Overbright Red para sa UI glow
+		# I-fade pabalik sa normal na kulay (White modulate = normal color)
+		bar_tween.tween_property(health_bar, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE)
+
+	# --- REST OF THE BASE CODE (No changes) ---
 	if hit_label:
 		hit_label.show()
 	if hit_timer:
@@ -610,39 +759,55 @@ func take_damage(amount):
 	if health <= 0: die()
 	
 func heal_player(amount: float):
-	var max_hp = 100.0 # Or use your specific max health variable if you have one
+	var max_hp = 100.0 
 	health += amount
 	if health > max_hp:
 		health = max_hp
-	
-	update_ui() # Important: Refreshes the health bar immediately!
+	update_ui() 
 	print("Healed! Health is now: ", health)
 
 func restore_stamina(amount: float):
 	current_stamina += amount
 	if current_stamina > max_stamina:
 		current_stamina = max_stamina
-		
-	update_ui() # Important: Refreshes the stamina bar immediately!
+	update_ui()
 	print("Stamina restored! Stamina is now: ", current_stamina)
 
 func activate_speed_boost():
-	# 1. If a boost timer is already running, kill it so we can restart
 	if speed_boost_tween:
 		speed_boost_tween.kill()
-	
-	# 2. Apply 50% boost (1.5x)
 	speed = default_speed * 1.5
 	sprint_speed = default_sprint_speed * 1.5
 	print("SPEED BOOST! Speed is now: ", speed)
-	spawn_floating_text("Speed Up!") # Optional: Reuses your text popup logic
-	
-	# 3. Create a timer for 5 seconds
+	spawn_floating_text("Speed Up!") 
 	speed_boost_tween = create_tween()
-	speed_boost_tween.tween_interval(5.0) # Wait 5 seconds
-	speed_boost_tween.tween_callback(reset_speed) # Then run reset_speed
+	speed_boost_tween.tween_interval(5.0) 
+	speed_boost_tween.tween_callback(reset_speed)
 
 func reset_speed():
 	speed = default_speed
 	sprint_speed = default_sprint_speed
 	print("Speed boost ended. Back to normal.")
+	
+func dev_kill_all_enemies():
+	print("DEV CHEAT: Executing Order 66 (Killing all enemies in range!)")
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	var kill_count = 0
+	for enemy in enemies:
+		if is_instance_valid(enemy):
+			var dist = global_position.distance_to(enemy.global_position)
+			if dist <= attack_range: 
+				if enemy.has_method("die"):
+					enemy.die()
+				elif enemy.has_method("take_damage"):
+					enemy.take_damage(99999)
+				else:
+					enemy.queue_free()
+				kill_count += 1
+	if kill_count > 0:
+		spawn_floating_text("DEV: " + str(kill_count) + " Enemies Killed!")
+		if hit_sound:
+			hit_sound.pitch_scale = 0.5 
+			hit_sound.play()
+	else:
+		spawn_floating_text("DEV: No enemies in range.")

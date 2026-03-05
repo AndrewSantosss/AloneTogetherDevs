@@ -1,4 +1,4 @@
-[gd_scene load_steps=165 format=3 uid="uid://b22ef5ijugjbq"]
+[gd_scene load_steps=170 format=3 uid="uid://b22ef5ijugjbq"]
 
 [ext_resource type="Script" uid="uid://cur4i6l2ihdte" path="res://scene_1.gd" id="1_5x68o"]
 [ext_resource type="PackedScene" uid="uid://c7psjp33u27si" path="res://PlayerPackage.tscn" id="1_uhspm"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://djsormkgoin6c" path="res://campfire.tscn" id="8_5oduc"]
 [ext_resource type="PackedScene" uid="uid://dk33wivr52j32" path="res://grass_plant.tscn" id="9_g0vqg"]
 [ext_resource type="PackedScene" uid="uid://t6dt2ctxo7t1" path="res://mountains.tscn" id="11_7of30"]
+[ext_resource type="PackedScene" uid="uid://cs1q815wwrn1r" path="res://models/lilim.gltf" id="12_yj075"]
 [ext_resource type="Texture2D" uid="uid://bxdmrj6vistc3" path="res://environment/ground reference.png" id="13_2kdka"]
 [ext_resource type="Texture2D" uid="uid://bdp43yt5aqdsx" path="res://environment/maxresdefault.jpg" id="14_0jh01"]
 [ext_resource type="Texture2D" uid="uid://cabrnt6cu7jdn" path="res://background/Screenshot (1242).png" id="15_r60kk"]
@@ -26,12 +27,14 @@
 [ext_resource type="PackedScene" uid="uid://ciepx3w5fd2gg" path="res://vines.tscn" id="26_7k6mj"]
 [ext_resource type="PackedScene" uid="uid://crme6l84ntp3f" path="res://moss.tscn" id="27_isws7"]
 [ext_resource type="PackedScene" uid="uid://vfgepuvds4c4" path="res://pan_trigger.tscn" id="29_o6qf4"]
+[ext_resource type="Shader" uid="uid://bbd6juyrtguwb" path="res://Scene1.gdshader" id="31_yexi5"]
 [ext_resource type="PackedScene" uid="uid://doqkbldrkgs5p" path="res://medkit.tscn" id="32_4it1m"]
 [ext_resource type="Script" uid="uid://dwxah7t7ii3fi" path="res://UniversalBatcher.gd" id="32_5p6yk"]
 [ext_resource type="Texture2D" uid="uid://fax8dilvgsf2" path="res://environment/1762883658602.png" id="32_eq5wg"]
 [ext_resource type="PackedScene" uid="uid://7anpcq60g7rp" path="res://stamina_candy.tscn" id="33_4it1m"]
 [ext_resource type="Texture2D" uid="uid://dfvej82s0p5vl" path="res://environment/Picsart_25-11-12_19-38-24-622.jpg" id="34_3qxjv"]
 [ext_resource type="AudioStream" uid="uid://3ow8fsn238p2" path="res://sfx/AMBIENCE_WIND_LEAVES.mp3" id="34_i0jom"]
+[ext_resource type="PackedScene" uid="uid://0xl84n1o4d0y" path="res://ammo_pickup.tscn" id="35_hveug"]
 [ext_resource type="Texture2D" uid="uid://d4fbsymtfeucb" path="res://environment/gray-concrete-sidewalk-pavement-texture-and-background-photo.jpg" id="37_5lgcf"]
 [ext_resource type="Texture2D" uid="uid://bq3odcfjpnyic" path="res://environment/Road AI (1).png" id="40_urdb7"]
 
@@ -449,22 +452,24 @@ sky_material = SubResource("PanoramaSkyMaterial_p2wow")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_5p6yk"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.8776157, 0.8776158, 0.8776157, 1)
 background_energy_multiplier = 0.86
 sky = SubResource("Sky_pqk4w")
 ambient_light_source = 2
 ambient_light_color = Color(0.347817, 0.347817, 0.347817, 1)
+ambient_light_energy = 2.42
 ssao_radius = 3.55
 ssao_intensity = 2.7
 ssao_detail = 0.57
 ssao_light_affect = 0.06
-glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 0.06
 fog_enabled = true
+fog_light_color = Color(0.5176471, 1, 1, 1)
 fog_light_energy = 0.52
-fog_density = 0.0002
+fog_sun_scatter = 1.0
+fog_density = 0.0005
 fog_height = -1024.0
 fog_height_density = 0.0005
 volumetric_fog_enabled = true
@@ -636,12 +641,20 @@ size = Vector3(4802.8867, 847.611, 78.70583)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i0jom"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yj075"]
+shader = ExtResource("31_yexi5")
+shader_parameter/blur_amount = 2.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p2wow"]
-bg_color = Color(0.2159017, 0.21590173, 0.21590161, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 1000
 corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
 corner_radius_bottom_left = 1000
+
+[sub_resource type="LabelSettings" id="LabelSettings_yexi5"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Scene1" type="Node3D" node_paths=PackedStringArray("city_marker")]
 script = ExtResource("1_5x68o")
@@ -733,6 +746,24 @@ multimesh = SubResource("MultiMesh_0jh01")
 [node name="@MultiMeshInstance3D@32444" type="MultiMeshInstance3D" parent="buildings"]
 material_override = SubResource("StandardMaterial3D_mnagh")
 multimesh = SubResource("MultiMesh_r60kk")
+
+[node name="blockbench_export" parent="buildings" instance=ExtResource("12_yj075")]
+transform = Transform3D(1.8988696, 0, -29.939846, 0, 30, 0, 29.939846, 0, 1.8988696, -9184.789, 0, 2584.5051)
+
+[node name="blockbench_export2" parent="buildings" instance=ExtResource("12_yj075")]
+transform = Transform3D(-1.8988723, 0, 29.939846, 0, 30, 0, -29.939846, 0, -1.8988723, -9388.939, 0, 2692.3853)
+
+[node name="blockbench_export3" parent="buildings" instance=ExtResource("12_yj075")]
+transform = Transform3D(1.8988696, 0, -29.939846, 0, 30, 0, 29.939846, 0, 1.8988696, -8741.376, 0, 2538.9868)
+
+[node name="blockbench_export4" parent="buildings" instance=ExtResource("12_yj075")]
+transform = Transform3D(-1.8988723, 0, 29.939846, 0, 30, 0, -29.939846, 0, -1.8988723, -8945.526, 0, 2646.867)
+
+[node name="blockbench_export5" parent="buildings" instance=ExtResource("12_yj075")]
+transform = Transform3D(1.8988696, 0, -29.939846, 0, 30, 0, 29.939846, 0, 1.8988696, -8302.807, 0, 2502.1982)
+
+[node name="blockbench_export6" parent="buildings" instance=ExtResource("12_yj075")]
+transform = Transform3D(-1.8988723, 0, 29.939846, 0, 30, 0, -29.939846, 0, -1.8988723, -8506.957, 0, 2610.0784)
 
 [node name="fenceRusty" type="Node3D" parent="."]
 
@@ -903,67 +934,67 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2295.45, 0, -174.132)
 [node name="Enemy" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 2814.0513, 3.58561, -769.9169)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy2" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 2696.852, 3.58561, -540.8629)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy3" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 2920.212, 3.58561, -886.21594)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy4" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3071.8965, 3.58561, -886.21594)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy5" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3071.8965, 3.58561, -1093.6014)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy6" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3071.8965, 3.58561, -827.84863)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy7" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3232.1992, 3.58561, -827.84863)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy8" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3605.3022, 3.58561, -1314.8694)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy9" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3371.0908, 3.58561, -1314.8694)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy10" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3371.0908, 3.58561, -1186.6912)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy11" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3900.0234, 3.58561, -1439.2162)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy12" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3686.1206, 3.58561, -1439.2162)
-health = 100.0
+health = 1000.0
 
 [node name="Enemy13" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("23_p2wow")]
 process_mode = 3
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 3980.6191, 3.58561, -1564.7874)
-health = 100.0
+health = 1000.0
 
 [node name="worldEnvironment" type="StaticBody3D" parent="SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1544.74, -1.8913, 259.9)
@@ -1107,6 +1138,27 @@ material_override = SubResource("StandardMaterial3D_iw2n3")
 mesh = SubResource("PlaneMesh_6nvw1")
 skeleton = NodePath("../../../../..")
 
+[node name="Ammunition" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("35_hveug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9341.416, 16.275764, 2463.3809)
+
+[node name="Ammunition2" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("35_hveug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9268.143, 16.275766, 2528.2993)
+
+[node name="Ammunition3" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("35_hveug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9223.032, 16.275766, 2490.2112)
+
+[node name="StaminaCandy" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("33_4it1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8751.293, 16.275764, 2706.893)
+
+[node name="StaminaCandy2" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("33_4it1m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8409.27, 17.999804, 2434.7546)
+
+[node name="Medkit" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("32_4it1m")]
+transform = Transform3D(16.661198, 0, 0, 0, 13.573301, 0, 0, 0, 17.581133, -8226.476, 14.85902, 2666.4297)
+
+[node name="Medkit2" parent="SubViewportContainer/SubViewport/worldEnvironment/mainMapFlat" instance=ExtResource("32_4it1m")]
+transform = Transform3D(16.661198, 0, 0, 0, 13.573301, 0, 0, 0, 17.581133, -8406.596, 14.85902, 2678.628)
+
 [node name="graphics" type="Node3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics" groups=["world_env"]]
@@ -1114,12 +1166,18 @@ environment = SubResource("Environment_5p6yk")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics" groups=["lights"]]
 transform = Transform3D(-0.34113228, -0.79819375, -0.49650338, -0.39891574, -0.35534087, 0.84533966, -0.8511727, 0.48643574, -0.19719377, -6239.1064, 652.867, 1954.4152)
+light_color = Color(1, 1, 0.72156864, 1)
+light_energy = 1.51
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_opacity = 0.9
 shadow_blur = 0.0
+directional_shadow_mode = 0
 directional_shadow_split_1 = 0.02
-directional_shadow_max_distance = 8192.0
+directional_shadow_max_distance = 484.9
+
+[node name="Ammunition" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics" instance=ExtResource("35_hveug")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7636.616, 18.167065, 2272.635)
 
 [node name="groundCollision" type="StaticBody3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
 transform = Transform3D(-2.63033, 0, -2.89932e-07, 0, 0.50552, 0, 2.29951e-07, 0, -3.31644, 1.89378, 1.8913, -42.5569)
@@ -1809,9 +1867,10 @@ transform = Transform3D(-0.0181504, 0, -0.999835, 0, 1, 0, 0.999835, 0, -0.01815
 [node name="EnemyViewMaker" type="Marker3D" parent="."]
 transform = Transform3D(-0.13540137, -0.28769493, -0.9481023, 0.23197974, 0.9211111, -0.31263408, 0.96325064, -0.26227152, -0.057980448, -7862.4365, 177.43103, 2520.2178)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." groups=["gameplay_ui"]]
 
 [node name="MinimapFrame2" type="Panel" parent="HUD"]
+material = SubResource("ShaderMaterial_yj075")
 offset_left = 911.0
 offset_top = 10.0
 offset_right = 1072.0
@@ -1899,11 +1958,11 @@ outline_size = 80
 uppercase = true
 
 [node name="MapMarker3" type="Label3D" parent="."]
-transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -9258.881, 1132.4448, 2415.7751)
+transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -9982.674, 1132.4448, 2237.5396)
 rotation_order = 0
 pixel_size = 1.721
 double_sided = false
-text = "STA.RITA FOREST"
+text = "OUTSKIRTS"
 font_size = 80
 outline_size = 80
 uppercase = true
@@ -1920,30 +1979,102 @@ font_size = 100
 outline_size = 80
 uppercase = true
 
-[node name="Medkit" parent="." instance=ExtResource("32_4it1m")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -9597.855, 9.437721, 2529.8323)
-
-[node name="Medkit6" parent="." instance=ExtResource("32_4it1m")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -8008.129, 9.437721, 2597.102)
-
-[node name="StaminaCandy" parent="." instance=ExtResource("33_4it1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9521.871, 16.783728, 2551.0037)
-
-[node name="StaminaCandy2" parent="." instance=ExtResource("33_4it1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9521.871, 16.783728, 2763.0369)
-
-[node name="StaminaCandy3" parent="." instance=ExtResource("33_4it1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9102.061, 16.783728, 2763.0369)
-
-[node name="StaminaCandy4" parent="." instance=ExtResource("33_4it1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8463.486, 16.783728, 2662.8206)
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("34_i0jom")
 volume_db = -5.0
 autoplay = true
 parameters/looping = true
 
+[node name="Crosshair" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -24.0
+offset_right = 11.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 23
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="InstructionOverlay" type="Control" parent="CanvasLayer"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/InstructionOverlay"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -73.0
+offset_top = 54.0
+offset_right = -66.67355
+offset_bottom = 68.74662
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(54.21682, 7.6627736)
+color = Color(0, 0, 0, 0.75686276)
+
+[node name="CountdownLabel" type="Label" parent="CanvasLayer/InstructionOverlay"]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 169.0
+offset_right = 175.0
+offset_bottom = 192.0
+scale = Vector2(0.45981458, 0.45981458)
+
+[node name="Label3D" type="Label" parent="CanvasLayer/InstructionOverlay"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 78.0
+offset_right = 508.00006
+offset_bottom = 361.0
+scale = Vector2(0.5872628, 0.6705186)
+text = "Navigation: Use the Minimap to make navigation easier.
+Movement: [WASD] to Walk | [SHIFT] to Sprint
+Camera: [C] to change Camera style
+Companion: [T] to make your Dog stay in place
+Inventory: [I] to open Inventory"
+label_settings = SubResource("LabelSettings_yexi5")
+
+[node name="ContinueLabel" type="Label" parent="CanvasLayer/InstructionOverlay"]
+process_mode = 3
+layout_mode = 0
+offset_left = 99.0
+offset_top = 170.0
+offset_right = 301.0
+offset_bottom = 193.0
+scale = Vector2(0.41981578, 0.41981578)
+text = "Press Any Key to Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapMarker4" type="Label3D" parent="."]
+transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -8787.243, 1132.4448, 2171.476)
+rotation_order = 0
+pixel_size = 1.721
+double_sided = false
+text = "PARK RUINS"
+font_size = 80
+outline_size = 80
+uppercase = true
+
+[editable path="SubViewportContainer/SubViewport/entities/playerMain/PlayerPackage"]
 [editable path="PanTrigger"]
 [editable path="PanTrigger2"]
 [editable path="HUD/MinimapFrame/SubViewport/MinimapViewport/mapLayout/moss"]

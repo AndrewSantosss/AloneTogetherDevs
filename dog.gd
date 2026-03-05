@@ -7,10 +7,10 @@ extends CharacterBody3D
 @export var scavenge_range := 5000.0 # High range to find items anywhere
 
 # --- Combat Settings ---
-@export var health := 100.0 
-@export var damage := 15.0
+@export var health := 90.0 
+@export var damage := 20
 @export var attack_range := 6.0 
-@export var attack_cooldown := 1.0
+@export var attack_cooldown := 3
 
 # --- POSITIONS ---
 @export var follow_offset := Vector3(1.2, 0, 1.5) 
@@ -18,6 +18,41 @@ extends CharacterBody3D
 # --- TELEPORT SETTINGS ---
 @export var teleport_distance := 500.0  
 @export var teleport_offset := Vector3(0, 2, -2)
+
+# --- FINAL X-RAY SILHOUETTE SHADER ---
+const SILHOUETTE_SHADER = """
+shader_type spatial;
+// depth_test_disabled para makita sa likod ng pader
+render_mode unshaded, depth_test_disabled, cull_disabled;
+
+uniform sampler2D texture_albedo : source_color, filter_nearest;
+uniform vec4 silhouette_color : source_color = vec4(0.0, 1.0, 0.0, 0.4);
+
+void vertex() {
+	// Y-BILLBOARD ONLY Math para sakto ang alignment
+	mat4 modified_model_view = VIEW_MATRIX * mat4(
+		vec4(MODEL_MATRIX[0].xyz, 0.0), 
+		vec4(MODEL_MATRIX[1].xyz, 0.0), 
+		vec4(MODEL_MATRIX[2].xyz, 0.0), 
+		vec4(MODEL_MATRIX[3].xyz, 1.0)
+	);
+	modified_model_view[0] = vec4(length(MODEL_MATRIX[0].xyz), 0.0, 0.0, 0.0);
+	modified_model_view[1] = vec4(0.0, length(MODEL_MATRIX[1].xyz), 0.0, 0.0);
+	modified_model_view[2] = vec4(0.0, 0.0, length(MODEL_MATRIX[2].xyz), 0.0);
+	MODELVIEW_MATRIX = modified_model_view;
+}
+
+void fragment() {
+	vec4 tex = texture(texture_albedo, UV);
+	// Gamitin ang 0.9 para malinis ang edges base sa Nearest filtering mo
+	if (tex.a < 0.9) {
+		discard;
+	}
+	ALBEDO = silhouette_color.rgb;
+	ALPHA = silhouette_color.a;
+}
+"""
+var silhouette_material: ShaderMaterial
 
 # --- State Variables ---
 var can_scavenge := false # Locked by default (unlocked by NPC)
@@ -84,6 +119,23 @@ func _ready():
 
 	if player:
 		add_collision_exception_with(player)
+		
+	if player:
+		add_collision_exception_with(player)
+
+	# --- SETUP SILHOUETTE MATERIAL ---
+	if animated_sprite:
+		var shader = Shader.new()
+		shader.code = SILHOUETTE_SHADER
+		silhouette_material = ShaderMaterial.new()
+		silhouette_material.shader = shader
+		
+		# Priority 1 para ma-draw ito PAGKATAPOS ng main sprite 
+		silhouette_material.render_priority = -1 
+		
+		# Gamitin ang material_override para sa main pass, tapos next_pass para sa silhouette
+		# O kaya, i-set ang material_overlay pero siguraduhing mataas ang priority
+		animated_sprite.material_overlay = silhouette_material
 
 func _input(event):
 	# Toggle Roaming [T]
@@ -143,6 +195,24 @@ func take_damage(amount):
 	health -= amount
 	if ui_health_bar:
 		ui_health_bar.value = health
+		# --- HEALTH BAR FLASH ---
+		var bar_tween = create_tween()
+		ui_health_bar.modulate = Color(3, 0, 0, 1) # Overbright Red
+		bar_tween.tween_property(ui_health_bar, "modulate", Color.WHITE, 0.4)
+		
+	# --- RED SILHOUETTE FLASH ---
+	if animated_sprite and silhouette_material:
+		var flash_tween = create_tween()
+		var original_color = Color(0.0, 1.0, 0.0, 0.4) # Yung dating green
+		var red_flash_solid = Color(5.0, 0.0, 0.0, 1.0) 
+		
+		silhouette_material.set_shader_parameter("silhouette_color", red_flash_solid)
+		animated_sprite.modulate.a = 0.0 # Itago ang sprite details
+		
+		# Fade back ang kulay at ang transparency ng main sprite
+		flash_tween.tween_method(func(c): silhouette_material.set_shader_parameter("silhouette_color", c), red_flash_solid, original_color, 0.4)
+		flash_tween.parallel().tween_property(animated_sprite, "modulate:a", 1.0, 0.4)
+		
 	if health <= 0:
 		die()
 
@@ -194,9 +264,19 @@ func _physics_process(delta):
 
 	move_and_slide()
 	handle_animations(delta)
+	
+	move_and_slide()
+	handle_animations(delta)
+
+	# --- UPDATE SILHOUETTE TEXTURE ---
+	if animated_sprite and silhouette_material:
+		var anim = animated_sprite.animation
+		if animated_sprite.sprite_frames:
+			var current_tex = animated_sprite.sprite_frames.get_frame_texture(anim, animated_sprite.frame)
+			silhouette_material.set_shader_parameter("texture_albedo", current_tex)
 
 # =========================================================
-#              HELPER FUNCTIONS (Restored)
+#               HELPER FUNCTIONS (Restored)
 # =========================================================
 
 func handle_animations(delta):

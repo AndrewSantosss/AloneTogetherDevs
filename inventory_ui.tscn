@@ -180,7 +180,7 @@ position = Vector2(79, 543)
 sprite_frames = SubResource("SpriteFrames_6oj57")
 animation = &"Open"
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Panel" parent="." groups=["gameplay_ui"]]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5

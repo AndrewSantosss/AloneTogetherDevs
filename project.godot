@@ -33,7 +33,9 @@ window/size/viewport_width=1080
 window/size/viewport_height=608
 window/size/mode=3
 window/size/borderless=true
-window/stretch/mode="viewport"
+window/size/window_width_override=1920
+window/size/window_height_override=1080
+window/stretch/mode="canvas_items"
 
 [editor]
 
@@ -53,6 +55,7 @@ grass=""
 vegetations=""
 lights=""
 world_env=""
+gameplay_ui=""
 
 [input]
 
@@ -167,6 +170,11 @@ use_candy={
 dog_scavenge={
 "deadzone": 0.2,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"location":0,"echo":false,"script":null)
+]
+}
+KEY_E={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":69,"location":0,"echo":false,"script":null)
 ]
 }
 

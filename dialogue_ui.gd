@@ -38,7 +38,7 @@ func setup_ui_styles():
 		
 		var sys_style = LabelSettings.new()
 		sys_style.font_color = Color.WHITE
-		sys_style.font_size = 15
+		sys_style.font_size = 11
 		sys_style.shadow_size = 2
 		sys_style.shadow_color = Color(0,0,0,0.5)
 		system_label.label_settings = sys_style
@@ -56,7 +56,7 @@ func setup_ui_styles():
 		hero_style.font_color = Color.WHITE
 		hero_style.outline_size = 4        
 		hero_style.outline_color = Color.BLACK
-		hero_style.font_size = 18          
+		hero_style.font_size = 11         
 		cinematic_label.label_settings = hero_style
 
 func _input(event):

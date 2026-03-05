@@ -25,18 +25,12 @@ func _ready():
 	main_menu.visible = true
 	
 	# --- SYNC UI WITH SETTINGS MANAGER ---
-	# Kukunin natin ang naka-save na settings mula sa Autoload
 	if SettingsManager:
 		if grass_check: grass_check.button_pressed = SettingsManager.show_grass
 		if trees_check: trees_check.button_pressed = SettingsManager.show_vegetation
 		if shadows_check: shadows_check.button_pressed = SettingsManager.shadows_enabled
 		if glow_check: glow_check.button_pressed = SettingsManager.glow_enabled
 		if fog_check: fog_check.button_pressed = SettingsManager.fog_enabled
-		
-		if master_slider: master_slider.value = SettingsManager.master_volume
-		if sfx_slider: sfx_slider.value = SettingsManager.sfx_volume
-	else:
-		print("Error: SettingsManager Autoload not found! Make sure to add it in Project Settings.")
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -47,6 +41,10 @@ func toggle_pause():
 	get_tree().paused = is_paused
 	visible = is_paused
 	
+	# --- FIX: Itago ang Gameplay UI ---
+	# Tatawagin nito ang lahat ng nodes sa group na "gameplay_ui"
+	get_tree().call_group("gameplay_ui", "set_visible", !is_paused)
+
 	if is_paused:
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		show_main_menu()
@@ -55,13 +53,14 @@ func toggle_pause():
 		settings_menu.visible = false 
 		main_menu.visible = true
 
+func show_main_menu():
+	main_menu.visible = true
+	settings_menu.visible = false
+
 # --- BUTTON SIGNALS ---
 
 func _on_resume_button_pressed():
-	is_paused = false
-	get_tree().paused = false
-	visible = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	toggle_pause() # Mas malinis na gamitin ang toggle_pause para sa sync
 
 func _on_settings_button_pressed():
 	main_menu.visible = false
@@ -73,7 +72,7 @@ func _on_back_button_pressed():
 func _on_quit_button_pressed():
 	get_tree().quit()
 
-# --- GRAPHICS TOGGLES (Connected to Signals) ---
+# --- GRAPHICS TOGGLES ---
 
 func _on_grass_check_pressed():
 	SettingsManager.update_grass(grass_check.button_pressed)
@@ -86,18 +85,3 @@ func _on_shadows_check_pressed():
 
 func _on_glow_check_pressed():
 	SettingsManager.update_glow(glow_check.button_pressed)
-
-func _on_fog_check_pressed():
-	SettingsManager.update_fog(fog_check.button_pressed)
-
-# --- VOLUME ---
-
-func _on_master_volume_changed(value):
-	SettingsManager.update_master_volume(value)
-
-func _on_sfx_volume_changed(value):
-	SettingsManager.update_sfx_volume(value)
-
-func show_main_menu():
-	settings_menu.visible = false
-	main_menu.visible = true

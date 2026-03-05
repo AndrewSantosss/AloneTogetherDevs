@@ -7,7 +7,8 @@ signal inventory_updated(item_name, quantity)
 # We initialize them to 0 so the keys always exist
 var inventory = {
 	"medkit": 0,
-	"candy": 0 
+	"candy": 0,
+	"ammo": 0
 }
 
 # --- ADDING ITEMS ---

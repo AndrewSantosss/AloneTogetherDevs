@@ -72,12 +72,12 @@ albedo_texture = ExtResource("8_ua4x8")
 uv1_scale = Vector3(200, 150, 200)
 texture_filter = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_haiw7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o1ig4"]
 uv1_scale = Vector3(500, 500, 500)
 uv1_offset = Vector3(500, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_rit8k"]
-material = SubResource("StandardMaterial3D_haiw7")
+material = SubResource("StandardMaterial3D_o1ig4")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_komm5"]
 transparency = 2
@@ -94,14 +94,14 @@ albedo_color = Color(2.07564e-07, 0.157179, 0.0814679, 1)
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_kecfg"]
 panorama = ExtResource("9_3l7a5")
 
-[sub_resource type="Sky" id="Sky_gjbfo"]
+[sub_resource type="Sky" id="Sky_vhnww"]
 sky_material = SubResource("PanoramaSkyMaterial_kecfg")
 radiance_size = 2
 
 [sub_resource type="Environment" id="Environment_whles"]
 background_mode = 1
 background_energy_multiplier = 0.86
-sky = SubResource("Sky_gjbfo")
+sky = SubResource("Sky_vhnww")
 ambient_light_source = 2
 ambient_light_color = Color(0.347817, 0.347817, 0.347817, 1)
 ambient_light_energy = 0.18
@@ -2166,6 +2166,7 @@ anchors_preset = 0
 offset_right = 105.0
 offset_bottom = 124.0
 script = ExtResource("1_6xwlh")
+cam_tilt_amount = 1.0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 process_mode = 3
@@ -2272,7 +2273,7 @@ transform = Transform3D(0.3813064, 0, -0.0475526, 0, 0.3716094, 0, 0.044570595, 
 transform = Transform3D(1.209949, 0, 9.72971, 0, 15.477442, 0, -1.194714, 0, 9.853784, -1163.3096, 6.283781, 295.62842)
 rotation_edit_mode = 2
 script = ExtResource("4_sku5u")
-next_scene_path = "uid://dkypqxajt04lt"
+next_scene_path = "uid://buke33rsf50fm"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/SceneTransferScene4"]
 transform = Transform3D(0.081903934, 0, -0.9966414, 0, 1, 0, 0.9966403, 0, 0.081903726, 5.0339355, 0.8657838, 1.3222198)
@@ -4877,13 +4878,6 @@ mesh = SubResource("BoxMesh_7k215")
 transform = Transform3D(17.1727, 0, 0, 0, 121.82, 0, 0, 0, 14.6384, -1683.05, 33.5877, -61.2739)
 shape = SubResource("ConcavePolygonShape3D_odbgd")
 
-[node name="Label3D" type="Label3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
-transform = Transform3D(2.04, 0, 0, 0, 1.19945, 0.030207, 0, -0.0362484, 0.999543, -873.545, 163.157, -88.97)
-pixel_size = 0.09
-text = "OLONGAPO PUBLIC MARKET
-"
-font_size = 500
-
 [node name="SMD" type="StaticBody3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings"]
 transform = Transform3D(-1.53715, 0, 0.167237, 0, 1.19784, 0, -0.118736, 0, -2.16504, 3562.9, 0, 3270.76)
 
@@ -5514,7 +5508,7 @@ transform = Transform3D(38.41958, 0, -0.008308964, 0, 42.453403, 0, 0.32187045, 
 transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -3248.869, 37.143356, -35.317657)
 
 [node name="vines17" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("33_18x8o")]
-transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -3968.53, 37.143356, -35.317657)
+transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -3968.53, 39.03888, -35.317657)
 
 [node name="vines18" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("33_18x8o")]
 transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -2602.4355, 37.143356, -35.317657)
@@ -5749,9 +5743,9 @@ visible = false
 visible = false
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
-transform = Transform3D(-0.07050495, -0.0032237368, -0.99750626, 0.021504221, 0.99975747, -0.004750957, 0.99727964, -0.02178556, -0.07041853, -4172.797, 20.083868, 260.4157)
+transform = Transform3D(-0.07050495, -0.0032237368, -0.99750626, 0.021504221, 0.99975747, -0.004750957, 0.99727964, -0.02178556, -0.07041853, -4172.797, 20.083868, 250.91937)
 current = true
-fov = 42.2
+fov = 58.7
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SubViewportContainer/SubViewport"]
 process_mode = 3
@@ -5781,7 +5775,17 @@ offset_bottom = 10.000002
 scale = Vector2(5.836403, 18.732481)
 color = Color(0, 0, 0, 0.46666667)
 
-[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+[node name="MarkerPlayer" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4078.292, 21.76031, 236.11627)
+
+[node name="MarkerDog" type="Marker3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4078.292, 15.176565, 265.97394)
+
+[node name="campfire" parent="SubViewportContainer" instance=ExtResource("36_8aa3y")]
+transform = Transform3D(3.5919702, 0, 0, 0, 4.4868855, 0, 0, 0, 3.5823936, -4050.677, 6.950798, 311.0197)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 82.00001
 offset_top = 33.000015
 offset_right = 2692.0
@@ -5789,16 +5793,14 @@ offset_bottom = 905.0
 scale = Vector2(0.024434581, 0.024434581)
 texture = ExtResource("60_3rxpw")
 
-[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 0
 offset_left = 17.0
 offset_top = -25.0
 offset_right = 2913.0
 offset_bottom = 4071.0
 scale = Vector2(0.06443519, 0.06443519)
 texture = ExtResource("61_o1ig4")
-
-[node name="campfire" parent="SubViewportContainer" instance=ExtResource("36_8aa3y")]
-transform = Transform3D(3.5919702, 0, 0, 0, 4.4868855, 0, 0, 0, 3.5823936, -4050.677, 6.950798, 311.0197)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0

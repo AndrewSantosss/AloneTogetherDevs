@@ -16,7 +16,9 @@ var close_timer: Timer
 # Ensure you have these images in your res://misc/ folder
 var item_icons = {
 	"medkit": preload("res://misc/medkit.png"),
-	"candy": preload("res://misc/candy.png") 
+	"candy": preload("res://misc/candy.png"),
+	"ammo": preload("res://misc/candy.png")
+
 }
 
 func _ready():

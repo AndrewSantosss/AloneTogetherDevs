@@ -18,6 +18,7 @@ var objective_marker_2: Node3D # "objective_marker_2" (!)
 var lbl_investigate: Label
 var lbl_get_medkit: Label
 var lbl_bring_medkit: Label
+var lbl_continue: Label
 
 var npc_node: Node3D 
 var npc_trigger_area: Area3D
@@ -102,45 +103,38 @@ func _ready():
 	if objective_arrow:
 		arrow_mesh = objective_arrow.find_child("MeshInstance3D", true, false)
 		if arrow_mesh: arrow_mesh.visible = false 
-		# Parent must be visible for children markers to show
 		objective_arrow.visible = true 
 	
-	# [cite_start]Using names from Scene File [cite: 232, 236]
 	objective_marker_1 = find_child("objective_marker_1", true, false)
 	objective_marker_2 = find_child("objective_marker_2", true, false) 
 	
-	# [cite_start]Find Labels inside Marker 1 [cite: 232]
 	if objective_marker_1:
 		lbl_investigate = objective_marker_1.find_child("Investigate", true, false)
 		lbl_get_medkit = objective_marker_1.find_child("GetMedkit", true, false)
 		lbl_bring_medkit = objective_marker_1.find_child("BringMedkit", true, false)
+		lbl_continue = objective_marker_1.find_child("Continue", true, false)
 		
-		# Reset Labels
 		if lbl_investigate: lbl_investigate.visible = false
 		if lbl_get_medkit: lbl_get_medkit.visible = false
 		if lbl_bring_medkit: lbl_bring_medkit.visible = false
+		if lbl_continue: lbl_continue.visible = false
 	
-	# FORCE HIDE ALL MARKERS AT START
 	if objective_marker_1: objective_marker_1.visible = false
 	if objective_marker_2: objective_marker_2.visible = false
 	
-	# 6. Find Blockers & Minimap
 	blocker_trigger = find_child("BlockerTrigger", true, false)
 	invisible_wall = find_child("InvisibleWall", true, false)
 	minimap_cam = find_child("MinimapCamera", true, false)
 	
-	# 7. Find Pathing Nodes
 	gate_node = find_child("SceneTransferScene5", true, false) 
 	guide_target = find_child("GuideTarget", true, false) 
 	guide_waypoints = find_child("GuideWaypoints", true, false) 
 	
-	# Connect Medkit signals to detect pickup
 	for kit_name in ["Medkit", "Medkit2", "Medkit3"]:
 		var kit_node = find_child(kit_name, true, false)
 		if kit_node:
 			kit_node.tree_exited.connect(_on_quest_item_picked_up)
 	
-	# 8. Connect Signals
 	if pan_trigger: 
 		pan_trigger.triggered.connect(_on_pan_trigger_activated)
 	if pan_trigger_2: 
@@ -174,27 +168,24 @@ func _process(_delta):
 		minimap_cam.global_position.x = player.global_position.x
 		minimap_cam.global_position.z = player.global_position.z
 	
-	# --- QUEST MARKER STATE MACHINE ---
 	if quest_started and not quest_completed:
 		if medkit_acquired_in_scene:
-			# --- STATE: Got Medkit -> Show "?" + "Bring Medkit" ---
 			if objective_marker_2: objective_marker_2.visible = false
 			if objective_marker_1: 
 				objective_marker_1.visible = true
 				if lbl_get_medkit: lbl_get_medkit.visible = false
 				if lbl_investigate: lbl_investigate.visible = false
 				if lbl_bring_medkit: lbl_bring_medkit.visible = true
+				if lbl_continue: lbl_continue.visible = false
 		else:
-			# --- STATE: Quest Start -> Show "!" + "Get Medkit" + Hide "?" ---
 			if objective_marker_2: objective_marker_2.visible = true
 			if objective_marker_1: 
-				objective_marker_1.visible = false # Hides (?)
-				# We enable the label so it's ready, but parent visibility rules apply
+				objective_marker_1.visible = false
 				if lbl_get_medkit: lbl_get_medkit.visible = true
 				if lbl_investigate: lbl_investigate.visible = false
 				if lbl_bring_medkit: lbl_bring_medkit.visible = false
+				if lbl_continue: lbl_continue.visible = false
 
-# Called when any Medkit node is removed from the tree
 func _on_quest_item_picked_up():
 	print("DEBUG: Quest Medkit collected!")
 	medkit_acquired_in_scene = true
@@ -210,10 +201,6 @@ func start_level_intro():
 		await get_tree().create_timer(0.5).timeout
 		await run_dialogue_step(p_name + ": Someone's up ahead. Keep your guard up.", 4.0, true)
 
-# ==========================================
-#             NPC INTERACTION LOGIC
-# ==========================================
-
 func _on_npc_area_entered(body):
 	if body != player or is_interacting: return
 	
@@ -222,7 +209,7 @@ func _on_npc_area_entered(body):
 	if not npc_cutscene_played:
 		await run_intro_dialogue()
 		npc_cutscene_played = true
-		quest_started = true # _process takes over marker logic here
+		quest_started = true
 		
 	elif quest_started and not quest_completed:
 		if medkit_acquired_in_scene:
@@ -242,11 +229,20 @@ func run_intro_dialogue():
 	print("--- STARTING SURVIVOR INTRO ---")
 	
 	if arrow_mesh: arrow_mesh.visible = false
-	
-	# Hide the "?" marker during dialogue
 	if objective_marker_1: objective_marker_1.visible = false
 	
 	lock_controls()
+	
+	# --- FIX: Stop Walk Anim and Silhouette ---
+	if player:
+		if player.has_node("AnimatedSprite3D"):
+			var sprite = player.get_node("AnimatedSprite3D")
+			if sprite.sprite_frames.has_animation("idle"):
+				sprite.play("idle")
+		
+		# Set silhouette to transparent [cite: 24, 26]
+		if player.get("silhouette_material"):
+			player.silhouette_material.set_shader_parameter("silhouette_color", Color(0, 0, 0, 0))
 	
 	await move_camera_to_npc()
 
@@ -267,13 +263,15 @@ func run_intro_dialogue():
 	
 	await run_dialogue_step("System: Quest Started - Find a Medkit for the Survivor.", 3.0, false)
 	
-	# Markers update automatically via _process now that quest_started = true
-
 	if npc_node and npc_node.has_method("play_idle"): npc_node.play_idle()
 
 	if invisible_wall:
 		invisible_wall.process_mode = Node.PROCESS_MODE_DISABLED
 		invisible_wall.visible = false
+
+	# Restore silhouette [cite: 24, 26]
+	if player and player.get("silhouette_material"):
+		player.silhouette_material.set_shader_parameter("silhouette_color", Color(0.0, 0.6, 1.0, 0.5))
 
 	unlock_controls()
 
@@ -295,6 +293,16 @@ func run_quest_completion_dialogue():
 	var d_name = "Dog"
 	if GameManager.get("player_name"): p_name = GameManager.player_name
 	if GameManager.get("dog_name"): d_name = GameManager.dog_name
+	
+	if player:
+		if player.has_node("AnimatedSprite3D"):
+			var sprite = player.get_node("AnimatedSprite3D")
+			if sprite.sprite_frames.has_animation("idle"):
+				sprite.play("idle")
+		
+		# Set silhouette to transparent [cite: 24, 26]
+		if player.get("silhouette_material"):
+			player.silhouette_material.set_shader_parameter("silhouette_color", Color(0, 0, 0, 0))
 
 	if Inventory and Inventory.has_method("remove_item"):
 		Inventory.remove_item("medkit", 1)
@@ -318,16 +326,14 @@ func run_quest_completion_dialogue():
 	await get_tree().create_timer(4.0).timeout
 	await run_dialogue_step("Survivor: Good luck out there. Stay safe.", 3.0, true, VO_INTRO_13)
 	
-	# --- HIDE ALL MARKERS & LABELS ---
-	quest_completed = true  # Stop _process loop
+	quest_completed = true 
 	
 	if objective_marker_1: objective_marker_1.visible = false
 	if objective_marker_2: objective_marker_2.visible = false
-	
-	# Explicitly hide all sub-labels
 	if lbl_investigate: lbl_investigate.visible = false
 	if lbl_get_medkit: lbl_get_medkit.visible = false
 	if lbl_bring_medkit: lbl_bring_medkit.visible = false
+	if lbl_continue: lbl_continue.visible = true
 	
 	perform_save()
 	await run_dialogue_step("System: Game Saved.", 2.0, false)
@@ -338,7 +344,6 @@ func run_quest_completion_dialogue():
 		
 	unlock_controls()
 
-# --- Perform Save Function ---
 func perform_save():
 	if GameManager.has_method("save_game") and player:
 		GameManager.save_game(player)
@@ -346,9 +351,6 @@ func perform_save():
 	else:
 		print("[Scene 2-3] Error: GameManager save_game method not found.")
 
-# ==========================================
-#             STORY AREA TRIGGER
-# ==========================================
 func _on_story_area_entered(body):
 	if body == player and not story_triggered:
 		story_triggered = true
@@ -360,9 +362,6 @@ func _on_story_area_entered(body):
 		await get_tree().create_timer(0.5).timeout
 		await run_dialogue_step(p_name + ": I hope we're close to the end.", 3.0, true)
 
-# ==========================================
-#       SPAWN MULTI-POINT GUIDE PATH
-# ==========================================
 func spawn_guide_path():
 	if not player: return
 	
@@ -431,10 +430,6 @@ func spawn_arrows_between(container, start_pos, end_pos, start_index) -> int:
 		tween.tween_property(mat, "albedo_color:a", 0.0, 0.5).set_trans(Tween.TRANS_SINE)
 		
 	return start_index + count
-
-# ==========================================
-#             UTILITY FUNCTIONS
-# ==========================================
 
 func lock_controls():
 	if player:
@@ -528,7 +523,6 @@ func _on_pan_trigger_2_activated():
 		if arrow_mesh: arrow_mesh.visible = true
 		if objective_arrow: start_arrow_bounce()
 		
-		# --- Heard Help: Show "?" and "Investigate" label ---
 		if objective_marker_1:
 			objective_marker_1.visible = true
 			if lbl_investigate: lbl_investigate.visible = true

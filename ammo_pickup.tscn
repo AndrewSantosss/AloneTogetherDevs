@@ -1,0 +1,111 @@
+[gd_scene load_steps=7 format=3 uid="uid://0xl84n1o4d0y"]
+
+[sub_resource type="GDScript" id="GDScript_2kikv"]
+script/source = "extends Area3D
+
+@export var item_name: String = \"ammo\"
+@export var quantity: int = 5 # Gives 5 bullets per pickup, change as needed
+@export var rotate_speed: float = 2.0
+
+@onready var visual_node = $Visuals
+
+func _ready():
+	add_to_group(\"loot\")
+	
+	if not body_entered.is_connected(_on_body_entered):
+		body_entered.connect(_on_body_entered)
+	
+	var tween = create_tween().set_loops()
+	tween.tween_property(visual_node, \"position:y\", 0.15, 0.5).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(visual_node, \"position:y\", -0.15, 0.5).set_trans(Tween.TRANS_SINE)
+
+func _process(delta):
+	visual_node.rotate_y(rotate_speed * delta)
+
+func _on_body_entered(body):
+	if body.name == \"Player\" or body.is_in_group(\"player\"):
+		if Inventory:
+			Inventory.add_item(item_name, quantity)
+			
+			if body.has_method(\"play_pickup_animation\"):
+				body.play_pickup_animation(\"Ammo Box\")
+			
+			queue_free()
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_col"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_red"]
+albedo_color = Color(0.33333334, 0.22745098, 0, 1)
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_2kikv"]
+material = SubResource("StandardMaterial3D_red")
+size = Vector3(0.6, 0.4, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_white"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_fs8dk"]
+material = SubResource("StandardMaterial3D_white")
+size = Vector3(0.25, 0.15, 0.3)
+
+[node name="Ammunition" type="Area3D"]
+collision_layer = 0
+script = SubResource("GDScript_2kikv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(23.593525, 0, 0, 0, 19.221153, 0, 0, 0, 16.24, 0, 6.8929033, 0)
+shape = SubResource("SphereShape3D_col")
+
+[node name="Visuals" type="Node3D" parent="."]
+transform = Transform3D(6.6000004, 0, 0, 0, 16.9344, 0, 0, 0, 16.24, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(0.15151514, 0, 0, 0, 0.059051402, 0, 0, 0, 0.06157636, 0, 0.29389846, 0)
+layers = 1023
+light_color = Color(0.4648643, 0.633438, 0.98121184, 1)
+light_energy = 300.0
+light_size = 0.6
+omni_range = 21.0
+
+[node name="Visuals" type="Node3D" parent="Visuals"]
+transform = Transform3D(2.4110985, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MainBox" type="MeshInstance3D" parent="Visuals/Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_2kikv")
+
+[node name="CrossHorizontal" type="MeshInstance3D" parent="Visuals/Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871695, 0, 0, 0, 0.9999998, -0.22069755, 0, 0)
+mesh = SubResource("BoxMesh_fs8dk")
+
+[node name="CrossHorizontal2" type="MeshInstance3D" parent="Visuals/Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, -0.12663764, 0, 0)
+mesh = SubResource("BoxMesh_fs8dk")
+
+[node name="CrossHorizontal3" type="MeshInstance3D" parent="Visuals/Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, -0.036683336, 0, 0)
+mesh = SubResource("BoxMesh_fs8dk")
+
+[node name="CrossHorizontal4" type="MeshInstance3D" parent="Visuals/Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, 0.057376575, 0, 0)
+mesh = SubResource("BoxMesh_fs8dk")
+
+[node name="CrossHorizontal5" type="MeshInstance3D" parent="Visuals/Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, 0.13538758, 0, 0)
+mesh = SubResource("BoxMesh_fs8dk")
+
+[node name="CrossHorizontal6" type="MeshInstance3D" parent="Visuals/Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, 0.2294475, 0, 0)
+mesh = SubResource("BoxMesh_fs8dk")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals/Visuals"]
+transform = Transform3D(0.038676944, 0, 0, 0, 0.046992473, 0, 0, 0, 0.03779289, 0, 0.47105265, 0)
+layers = 1023
+light_color = Color(0.2, 1, 0.2, 1)
+light_energy = 300.0
+light_size = 0.6
+omni_range = 21.0

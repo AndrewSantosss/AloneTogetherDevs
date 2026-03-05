@@ -43,8 +43,33 @@
 [ext_resource type="AudioStream" uid="uid://3ow8fsn238p2" path="res://sfx/AMBIENCE_WIND_LEAVES.mp3" id="41_ev1nw"]
 [ext_resource type="PackedScene" uid="uid://djsormkgoin6c" path="res://campfire.tscn" id="42_2xbvf"]
 [ext_resource type="PackedScene" uid="uid://lb0h0k378hdt" path="res://inventory_ui.tscn" id="42_n80bx"]
-[ext_resource type="PackedScene" uid="uid://doqkbldrkgs5p" path="res://medkit.tscn" id="43_5f7ld"]
-[ext_resource type="PackedScene" uid="uid://7anpcq60g7rp" path="res://stamina_candy.tscn" id="45_hrxwa"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_ev1nw"]
+
+[sub_resource type="Skin" id="Skin_2xbvf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qs8eo"]
+albedo_color = Color(0.77308744, 0, 0.19545299, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hrxwa"]
+font_size = 17
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.5803922)
+
+[sub_resource type="FontFile" id="FontFile_hrxwa"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_6wadg"]
+font = SubResource("FontFile_hrxwa")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_liwt8"]
 size = Vector3(2.6292877, 2.7315674, 25.185242)
@@ -73,30 +98,32 @@ texture_filter = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iw2n3"]
 albedo_color = Color(2.07564e-07, 0.157179, 0.0814679, 1)
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_qs8eo"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrxwa"]
 panorama = ExtResource("12_2xbvf")
 
-[sub_resource type="Sky" id="Sky_6wadg"]
-sky_material = SubResource("PanoramaSkyMaterial_qs8eo")
+[sub_resource type="Sky" id="Sky_pqk4w"]
+sky_material = SubResource("PanoramaSkyMaterial_hrxwa")
 radiance_size = 2
 
-[sub_resource type="Environment" id="Environment_po1yn"]
-background_mode = 1
+[sub_resource type="Environment" id="Environment_6wadg"]
+background_mode = 2
 background_color = Color(0.8776157, 0.8776158, 0.8776157, 1)
 background_energy_multiplier = 0.86
-sky = SubResource("Sky_6wadg")
+sky = SubResource("Sky_pqk4w")
 ambient_light_source = 2
 ambient_light_color = Color(0.347817, 0.347817, 0.347817, 1)
+ambient_light_energy = 2.42
 ssao_radius = 3.55
 ssao_intensity = 2.7
 ssao_detail = 0.57
 ssao_light_affect = 0.06
-glow_enabled = true
 glow_intensity = 1.0
 glow_bloom = 0.06
 fog_enabled = true
+fog_light_color = Color(0.5176471, 1, 1, 1)
 fog_light_energy = 0.52
-fog_density = 0.0002
+fog_sun_scatter = 1.0
+fog_density = 0.0005
 fog_height = -1024.0
 fog_height_density = 0.0005
 volumetric_fog_enabled = true
@@ -800,22 +827,6 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pt3yh"]
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
-[sub_resource type="PrismMesh" id="PrismMesh_ev1nw"]
-
-[sub_resource type="Skin" id="Skin_2xbvf"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qs8eo"]
-albedo_color = Color(0.77308744, 0, 0.19545299, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_hrxwa"]
-font_color = Color(1, 1, 0, 1)
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6wadg"]
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs8eo"]
 bg_color = Color(0.2159017, 0.21590173, 0.21590161, 1)
 corner_radius_top_left = 1000
@@ -834,6 +845,9 @@ size = Vector3(4, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_n80bx"]
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2ywxs"]
+points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
 [node name="Scene3" type="Node3D"]
 script = ExtResource("1_wmkmp")
 
@@ -842,6 +856,105 @@ process_mode = 3
 offset_right = 1080.0
 offset_bottom = 608.0
 metadata/_edit_use_anchors_ = true
+
+[node name="ObjectiveArrow" type="Node3D" parent="SubViewportContainer"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2752, 27.743713, 825)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/ObjectiveArrow"]
+transform = Transform3D(-0.05354071, -6.6507034, -1.5302036, -17.140135, 0.6962506, -2.455651e-09, 0.30529535, 37.923088, -0.26835707, 27.82251, 17.250084, -385.7626)
+mesh = SubResource("PrismMesh_ev1nw")
+skin = SubResource("Skin_2xbvf")
+surface_material_override/0 = SubResource("StandardMaterial3D_qs8eo")
+
+[node name="objective_marker_1" type="Label3D" parent="SubViewportContainer/ObjectiveArrow"]
+transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -69.2561, 1132.4448, 26.253296)
+rotation_order = 0
+pixel_size = 1.721
+double_sided = false
+modulate = Color(1, 1, 0.003921569, 1)
+text = "?"
+font_size = 200
+outline_size = 80
+uppercase = true
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 895.99994
+offset_top = 182.0
+offset_right = 935.99994
+offset_bottom = 222.0
+scale = Vector2(4.3599997, 1.36)
+color = Color(0.13333334, 0.13333334, 0.13333334, 0.8156863)
+
+[node name="Label" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 891.0
+offset_top = 184.99997
+offset_right = 1062.0
+offset_bottom = 241.99997
+scale = Vector2(0.6558331, 0.6558331)
+text = "✓ Main Objectives:
+ "
+label_settings = SubResource("LabelSettings_hrxwa")
+horizontal_alignment = 2
+
+[node name="Investigate" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 913.0
+offset_top = 205.0
+offset_right = 1222.0
+offset_bottom = 254.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Investigate the noise.
+  "
+label_settings = SubResource("LabelSettings_6wadg")
+
+[node name="GetMedkit" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 913.0
+offset_top = 206.0
+offset_right = 1222.0
+offset_bottom = 229.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Find a Medkit at Public Market."
+label_settings = SubResource("LabelSettings_6wadg")
+
+[node name="BringMedkit" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 913.0
+offset_top = 205.0
+offset_right = 1222.0
+offset_bottom = 228.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Bring medkit to the survivor."
+label_settings = SubResource("LabelSettings_6wadg")
+
+[node name="Continue" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 912.99994
+offset_top = 201.0
+offset_right = 1222.0
+offset_bottom = 250.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Continue with your journey. Turn 
+right and then walk straight."
+label_settings = SubResource("LabelSettings_6wadg")
+
+[node name="objective_marker_2" type="Label3D" parent="SubViewportContainer/ObjectiveArrow"]
+transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -567.92017, 1096.5593, -1159.6097)
+rotation_order = 0
+pixel_size = 1.721
+double_sided = false
+modulate = Color(1, 1, 0.003921569, 1)
+text = "!"
+font_size = 200
+outline_size = 80
+uppercase = true
+
+[node name="objective_marker_3" type="Label3D" parent="SubViewportContainer/ObjectiveArrow"]
+transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, 1608.5745, 1096.5593, -512.2786)
+rotation_order = 0
+pixel_size = 1.721
+double_sided = false
+modulate = Color(1, 1, 0.003921569, 1)
+text = "!"
+font_size = 200
+outline_size = 80
+uppercase = true
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
@@ -899,13 +1012,13 @@ transform = Transform3D(0.32379267, 0, 2.061557, 0, 1.9000006, 0, -1.66888, 0, 0
 transform = Transform3D(0.38390246, 0, 0, 0, 0.37160945, 0, 0, 0, 0.4095879, -2893.4722, -9.0005045, 452.1549)
 
 [node name="vegetation2" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
-transform = Transform3D(0.38390246, 0, 0, 0, 0.37160945, 0, 0, 0, 0.4095879, -3367.8162, -9.0005045, 452.1549)
+transform = Transform3D(0.38390246, 0, 0, 0, 0.37160945, 0, 0, 0, 0.4095879, -3383.9663, -9.0005045, 478.6593)
 
 [node name="vegetation3" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
-transform = Transform3D(0.38390246, 0, 0, 0, 0.37160945, 0, 0, 0, 0.4095879, -3156.5403, -9.0005045, 107.481476)
+transform = Transform3D(0.38390246, 0, 0, 0, 0.37160945, 0, 0, 0, 0.4095879, -3222.5637, -9.0005045, 75.97342)
 
 [node name="vegetation4" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
-transform = Transform3D(-0.30114055, 0, -0.2540391, 0, 0.37160942, 0, 0.2381082, 0, -0.32128865, -4279.55, -9.0005045, 158.35217)
+transform = Transform3D(-0.17672539, 0, -0.36360884, 0, 0.3716094, 0, 0.34080678, 0, -0.18854934, -4362.5835, -9.0005045, 296.49298)
 
 [node name="vegetation5" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
 transform = Transform3D(-0.30114055, 0, -0.2540391, 0, 0.37160942, 0, 0.2381082, 0, -0.32128865, -3918.584, -9.0005045, 170.18771)
@@ -962,16 +1075,12 @@ vertical_alignment = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9581.01, 0, 2674.08)
 
 [node name="PlayerPackage" parent="SubViewportContainer/SubViewport/entities/playerMain" instance=ExtResource("1_vpreu")]
-transform = Transform3D(-0.55620855, 0, 0.83104277, 0, 1, 0, -0.83104277, 0, -0.55620855, 5314.836, 0, -2223.9956)
+transform = Transform3D(-0.55620855, 0, 0.83104277, 0, 1, 0, -0.83104277, 0, -0.55620855, 5322.0313, -2.2925987, -2234.7268)
 
 [node name="enemyMain" type="Node3D" parent="SubViewportContainer/SubViewport/entities"]
 
 [node name="Enemy2" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("1_blb5u")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -3650.9072, 20.7101, 273.9045)
-health = 1000.0
-
-[node name="Enemy3" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("1_blb5u")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -3632.704, 25.229803, 38.704315)
+transform = Transform3D(13.99733, 0, 0, 0, 16.984245, 0, 0, 0, 1, -3255.6792, 20.7101, 217.01648)
 health = 1000.0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/entities"]
@@ -1329,17 +1438,20 @@ skeleton = NodePath("../../../../..")
 [node name="graphics" type="Node3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3649.965, 0, -3613.6685)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics"]
-environment = SubResource("Environment_po1yn")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics" groups=["world_env"]]
+environment = SubResource("Environment_6wadg")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics"]
-transform = Transform3D(-0.91427374, 0.08325502, -0.39644915, -0.3989156, -0.35534087, 0.8453397, -0.070495576, 0.9310217, 0.35809064, 1470.2178, 652.867, 2275.1116)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport/worldEnvironment/graphics" groups=["lights"]]
+transform = Transform3D(-0.34113228, -0.79819375, -0.49650338, -0.39891574, -0.35534087, 0.84533966, -0.8511727, 0.48643574, -0.19719377, -6239.1064, 652.867, 1954.4152)
+light_color = Color(1, 1, 0.72156864, 1)
+light_energy = 1.51
 shadow_enabled = true
 shadow_bias = 0.0
 shadow_opacity = 0.9
 shadow_blur = 0.0
+directional_shadow_mode = 0
 directional_shadow_split_1 = 0.02
-directional_shadow_max_distance = 8192.0
+directional_shadow_max_distance = 484.9
 
 [node name="groundCollision" type="StaticBody3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
 transform = Transform3D(-2.63033, 0, -2.89932e-07, 0, 0.50552, 0, 2.29951e-07, 0, -3.31644, 1.89378, 1.8913, -42.5569)
@@ -1377,7 +1489,7 @@ transform = Transform3D(4.81651, -1.0067, 3.52005, 0.685043, 5.70698, 0.754544, 
 transform = Transform3D(2.91937, -0.760964, -4.64291, -0.399016, 5.70011, -0.904872, 6.04215, 0.744101, 2.18355, -2009.87, 2.78652, 1331.54)
 
 [node name="bus6" parent="SubViewportContainer/SubViewport/mapEnvironment/bus" instance=ExtResource("33_a2krc")]
-transform = Transform3D(4.0366855, 0, 4.166028, 0, 5.7986207, 0, -5.375384, 0, 3.1285107, -3781.9456, -4.036705, 387.46863)
+transform = Transform3D(4.0366855, 0, 4.166028, 0, 5.7986207, 0, -5.375384, 0, 3.1285107, -3781.9456, -4.036705, 402.42984)
 
 [node name="bus7" parent="SubViewportContainer/SubViewport/mapEnvironment/bus" instance=ExtResource("33_a2krc")]
 transform = Transform3D(-6.669364, 0.4582444, 0.5063966, -0.69306624, -0.43125713, -5.1676593, -0.47833616, -5.7643747, 0.426871, -3047.9995, 21.553911, 405.81845)
@@ -1390,6 +1502,9 @@ transform = Transform3D(6.72232, 0, 0, 0, 5.79862, 0, 0, 0, 5.20993, -3253.4893,
 
 [node name="bus10" parent="SubViewportContainer/SubViewport/mapEnvironment/bus" instance=ExtResource("27_inis0")]
 transform = Transform3D(6.72232, 0, 0, 0, 5.79862, 0, 0, 0, 5.20993, -3664.9956, 0.34362227, -315.65454)
+
+[node name="bus11" parent="SubViewportContainer/SubViewport/mapEnvironment/bus" instance=ExtResource("33_a2krc")]
+transform = Transform3D(-0.91489613, -5.721887, 0.45917696, -0.69306624, -0.43125716, -5.1676593, 6.6236086, -0.8354696, -0.47729757, -3236.7925, 21.553911, 430.02917)
 
 [node name="buildings" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
 
@@ -4286,6 +4401,12 @@ transform = Transform3D(-6.717082, 0, -0.20563152, 0, 5.79862, 0, 0.26532426, 0,
 [node name="truck17" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("33_a2krc")]
 transform = Transform3D(-6.720632, 0, 0.11674511, 0, 5.79862, 0, -0.15063503, 0, -5.2086215, -3059.7285, 2.7971878, -210.99701)
 
+[node name="truck18" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
+transform = Transform3D(-6.41695, 0, 1.5524272, 0, 5.79862, 0, -2.003081, 0, -4.9732623, -3931.0576, -2.3234463, 62.48757)
+
+[node name="truck19" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
+transform = Transform3D(5.702703, 0.5891711, -2.707274, 0.77203333, 5.35062, 1.9168096, 3.4745808, -2.1558633, 4.0174465, -4321.835, -11.322371, -29.630745)
+
 [node name="poste" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
 
 [node name="post" parent="SubViewportContainer/SubViewport/mapEnvironment/poste" instance=ExtResource("36_liwt8")]
@@ -4424,7 +4545,7 @@ visible = false
 visible = false
 
 [node name="campfire" parent="SubViewportContainer" instance=ExtResource("42_2xbvf")]
-transform = Transform3D(3.5919702, 0, 0, 0, 4.4868855, 0, 0, 0, 3.5823936, -2729.5042, 7.875181, 986.4654)
+transform = Transform3D(2.1551821, 0, 0, 0, 4.4868855, 0, 0, 0, 1.9344926, -2753.553, 7.875181, 1000.5094)
 
 [node name="NPC" parent="." instance=ExtResource("37_6m5ae")]
 transform = Transform3D(-0.99944675, 0, 0.033259846, 0, 1, 0, -0.033259846, 0, -0.99944675, -2752.8313, 13.30831, 945.8783)
@@ -4454,104 +4575,21 @@ volume_db = -5.0
 autoplay = true
 parameters/looping = true
 
-[node name="ObjectiveArrow" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2752, 27.743713, 825)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="ObjectiveArrow"]
-transform = Transform3D(-0.05354071, -6.6507034, -1.5302036, -17.140135, 0.6962506, -2.455651e-09, 0.30529535, 37.923088, -0.26835707, 27.82251, 17.250084, -385.7626)
-mesh = SubResource("PrismMesh_ev1nw")
-skin = SubResource("Skin_2xbvf")
-surface_material_override/0 = SubResource("StandardMaterial3D_qs8eo")
-
-[node name="objective_marker_1" type="Label3D" parent="ObjectiveArrow"]
-transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -69.2561, 1132.4448, 26.253296)
-rotation_order = 0
-pixel_size = 1.721
-double_sided = false
-modulate = Color(1, 1, 0.003921569, 1)
-text = "?"
-font_size = 200
-outline_size = 80
-uppercase = true
-
-[node name="Label" type="Label" parent="ObjectiveArrow/objective_marker_1"]
-offset_left = 835.00006
-offset_top = 56.000004
-offset_right = 913.00006
-offset_bottom = 105.0
-scale = Vector2(0.89583313, 0.89583313)
-text = "Objective:
- "
-label_settings = SubResource("LabelSettings_hrxwa")
-horizontal_alignment = 2
-
-[node name="Investigate" type="Label" parent="ObjectiveArrow/objective_marker_1"]
-offset_left = 643.0
-offset_top = 72.0
-offset_right = 952.0
-offset_bottom = 95.0
-scale = Vector2(0.8486851, 0.8486851)
-text = "Investigate the noise."
-label_settings = SubResource("LabelSettings_6wadg")
-horizontal_alignment = 2
-
-[node name="GetMedkit" type="Label" parent="ObjectiveArrow/objective_marker_1"]
-offset_left = 643.0
-offset_top = 72.0
-offset_right = 952.0
-offset_bottom = 95.0
-scale = Vector2(0.8486851, 0.8486851)
-text = "Find a Medkit at Public Market."
-label_settings = SubResource("LabelSettings_6wadg")
-horizontal_alignment = 2
-
-[node name="BringMedkit" type="Label" parent="ObjectiveArrow/objective_marker_1"]
-offset_left = 643.0
-offset_top = 72.0
-offset_right = 952.0
-offset_bottom = 95.0
-scale = Vector2(0.8486851, 0.8486851)
-text = "Bring medkit to the survivor."
-label_settings = SubResource("LabelSettings_6wadg")
-horizontal_alignment = 2
-
-[node name="objective_marker_2" type="Label3D" parent="ObjectiveArrow"]
-transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -567.92017, 1096.5593, -1159.6097)
-rotation_order = 0
-pixel_size = 1.721
-double_sided = false
-modulate = Color(1, 1, 0.003921569, 1)
-text = "!"
-font_size = 200
-outline_size = 80
-uppercase = true
-
-[node name="objective_marker_3" type="Label3D" parent="ObjectiveArrow"]
-transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, 1608.5745, 1096.5593, -512.2786)
-rotation_order = 0
-pixel_size = 1.721
-double_sided = false
-modulate = Color(1, 1, 0.003921569, 1)
-text = "!"
-font_size = 200
-outline_size = 80
-uppercase = true
-
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="MinimapFrame2" type="Panel" parent="HUD"]
-offset_left = 911.0
-offset_top = 10.0
-offset_right = 1072.0
-offset_bottom = 168.0
+offset_left = 903.0
+offset_top = 18.0
+offset_right = 1064.0
+offset_bottom = 176.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qs8eo")
 
 [node name="MinimapFrame" type="Panel" parent="HUD"]
 clip_children = 1
-offset_left = 915.0
-offset_top = 14.0
-offset_right = 1068.0
-offset_bottom = 164.0
+offset_left = 907.0
+offset_top = 22.0
+offset_right = 1060.0
+offset_bottom = 172.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_qs8eo")
 
 [node name="SubViewport" type="SubViewportContainer" parent="HUD/MinimapFrame"]
@@ -4587,6 +4625,7 @@ layers = 32
 layers = 32
 
 [node name="InventoryUI" parent="HUD" instance=ExtResource("42_n80bx")]
+visible = false
 
 [node name="MapMarker3" type="Label3D" parent="."]
 transform = Transform3D(1, 8.742278e-08, -8.742277e-08, 8.742278e-08, -4.371139e-08, 1, 8.742277e-08, -1, -4.3711395e-08, -3398.933, 1132.4448, -21.244385)
@@ -4619,39 +4658,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1992, 26, 280)
 transform = Transform3D(20.202, 0, 0, 0, 149.26083, 0, 0, 0, 727.1377, -132.0249, 40, 0)
 shape = SubResource("BoxShape3D_n80bx")
 
-[node name="Medkit" parent="." instance=ExtResource("43_5f7ld")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -3444, 13, -164)
-
-[node name="Medkit2" parent="." instance=ExtResource("43_5f7ld")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -3352, 13, -287)
-
-[node name="Medkit3" parent="." instance=ExtResource("43_5f7ld")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -3417, 13, -339)
-
-[node name="Medkit4" parent="." instance=ExtResource("43_5f7ld")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -2941.7246, 13, 220.00964)
-
-[node name="Medkit5" parent="." instance=ExtResource("43_5f7ld")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -2941.7246, 13, 306.88202)
-
-[node name="Medkit6" parent="." instance=ExtResource("43_5f7ld")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -2615.1858, 13, 306.88202)
-
-[node name="StaminaCandy" parent="." instance=ExtResource("45_hrxwa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3384, 18, -271)
-
-[node name="StaminaCandy2" parent="." instance=ExtResource("45_hrxwa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3380, 18, -342)
-
-[node name="StaminaCandy3" parent="." instance=ExtResource("45_hrxwa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2299.7808, 18, 98.15617)
-
-[node name="StaminaCandy4" parent="." instance=ExtResource("45_hrxwa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2299.7808, 18, 328.09625)
-
-[node name="StaminaCandy5" parent="." instance=ExtResource("45_hrxwa")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2018.5658, 18, 328.09625)
-
 [node name="GuideWaypoints" type="Node3D" parent="."]
 
 [node name="Marker1" type="Marker3D" parent="GuideWaypoints"]
@@ -4665,6 +4671,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1832.7717, 0, 186.69345)
 
 [node name="Marker4" type="Marker3D" parent="GuideWaypoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1181.9506, 0, 276.2427)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(223.49532, 0, 0, 0, 149.84792, 0, 0, 0, 205.89648, 143.59953, 179.9444, 0)
+shape = SubResource("ConvexPolygonShape3D_2ywxs")
 
 [editable path="SubViewportContainer/SubViewport/entities/playerMain/PlayerPackage"]
 [editable path="SubViewportContainer/SubViewport/mapEnvironment/poste/post"]

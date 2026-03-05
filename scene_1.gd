@@ -1,5 +1,10 @@
 extends Node3D
 
+# --- UI References ---
+@onready var instruction_overlay = $CanvasLayer/InstructionOverlay 
+@onready var countdown_label = $CanvasLayer/InstructionOverlay/CountdownLabel 
+@onready var continue_label = $CanvasLayer/InstructionOverlay/ContinueLabel
+
 # --- References ---
 var player: CharacterBody3D
 var dog: CharacterBody3D
@@ -18,9 +23,14 @@ var story_area_2: Area3D
 # --- Flags ---
 var has_triggered_story_1 = false 
 var has_triggered_story_2 = false 
+var can_close_instructions = false # Flag para malaman kung tapos na ang countdown
 
 func _ready():
 	print("DEBUG: Finding Nodes...")
+	
+	# --- SETUP INSTRUCTION SEQUENCE ---
+	if instruction_overlay:
+		start_countdown_sequence()
 	
 	var package = find_child("PlayerPackage", true, false)
 	if package:
@@ -64,37 +74,65 @@ func _ready():
 	await get_tree().create_timer(1.0).timeout
 	start_level_intro()
 
+# --- NEW: Sequence Logic ---
+func start_countdown_sequence():
+	# Litaw agad ang overlay
+	instruction_overlay.visible = true
+	instruction_overlay.modulate.a = 1.0
+	if continue_label: continue_label.visible = false
+	if countdown_label: countdown_label.visible = true
+	
+	# Countdown loop (5 seconds)
+	for i in range(5, 0, -1):
+		if countdown_label:
+			countdown_label.text = "(" + str(i) + ")"
+		await get_tree().create_timer(1.0).timeout
+	
+	# Tapos na ang countdown
+	if countdown_label: countdown_label.visible = false
+	if continue_label: 
+		continue_label.visible = true
+		continue_label.text = "Press any key to continue"
+		# Konting pulsing effect para sa "Press any key"
+		var pulse = create_tween().set_loops()
+		pulse.tween_property(continue_label, "modulate:a", 0.3, 0.8)
+		pulse.tween_property(continue_label, "modulate:a", 1.0, 0.8)
+	
+	can_close_instructions = true
+
+# --- INPUT HANDLING ---
+func _input(event):
+	# Kung tapos na countdown at may pinindot na key/mouse
+	if can_close_instructions and instruction_overlay.visible:
+		if event is InputEventKey or event is InputEventMouseButton:
+			if event.pressed:
+				instruction_overlay.visible = false
+				# Siguraduhin na naka-capture ang mouse para sa gameplay
+				Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func _process(_delta):
 	if player and minimap_cam:
 		minimap_cam.global_position.x = player.global_position.x
 		minimap_cam.global_position.z = player.global_position.z
 
 func start_level_intro():
-	# --- MEMORY CHECK (Skip if already seen) ---
 	if Global.has_seen("scene1_intro"):
 		return 
-	
-	# --- MARK AS SEEN ---
 	Global.mark_as_seen("scene1_intro")
 	
-	# --- RETRIEVE NAMES FROM GAMEMANAGER (Your Input) ---
 	var p_name = GameManager.player_name
 	var d_name = GameManager.dog_name
 	
 	if dialogue_ui:
 		dialogue_ui.show_text("Objective: Reach the City Center", 5.0, false)
-		# Uses the p_name and d_name variables
 		await run_dialogue_step(p_name + ": Easy, " + d_name + ". We're almost there.", 4.0, true)
 		await run_dialogue_step(p_name + ": Just a few more blocks to the safe zone.", 3.0, true)
 
 func _on_story_area_entered(body):
 	if body == player and not has_triggered_story_1:
 		has_triggered_story_1 = true
-		
-		# Retrieve names again to be safe
 		var p_name = GameManager.player_name
 		var d_name = GameManager.dog_name
-		
 		await run_dialogue_step(p_name + ": This place... it used to be full of life.", 4.0, true)
 		await run_dialogue_step(p_name + ": I almost forgotten what peace feels like... it's been such a long road.", 5.0, true)
 		await run_dialogue_step(p_name + ": Stay close, " + d_name + ".", 3.0, true)
@@ -103,7 +141,6 @@ func _on_story_2_area_entered(body):
 	if body == player and not has_triggered_story_2:
 		has_triggered_story_2 = true
 		var p_name = GameManager.player_name
-		
 		await run_dialogue_step(p_name + ": Shh... did you hear that?", 3.0, true)
 		await run_dialogue_step(p_name + ": Something's moving up ahead. Feels dangerous.", 4.0, true)
 		await run_dialogue_step("STAY ALERT", 3.0, false)

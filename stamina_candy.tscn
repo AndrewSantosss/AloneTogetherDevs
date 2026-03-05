@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://7anpcq60g7rp"]
+[gd_scene load_steps=7 format=3 uid="uid://7anpcq60g7rp"]
 
 [ext_resource type="Script" uid="uid://cn4kfjldf8o0j" path="res://stamina_candy.gd" id="1_candy_script"]
 
@@ -7,26 +7,32 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_candy"]
 albedo_color = Color(0.84663993, 0.4928165, 0, 1)
 emission_enabled = true
-emission = Color(0.1, 0.4, 0.8, 1)
+emission = Color(0.3019608, 0.7882353, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_candy"]
 material = SubResource("StandardMaterial3D_candy")
 radius = 0.25
 height = 0.5
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s4hom"]
+albedo_color = Color(1, 1, 0.32941177, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_s4hom"]
+material = SubResource("StandardMaterial3D_s4hom")
+
 [node name="StaminaCandy" type="Area3D"]
 collision_layer = 0
 script = ExtResource("1_candy_script")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(6.6000004, 0, 0, 0, 16.9344, 0, 0, 0, 16.24, 0, 0, 0)
+transform = Transform3D(-4.526043e-07, -12.184409, 0, 10.354379, -5.325975e-07, 0, 0, 0, 8.758791, 0.0996573, 0, 0)
 shape = SubResource("SphereShape3D_col")
 
 [node name="Visuals" type="Node3D" parent="."]
 transform = Transform3D(6.6000004, 0, 0, 0, 16.9344, 0, 0, 0, 16.24, 0, 0, 0)
 
 [node name="CandyMesh" type="MeshInstance3D" parent="Visuals"]
-transform = Transform3D(2.6, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(2.1243417, 0, 0, 0, 0.7355601, 0, 0, 0, 0.85423476, 0, 0, 0)
 mesh = SubResource("SphereMesh_candy")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Visuals"]
@@ -36,3 +42,15 @@ light_color = Color(0.4648643, 0.633438, 0.98121184, 1)
 light_energy = 300.0
 light_size = 0.6
 omni_range = 21.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Visuals"]
+transform = Transform3D(-2.1844379e-07, 27.595106, 0, 4.9974127, 1.2062209e-06, 0, 0, 0, 14.854396, -3.4036598, 0, 0)
+shape = SubResource("SphereShape3D_col")
+
+[node name="CandyMesh2" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-1.3333721e-08, -0.7935165, 0, 0.30504033, -3.4685748e-08, 0, 0, 0, 0.07813518, 0.41467783, -5.631582e-08, 0.00031816555)
+mesh = SubResource("PrismMesh_s4hom")
+
+[node name="CandyMesh3" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(-1.33337155e-08, 0.7042602, 0, 0.30504027, 3.0784214e-08, 0, 0, 0, 0.07813519, -0.45485696, -5.631582e-08, 0.00031816555)
+mesh = SubResource("PrismMesh_s4hom")

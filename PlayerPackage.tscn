@@ -704,7 +704,6 @@ transform = Transform3D(1, 0, 0, 0, 0.9998792, 0.015550286, 0, -0.015550286, 0.9
 script = ExtResource("1_ikdwn")
 speed = 80.0
 sprint_speed = 120.0
-attack_damage = 100.0
 stamina_drain_rate = 10.0
 footstep_frames = Array[int]([2, 6])
 camera_pivot = NodePath("../CameraPivot")
@@ -716,7 +715,7 @@ cinematic_camera = NodePath("CinematicCamera")
 transform = Transform3D(-0.041975416, 0.30861503, -0.95026046, -0.021932624, 0.9505848, 0.30968907, 0.99887794, 0.033841033, -0.033132456, -44.439247, 23.205635, -4.7091913)
 cull_mask = 1048543
 
-[node name="HitLabel3D" type="Label3D" parent="Player"]
+[node name="HitLabel3D" type="Label3D" parent="Player" groups=["gameplay_ui"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3493.028, -58.104214)
 billboard = 1
 text = "Aray Hah"
@@ -747,7 +746,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.61426, 6.48762, 7.97662)
 
 [node name="Crosshair" type="Node3D" parent="Player/AttackRayOrigin"]
 
-[node name="Crosshair" type="Label" parent="Player/AttackRayOrigin/Crosshair"]
+[node name="Crosshair" type="Label" parent="Player/AttackRayOrigin/Crosshair" groups=["gameplay_ui"]]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -760,17 +760,16 @@ offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 23
-text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ReloadTimer" type="Timer" parent="Player"]
 
-[node name="AmmoLabel" type="Label" parent="Player"]
-offset_left = 945.0
-offset_top = 241.99998
-offset_right = 1081.0
-offset_bottom = 290.0
+[node name="AmmoLabel" type="Label" parent="Player" groups=["gameplay_ui"]]
+offset_left = 187.0
+offset_top = 55.0
+offset_right = 323.0
+offset_bottom = 103.000015
 scale = Vector2(0.8954373, 0.8954373)
 text = "derrr"
 label_settings = SubResource("LabelSettings_yo8xh")
@@ -814,6 +813,8 @@ bus = &"SFX"
 transform = Transform3D(0.99998, 0, -0.00640531, 0, 1, 0, 0.00640531, 0, 0.99998, -11.864548, 0, -17)
 script = ExtResource("8_7lkuv")
 target = NodePath("../Player")
+follow_speed = 7.0
+mouse_smoothness = 10.0
 third_person_pitch_min = -20.0
 third_person_pitch_max = 10.0
 third_person_fov = 100.0
@@ -821,7 +822,7 @@ fpp_eye_level = Vector3(-8, 18, -30)
 first_person_fov = 95.0
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
-transform = Transform3D(0.999995, 0.00349065, 0, -0.00348759, 0.999117, 0.0418757, 0.00014619483, -0.0418754, 0.999124, -1.0433369, 25.0284, -44.20337)
+transform = Transform3D(0.999995, 0.00349065, 0, -0.00348759, 0.999117, 0.0418757, 0.00014619483, -0.0418754, 0.999124, -1.1836185, 33.88439, -66.10428)
 shape = SubResource("CapsuleShape3D_wtgu4")
 spring_length = 0.0
 
@@ -853,14 +854,14 @@ theme_override_colors/font_color = Color(0.4, 0.22352941, 0.19215687, 1)
 theme_override_font_sizes/font_size = 12
 text = "ESC"
 
-[node name="PlayerHealthBar" type="ProgressBar" parent="Healthbar"]
+[node name="PlayerHealthBar" type="ProgressBar" parent="Healthbar" groups=["gameplay_ui"]]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -154.0
-offset_top = 179.0
-offset_right = -35.925537
-offset_bottom = 196.71902
+offset_left = -1031.0
+offset_top = 40.0
+offset_right = -912.92554
+offset_bottom = 57.719025
 grow_horizontal = 0
 scale = Vector2(1.2322888, 1.2722925)
 theme_override_styles/background = SubResource("StyleBoxFlat_bgcur")
@@ -885,14 +886,15 @@ position = Vector2(52.09442, 7.1994476)
 scale = Vector2(0.5508994, 0.48727068)
 texture = ExtResource("10_x2ql6")
 
-[node name="DogHealthBar" type="ProgressBar" parent="Healthbar" groups=["dog_ui"]]
-offset_left = 953.0
-offset_top = 208.99998
-offset_right = 1049.7206
-offset_bottom = 225.78644
+[node name="DogHealthBar" type="ProgressBar" parent="Healthbar" groups=["dog_ui", "gameplay_ui"]]
+offset_left = 75.99988
+offset_top = 69.999954
+offset_right = 172.72046
+offset_bottom = 86.78641
 scale = Vector2(1.2322887, 1.2722924)
 tooltip_text = "DOG"
 theme_override_styles/background = SubResource("StyleBoxFlat_wi0c6")
+max_value = 90.0
 show_percentage = false
 script = SubResource("GDScript_hp6x6")
 

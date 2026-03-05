@@ -99,10 +99,31 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i48ha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1hoc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6m5aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1478n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7isa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru7ao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5vbj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sao2")
 }],
 "loop": true,
 "name": &"talk",
-"speed": 1.0
+"speed": 9.0
 }]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ll5ud"]
@@ -118,10 +139,12 @@ shape = SubResource("CapsuleShape3D_npc")
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(72.18664, 0, 0, 0, 62.982513, 0, 0, 0, 1.0000006, 0, 0, 0)
 billboard = 2
+shaded = true
 alpha_cut = 2
 texture_filter = 2
 sprite_frames = SubResource("SpriteFrames_6sao2")
 animation = &"talk"
+frame_progress = 0.18618637
 
 [node name="Label3D" type="Label3D" parent="Sprite3D"]
 transform = Transform3D(0.20280991, 0, 0, 0, 0.1786817, 0, 0, 0, 0.6597252, 0, 0.25850928, 0)

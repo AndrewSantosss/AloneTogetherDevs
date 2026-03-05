@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c0kpj5taicbgf"]
+[gd_scene load_steps=3 format=3 uid="uid://c0kpj5taicbgf"]
 
 [ext_resource type="Script" uid="uid://b1nfeo2w3bgxe" path="res://dialogue_ui.gd" id="1_njptv"]
 
@@ -6,9 +6,7 @@
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="LabelSettings" id="LabelSettings_2x5cq"]
-
-[node name="DialogueUI" type="CanvasLayer"]
+[node name="DialogueUI" type="CanvasLayer" groups=["gameplay_ui"]]
 script = ExtResource("1_njptv")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -22,6 +20,7 @@ grow_vertical = 0
 color = Color(0, 0, 0, 0.5882353)
 
 [node name="TextLabel" type="Label" parent="Background"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.001
@@ -54,10 +53,7 @@ offset_right = -1.0
 offset_bottom = -27.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 20
-label_settings = SubResource("LabelSettings_2x5cq")
 
 [node name="SystemBackground" type="PanelContainer" parent="."]
 offset_left = 26.0

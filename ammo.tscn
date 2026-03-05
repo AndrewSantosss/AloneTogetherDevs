@@ -1,0 +1,69 @@
+[gd_scene load_steps=7 format=3 uid="uid://do2q6k5e1uins"]
+
+[ext_resource type="Script" uid="uid://dgi1s3nl6bw4q" path="res://ammo_pickup.gd" id="1_mulmr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_collision"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_red"]
+albedo_color = Color(0.33333334, 0.22745098, 0, 1)
+roughness = 0.3
+
+[sub_resource type="BoxMesh" id="BoxMesh_box"]
+material = SubResource("StandardMaterial3D_red")
+size = Vector3(0.6, 0.4, 0.25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_white"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_cross_h"]
+material = SubResource("StandardMaterial3D_white")
+size = Vector3(0.25, 0.15, 0.3)
+
+[node name="Ammo" type="Area3D"]
+transform = Transform3D(14.225524, 0, 0, 0, 12.416537, 0, 0, 0, 17.833633, 0, 0, 0)
+collision_layer = 0
+script = ExtResource("1_mulmr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_collision")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="MainBox" type="MeshInstance3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+mesh = SubResource("BoxMesh_box")
+
+[node name="CrossHorizontal" type="MeshInstance3D" parent="Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871695, 0, 0, 0, 0.9999998, -0.22069755, 0, 0)
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="CrossHorizontal2" type="MeshInstance3D" parent="Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, -0.12663764, 0, 0)
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="CrossHorizontal3" type="MeshInstance3D" parent="Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, -0.036683336, 0, 0)
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="CrossHorizontal4" type="MeshInstance3D" parent="Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, 0.057376575, 0, 0)
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="CrossHorizontal5" type="MeshInstance3D" parent="Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, 0.13538758, 0, 0)
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="CrossHorizontal6" type="MeshInstance3D" parent="Visuals/MainBox"]
+transform = Transform3D(0.12608272, 0, 0, 0, 1.4871694, 0, 0, 0, 0.9999998, 0.2294475, 0, 0)
+mesh = SubResource("BoxMesh_cross_h")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Visuals"]
+transform = Transform3D(0.038676944, 0, 0, 0, 0.046992473, 0, 0, 0, 0.03779289, 0, 0.47105265, 0)
+layers = 1023
+light_color = Color(0.2, 1, 0.2, 1)
+light_energy = 300.0
+light_size = 0.6
+omni_range = 21.0

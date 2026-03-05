@@ -1,6 +1,115 @@
-[gd_scene load_steps=2 format=3 uid="uid://utcu6mm68xcq"]
+[gd_scene load_steps=22 format=3 uid="uid://utcu6mm68xcq"]
 
 [ext_resource type="Script" uid="uid://c2deymibnbhqw" path="res://PauseMenu.gd" id="1_nov15"]
+[ext_resource type="Texture2D" uid="uid://4stfixjdole3" path="res://misc/1764479694344.png" id="2_q775a"]
+[ext_resource type="Shader" uid="uid://bbd6juyrtguwb" path="res://Scene1.gdshader" id="2_r2gvh"]
+[ext_resource type="Texture2D" uid="uid://dx3ddydx5p8ri" path="res://misc/IMG_20251129_130100.png" id="3_qg8xq"]
+[ext_resource type="Texture2D" uid="uid://diio66w2rrxlb" path="res://character/idle.png" id="4_36k83"]
+[ext_resource type="Texture2D" uid="uid://be514r86f7q64" path="res://character/dog_sitting_idle.png" id="5_r2gvh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sev4g"]
+shader = ExtResource("2_r2gvh")
+shader_parameter/blur_amount = 1.19600005681
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sev4g"]
+atlas = ExtResource("4_36k83")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04dm0"]
+atlas = ExtResource("4_36k83")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idhon"]
+atlas = ExtResource("4_36k83")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntcl7"]
+atlas = ExtResource("4_36k83")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jtd52"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sev4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04dm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idhon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntcl7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vw8ej"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvk8j"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mc44d"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj5p7"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rjb6m"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjnfl"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eik8f"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oa36"]
+atlas = ExtResource("5_r2gvh")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pt02m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vw8ej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvk8j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mc44d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj5p7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rjb6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pjnfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eik8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0oa36")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -9,29 +118,30 @@ process_physics_priority = 1
 auto_translate_mode = 1
 script = ExtResource("1_nov15")
 
+[node name="BlurBackground" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_sev4g")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(28.227322, 15.471623)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+process_mode = 3
+offset_top = -14.0
+offset_right = 133.29773
+offset_bottom = 104.578926
+scale = Vector2(2.288111, 5.300152)
+color = Color(0, 0, 0, 1)
+
 [node name="ColorRect3" type="ColorRect" parent="."]
 process_mode = 3
 offset_top = -12.0
 offset_right = 480.9801
 offset_bottom = 106.19579
 scale = Vector2(2.2537315, 5.3401523)
-color = Color(0.20392157, 0.20392157, 0.20392157, 0.31764707)
-
-[node name="ColorRect" type="ColorRect" parent="."]
-process_mode = 3
-offset_top = -4.0
-offset_right = 121.13244
-offset_bottom = 112.66327
-scale = Vector2(2.7737312, 5.340152)
-color = Color(0.20392157, 0.20392157, 0.20392157, 0.8156863)
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-process_mode = 3
-offset_top = -14.0
-offset_right = 480.9801
-offset_bottom = 104.578926
-scale = Vector2(2.288111, 5.300152)
-color = Color(0.20392157, 0.20392157, 0.20392157, 0.31764707)
+color = Color(0, 0, 0, 0.7764706)
 
 [node name="OBJECTIVES" type="Label" parent="."]
 visible = false
@@ -43,11 +153,12 @@ scale = Vector2(1.5189005, 1.6800003)
 text = "Controls"
 
 [node name="MenuContainer" type="CenterContainer" parent="."]
-offset_left = 83.0
-offset_top = 11.0
-offset_right = 201.0
-offset_bottom = 338.0
+offset_left = 57.000004
+offset_top = 77.0
+offset_right = 175.0
+offset_bottom = 404.0
 scale = Vector2(1.615686, 1.5488434)
+mouse_filter = 0
 
 [node name="MainMenu" type="VBoxContainer" parent="MenuContainer"]
 process_mode = 3
@@ -55,7 +166,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="MenuContainer/MainMenu"]
 layout_mode = 2
-text = "  PAUSED"
+text = "Game Paused"
 
 [node name="ResumeButton" type="Button" parent="MenuContainer/MainMenu"]
 process_mode = 3
@@ -70,11 +181,30 @@ text = "SETTINGS"
 layout_mode = 2
 text = "QUIT"
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MenuContainer"]
+texture_filter = 3
+position = Vector2(545.7249, 272.7713)
+rotation = 3.1415927
+scale = Vector2(4.926701, -4.932713)
+sprite_frames = SubResource("SpriteFrames_jtd52")
+autoplay = "default"
+frame = 2
+frame_progress = 0.974646
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="MenuContainer"]
+texture_filter = 3
+position = Vector2(605.9346, 312.49124)
+rotation = 3.1415927
+scale = Vector2(1.2540691, -1.2555996)
+sprite_frames = SubResource("SpriteFrames_pt02m")
+autoplay = "default"
+frame_progress = 0.028142426
+
 [node name="SettingsMenu" type="VBoxContainer" parent="."]
-offset_left = 121.0
-offset_top = 107.0
-offset_right = 239.0
-offset_bottom = 434.0
+offset_left = 98.0
+offset_top = 194.0
+offset_right = 216.0
+offset_bottom = 521.0
 
 [node name="SETTINGS" type="Label" parent="SettingsMenu"]
 layout_mode = 2
@@ -137,6 +267,22 @@ layout_mode = 2
 [node name="FogCheck" type="CheckBox" parent="SettingsMenu/SettingsMenu6"]
 layout_mode = 2
 text = "Fog"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 120.0
+offset_top = 27.000015
+offset_right = 2730.0
+offset_bottom = 899.0
+scale = Vector2(0.024434581, 0.024434581)
+texture = ExtResource("2_q775a")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = 55.0
+offset_top = -31.0
+offset_right = 2951.0
+offset_bottom = 4065.0
+scale = Vector2(0.06443519, 0.06443519)
+texture = ExtResource("3_qg8xq")
 
 [connection signal="pressed" from="MenuContainer/MainMenu/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MainMenu/SettingsButton" to="." method="_on_settings_button_pressed"]

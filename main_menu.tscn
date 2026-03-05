@@ -1,9 +1,83 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfop58tgnvixx"]
+[gd_scene load_steps=12 format=3 uid="uid://bfop58tgnvixx"]
 
-[ext_resource type="Script" uid="uid://dmf3kphetxmsh" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://dfjvgrmu4vjyf" path="res://main_menu_1st.gd" id="1_nlkkf"]
+[ext_resource type="Shader" uid="uid://ta727cidl7uh" path="res://main_menu.gdshader" id="2_glbon"]
+[ext_resource type="Shader" uid="uid://bj3w02wv2k7wi" path="res://main_menu_bg.gdshader" id="2_nlkkf"]
 [ext_resource type="Texture2D" uid="uid://dcbyppygo7itf" path="res://misc/Main menu 2.jpg" id="3_jix8l"]
 [ext_resource type="AudioStream" uid="uid://dknb4enm0iydd" path="res://sfx/SOUNDTRACK_BACKGROUND_1.mp3" id="4_glbon"]
 [ext_resource type="Texture2D" uid="uid://dx3ddydx5p8ri" path="res://misc/IMG_20251129_130100.png" id="4_jix8l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe12f"]
+shader = ExtResource("2_nlkkf")
+shader_parameter/mouse_pos = Vector2(0.5, 0.5)
+shader_parameter/distortion_strength = -0.01699995330750003
+shader_parameter/radius = 0.6930000329175
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nlkkf"]
+shader = ExtResource("2_glbon")
+shader_parameter/smoke_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+shader_parameter/speed = 0.14400000684
+shader_parameter/density = 2.0
+
+[sub_resource type="Animation" id="Animation_qe12f"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/FadeOverlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionLayer/FadeOverlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nlkkf"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TransitionLayer/FadeOverlay:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TransitionLayer/FadeOverlay:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qe12f"]
+_data = {
+&"RESET": SubResource("Animation_qe12f"),
+&"fade_out": SubResource("Animation_nlkkf")
+}
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -12,7 +86,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_06t4h")
+script = ExtResource("1_nlkkf")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -32,35 +106,63 @@ theme_override_constants/margin_top = 12
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0.37254903)
 texture_filter = 3
-layout_mode = 0
-offset_top = -2.0000012
-offset_right = 2776.0
-offset_bottom = 1160.0
+material = SubResource("ShaderMaterial_qe12f")
+offset_left = -21.000004
+offset_top = -17.0
+offset_right = 2755.0
+offset_bottom = 1145.0
 scale = Vector2(0.55267453, 0.56249475)
 texture = ExtResource("3_jix8l")
 
-[node name="TextureRect2" type="TextureRect" parent="."]
-layout_mode = 0
-offset_left = 317.0
-offset_top = -79.0
-offset_right = 3213.0
-offset_bottom = 4017.0
-scale = Vector2(0.15709579, 0.15709579)
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer"]
+offset_left = 375.9999
+offset_top = 18.000015
+offset_right = 3272.0
+offset_bottom = 4114.0
+scale = Vector2(0.117, 0.117)
 texture = ExtResource("4_jix8l")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_left = 404.95627
-offset_top = 515.8623
-offset_right = 698.9563
-offset_bottom = 564.8623
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_nlkkf")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.2799995)
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 402.95627
+offset_top = 448.8623
+offset_right = 696.9563
+offset_bottom = 523.8623
 text = "Press any key to continue
 "
 horizontal_alignment = 1
 
-[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="CanvasLayer"]
 stream = ExtResource("4_glbon")
 autoplay = true
 parameters/looping = false
+
+[node name="TransitionLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="FadeOverlay" type="ColorRect" parent="TransitionLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TransitionLayer"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_qe12f")
+}

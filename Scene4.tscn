@@ -1,4 +1,4 @@
-[gd_scene load_steps=293 format=3 uid="uid://dkypqxajt04lt"]
+[gd_scene load_steps=294 format=3 uid="uid://dkypqxajt04lt"]
 
 [ext_resource type="Script" uid="uid://cto02aqqldqc5" path="res://scene_4.gd" id="1_gfayk"]
 [ext_resource type="PackedScene" uid="uid://c7psjp33u27si" path="res://PlayerPackage.tscn" id="1_vrnyh"]
@@ -50,7 +50,7 @@
 [ext_resource type="AudioStream" uid="uid://3ow8fsn238p2" path="res://sfx/AMBIENCE_WIND_LEAVES.mp3" id="48_iucb7"]
 [ext_resource type="PackedScene" uid="uid://b5lv60n1r3t80" path="res://bodybag.tscn" id="49_2tn8k"]
 [ext_resource type="PackedScene" uid="uid://doqkbldrkgs5p" path="res://medkit.tscn" id="50_w3n1w"]
-[ext_resource type="PackedScene" uid="uid://7anpcq60g7rp" path="res://stamina_candy.tscn" id="51_1ecpd"]
+[ext_resource type="PackedScene" uid="uid://0xl84n1o4d0y" path="res://ammo_pickup.tscn" id="52_d2t2a"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_funbc"]
 size = Vector3(2.6292877, 2.7315674, 25.185242)
@@ -110,6 +110,7 @@ glow_bloom = 0.06
 fog_enabled = true
 fog_light_color = Color(0.1267241, 0.14171177, 0.16503283, 1)
 fog_light_energy = 0.52
+fog_sun_scatter = 1.0
 fog_density = 0.0008
 fog_height = -1024.0
 fog_height_density = 0.0005
@@ -940,7 +941,7 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 size = Vector3(31.758003, 10.559784, 11.876221)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d2t2a"]
-size = Vector3(0.9146118, 1, 1)
+size = Vector3(0.9146118, 1, 22.148315)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0w1lk"]
 size = Vector3(1, 1.3989258, 1)
@@ -957,14 +958,25 @@ texture_filter = 2
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ecpd"]
 albedo_texture = ExtResource("22_d2t2a")
 
-[sub_resource type="LabelSettings" id="LabelSettings_2tn8k"]
-font_color = Color(1, 1, 0, 1)
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="LabelSettings" id="LabelSettings_1ecpd"]
+font_size = 17
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.5803922)
 
-[sub_resource type="LabelSettings" id="LabelSettings_w3n1w"]
-outline_size = 5
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="FontFile" id="FontFile_hrxwa"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_d2t2a"]
+font = SubResource("FontFile_hrxwa")
 
 [node name="Scene4" type="Node3D"]
 script = ExtResource("1_gfayk")
@@ -1389,12 +1401,13 @@ transform = Transform3D(-0.91427374, 0.08325502, -0.39644915, -0.3989156, -0.355
 light_energy = 0.0
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 2.882
-shadow_enabled = true
+light_bake_mode = 1
 shadow_bias = 0.0
 shadow_opacity = 0.9
 shadow_blur = 0.0
+directional_shadow_mode = 0
 directional_shadow_split_1 = 0.02
-directional_shadow_max_distance = 8192.0
+directional_shadow_max_distance = 214.5
 
 [node name="groundCollision" type="StaticBody3D" parent="SubViewportContainer/SubViewport/worldEnvironment"]
 transform = Transform3D(-2.63033, 0, -2.89932e-07, 0, 0.50552, 0, 2.29951e-07, 0, -3.31644, 1.89378, 1.8913, -42.5569)
@@ -1802,10 +1815,10 @@ transform = Transform3D(-2.1124039, 0, 3.5356376, 0, 0.99999994, 0, -6.418493, 0
 transform = Transform3D(6.279734, 1.0872413, -2.7778535, -0.14459564, 5.274882, 2.8091183, 1.9389101, -1.6500107, 4.2157044, -493.51935, -8.829913, 756.50385)
 
 [node name="truck" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("32_funbc")]
-transform = Transform3D(6.001622, 0, 2.3469298, 0, 5.79862, 0, -3.02822, 0, 4.651375, -678.38635, 9.266278, 336.2152)
+transform = Transform3D(5.2307887, 0, 3.2724216, 0, 5.79862, 0, -4.222373, 0, 4.0539637, -763.6255, 9.266278, 476.49872)
 
 [node name="truck2" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("33_drjap")]
-transform = Transform3D(2.258881, 0, -4.9069843, 0, 5.7986207, 0, 6.331433, 0, 1.7506772, -819.7856, 9.266262, 124.364456)
+transform = Transform3D(-5.828376, 0, -2.5959826, 0, 5.7986207, 0, 3.3495698, 0, -4.5171056, -697.2931, 9.266262, 52.931015)
 
 [node name="truck4" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("32_funbc")]
 transform = Transform3D(-2.2541287, 0, 4.908297, 0, 5.798621, 0, -6.3331265, 0, -1.7469944, -179.49576, 9.266278, 1176.5454)
@@ -1855,16 +1868,13 @@ transform = Transform3D(6.6952457, 0, -0.46711797, 0, 5.7986207, 0, 0.6027177, 0
 [node name="trees" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
 
 [node name="vegetation7" parent="SubViewportContainer/SubViewport/mapEnvironment/trees" instance=ExtResource("34_3xwpd")]
-transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -624.98395, -9.0005045, 118.32187)
+transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -559.68713, -9.0005045, 100.23039)
 
 [node name="vegetation8" parent="SubViewportContainer/SubViewport/mapEnvironment/trees" instance=ExtResource("34_3xwpd")]
 transform = Transform3D(-0.36336258, 0, 0.13217875, 0, 0.37160936, 0, -0.12388985, 0, -0.38767377, -640.21, -9.0005045, -173.10245)
 
 [node name="vegetation9" parent="SubViewportContainer/SubViewport/mapEnvironment/trees" instance=ExtResource("34_3xwpd")]
 transform = Transform3D(0.17185989, 0, 0.36625385, 0, 0.37160936, 0, -0.34328598, 0, 0.18335828, -899.4769, -9.0005045, -178.58447)
-
-[node name="vegetation10" parent="SubViewportContainer/SubViewport/mapEnvironment/trees" instance=ExtResource("34_3xwpd")]
-transform = Transform3D(-0.14483681, 0, 0.37931973, 0, 0.3716094, 0, -0.35553253, 0, -0.15452735, -499.1463, -9.0005045, 420.0567)
 
 [node name="vegetation11" parent="SubViewportContainer/SubViewport/mapEnvironment/trees" instance=ExtResource("34_3xwpd")]
 transform = Transform3D(-0.341495, 0, 0.18712628, 0, 0.3716094, 0, -0.17539161, 0, -0.3643431, -214.00003, -9.0005045, 874.71344)
@@ -5767,7 +5777,7 @@ mesh = SubResource("PlaneMesh_1ecpd")
 [node name="TruckTrigger" type="Area3D" parent="truckniMitz"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="truckniMitz/TruckTrigger"]
-transform = Transform3D(67.90928, 0, 1.4901161e-08, 0, 14.122308, 0, -3.33786e-06, 0, 2.1841114, -8.615463, 9.752714, 30.1721)
+transform = Transform3D(67.90928, 0, 1.4901161e-08, 0, 14.122308, 0, -3.33786e-06, 0, 2.1841114, -8.615463, 9.752714, 53.267246)
 shape = SubResource("BoxShape3D_d2t2a")
 
 [node name="objectiveMarker" type="Label3D" parent="truckniMitz"]
@@ -5792,75 +5802,57 @@ shape = SubResource("BoxShape3D_0w1lk")
 
 [node name="Enemy" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -564.18085, 3.58561, 1190.7048)
-health = 100.0
 
 [node name="Enemy2" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 1190.7048)
-health = 100.0
 
 [node name="Enemy3" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 1283.8441)
-health = 100.0
 
 [node name="Enemy4" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 939.1959)
-health = 100.0
 
 [node name="Enemy5" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -542.9262, 3.58561, 939.1959)
-health = 100.0
 
 [node name="Enemy6" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -651.9423, 3.58561, 1071.9459)
-health = 100.0
 
 [node name="Enemy7" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -445.5302, 3.58561, 1071.9459)
-health = 100.0
 
 [node name="Enemy8" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -534.5862, 3.58561, 1376.5714)
-health = 100.0
 
 [node name="Enemy9" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -186.3155, 3.58561, 1376.5714)
-health = 100.0
 
 [node name="Enemy10" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -106.45447, 3.58561, 1275.5265)
-health = 100.0
 
 [node name="Enemy11" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -243.16197, 3.58561, 1275.5265)
-health = 100.0
 
 [node name="Enemy12" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -725.61475, 3.58561, 1321.3511)
-health = 100.0
 
 [node name="Enemy13" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -893.0874, 3.58561, 1321.3511)
-health = 100.0
 
 [node name="Enemy14" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -320.0782, 3.58561, 871.3064)
-health = 100.0
 
 [node name="Enemy15" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -320.0782, 3.58561, 1067.0621)
-health = 100.0
 
 [node name="Enemy16" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -560.08435, 3.58561, 1067.0621)
-health = 100.0
 
 [node name="Enemy17" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -633.45764, 3.58561, 1294.8616)
-health = 100.0
 
 [node name="Enemy18" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -633.45764, 3.58561, 1403.2056)
-health = 100.0
 
 [node name="TruckKey" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1356.7329, 35.764816, 1073.0402)
@@ -6559,69 +6551,71 @@ font_size = 200
 outline_size = 80
 uppercase = true
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 900.0
+offset_top = 186.0
+offset_right = 940.0
+offset_bottom = 226.0
+scale = Vector2(4.3599997, 1.36)
+color = Color(0.13333334, 0.13333334, 0.13333334, 0.8156863)
+
 [node name="Label" type="Label" parent="."]
-offset_left = 835.00006
-offset_top = 56.000004
-offset_right = 913.00006
-offset_bottom = 105.0
-scale = Vector2(0.89583313, 0.89583313)
-text = "Objective:
+offset_left = 893.0
+offset_top = 187.0
+offset_right = 1064.0
+offset_bottom = 244.0
+scale = Vector2(0.6558331, 0.6558331)
+text = "✓ Main Objectives:
  "
-label_settings = SubResource("LabelSettings_2tn8k")
+label_settings = SubResource("LabelSettings_1ecpd")
 horizontal_alignment = 2
 
 [node name="FindKey" type="Label" parent="."]
-offset_left = 504.00003
-offset_top = 72.0
-offset_right = 973.0
-offset_bottom = 95.0
-scale = Vector2(0.8486851, 0.8486851)
-text = "Clear the area and look for the truck key inside Victory Liner."
-label_settings = SubResource("LabelSettings_w3n1w")
-horizontal_alignment = 2
+offset_left = 912.70844
+offset_top = 204.9167
+offset_right = 1221.7085
+offset_bottom = 253.91672
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Clear the area and look for the
+truck key inside.
+  "
+label_settings = SubResource("LabelSettings_d2t2a")
 
 [node name="UseKey" type="Label" parent="."]
-offset_left = 630.0
-offset_top = 72.0
-offset_right = 952.0
-offset_bottom = 95.0
-scale = Vector2(0.8486851, 0.8486851)
-text = "Use the key to move the truck."
-label_settings = SubResource("LabelSettings_w3n1w")
-horizontal_alignment = 2
+offset_left = 912.70844
+offset_top = 205.81253
+offset_right = 1221.7085
+offset_bottom = 228.81253
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Use the key to move the truck."
+label_settings = SubResource("LabelSettings_d2t2a")
+
+[node name="Ammunition" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -836.047, 16.275766, 319.4198)
+
+[node name="Ammunition2" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -812.18604, 16.275764, 365.82465)
+
+[node name="Ammunition3" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -783.1683, 16.275751, 339.70105)
+
+[node name="Ammunition4" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -829.71234, 16.275766, 352.63422)
+
+[node name="Ammunition5" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -862.91864, 16.27575, 312.82483)
+
+[node name="Ammunition6" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -833.8795, 16.27575, 305.13354)
 
 [node name="Medkit" parent="." instance=ExtResource("50_w3n1w")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -857, 0, 123)
+transform = Transform3D(16.661198, 0, 0, 0, 13.573301, 0, 0, 0, 17.581133, -490.8955, 14.85902, 319.99292)
 
 [node name="Medkit2" parent="." instance=ExtResource("50_w3n1w")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -780, 0, -45)
+transform = Transform3D(16.661198, 0, 0, 0, 13.573301, 0, 0, 0, 17.581133, -636.96606, 14.85902, 994.891)
 
-[node name="Medkit3" parent="." instance=ExtResource("50_w3n1w")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -672, 0, 500)
-
-[node name="Medkit4" parent="." instance=ExtResource("50_w3n1w")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -530, 0, 814)
-
-[node name="Medkit5" parent="." instance=ExtResource("50_w3n1w")]
-transform = Transform3D(25.855198, 0, 0, 0, 21.280003, 0, 0, 0, 26.460001, -195, 0, 175)
-
-[node name="StaminaCandy" parent="." instance=ExtResource("51_1ecpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 34, 159)
-
-[node name="StaminaCandy2" parent="." instance=ExtResource("51_1ecpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -123, 34, 209)
-
-[node name="StaminaCandy3" parent="." instance=ExtResource("51_1ecpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 34, 246)
-
-[node name="StaminaCandy4" parent="." instance=ExtResource("51_1ecpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 241, 34, 246)
-
-[node name="StaminaCandy5" parent="." instance=ExtResource("51_1ecpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 591, 128, 246)
-
-[node name="StaminaCandy6" parent="." instance=ExtResource("51_1ecpd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1069, 128, 246)
+[node name="Ammunition7" parent="." instance=ExtResource("52_d2t2a")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -612.5172, 16.275764, 955.76404)
 
 [editable path="PanTrigger"]
 [editable path="HUD/MinimapFrame/SubViewport/MinimapViewport/mapLayout/moss"]

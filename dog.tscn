@@ -735,7 +735,6 @@ transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, 0, 3.58561, 0)
 script = ExtResource("1_kb3ao")
 walk_speed = 130.0
 run_speed = 200.0
-damage = 10.0
 follow_offset = Vector3(10, 0, -1.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -744,10 +743,12 @@ shape = SubResource("CapsuleShape3D_7xaro")
 
 [node name="Sprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(-4.2169914, 0, 0, 0, -3.8047092, 0, 0, 0, -4.65019, -0.06320101, 0.05927956, -0.00642705)
-billboard = 2
+billboard = 1
 shaded = true
 alpha_cut = 2
-texture_filter = 2
+alpha_scissor_threshold = 1.0
+alpha_hash_scale = 1.43
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_6vfhn")
 animation = &"attack"
 
