@@ -1,4 +1,4 @@
-[gd_scene load_steps=99 format=3 uid="uid://c7psjp33u27si"]
+[gd_scene load_steps=100 format=3 uid="uid://c7psjp33u27si"]
 
 [ext_resource type="Script" uid="uid://depaygkgmdkuo" path="res://player_code.gd" id="1_ikdwn"]
 [ext_resource type="Texture2D" uid="uid://drn4hjsejhec3" path="res://character/shoot_back.png" id="2_2tgtl"]
@@ -658,7 +658,15 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="FontFile" id="FontFile_yo8xh"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_yo8xh"]
+font = SubResource("FontFile_yo8xh")
 outline_size = 5
 outline_color = Color(0, 0, 0, 1)
 
@@ -702,7 +710,6 @@ process_mode = 3
 process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 0.9998792, 0.015550286, 0, -0.015550286, 0.9998792, -12.01445, 2.85493, -9.820068)
 script = ExtResource("1_ikdwn")
-speed = 80.0
 sprint_speed = 120.0
 stamina_drain_rate = 10.0
 footstep_frames = Array[int]([2, 6])
@@ -766,10 +773,10 @@ vertical_alignment = 1
 [node name="ReloadTimer" type="Timer" parent="Player"]
 
 [node name="AmmoLabel" type="Label" parent="Player" groups=["gameplay_ui"]]
-offset_left = 187.0
-offset_top = 55.0
-offset_right = 323.0
-offset_bottom = 103.000015
+offset_left = 54.99994
+offset_top = 111.0
+offset_right = 190.99994
+offset_bottom = 159.0
 scale = Vector2(0.8954373, 0.8954373)
 text = "derrr"
 label_settings = SubResource("LabelSettings_yo8xh")

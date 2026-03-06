@@ -1,4 +1,4 @@
-[gd_scene load_steps=256 format=3 uid="uid://dbhbpksppw7fv"]
+[gd_scene load_steps=259 format=3 uid="uid://dbhbpksppw7fv"]
 
 [ext_resource type="PackedScene" uid="uid://dkf7vpr6fkkya" path="res://enemy.tscn" id="1_blb5u"]
 [ext_resource type="Script" uid="uid://htaojc2j0wk5" path="res://gate.gd" id="1_m0bgb"]
@@ -101,7 +101,7 @@ albedo_color = Color(2.07564e-07, 0.157179, 0.0814679, 1)
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_hrxwa"]
 panorama = ExtResource("12_2xbvf")
 
-[sub_resource type="Sky" id="Sky_pqk4w"]
+[sub_resource type="Sky" id="Sky_5f7ld"]
 sky_material = SubResource("PanoramaSkyMaterial_hrxwa")
 radiance_size = 2
 
@@ -109,7 +109,7 @@ radiance_size = 2
 background_mode = 2
 background_color = Color(0.8776157, 0.8776158, 0.8776157, 1)
 background_energy_multiplier = 0.86
-sky = SubResource("Sky_pqk4w")
+sky = SubResource("Sky_5f7ld")
 ambient_light_source = 2
 ambient_light_color = Color(0.347817, 0.347817, 0.347817, 1)
 ambient_light_energy = 2.42
@@ -828,7 +828,7 @@ data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0
 data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qs8eo"]
-bg_color = Color(0.2159017, 0.21590173, 0.21590161, 1)
+bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 1000
 corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
@@ -847,6 +847,33 @@ size = Vector3(4, 1, 1)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2ywxs"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
+
+[sub_resource type="FontFile" id="FontFile_5f7ld"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_5f7ld"]
+line_spacing = 6.0
+font = SubResource("FontFile_5f7ld")
+font_size = 18
+shadow_color = Color(0, 0, 0, 0.44705883)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n80bx"]
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="Scene3" type="Node3D"]
 script = ExtResource("1_wmkmp")
@@ -885,11 +912,19 @@ offset_bottom = 222.0
 scale = Vector2(4.3599997, 1.36)
 color = Color(0.13333334, 0.13333334, 0.13333334, 0.8156863)
 
+[node name="ColorRect2" type="ColorRect" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
+offset_left = 895.99994
+offset_top = 182.0
+offset_right = 935.99994
+offset_bottom = 196.70589
+scale = Vector2(4.3599997, 1.36)
+color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+
 [node name="Label" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
-offset_left = 891.0
-offset_top = 184.99997
-offset_right = 1062.0
-offset_bottom = 241.99997
+offset_left = 923.0
+offset_top = 182.99998
+offset_right = 1094.0
+offset_bottom = 239.99998
 scale = Vector2(0.6558331, 0.6558331)
 text = "✓ Main Objectives:
  "
@@ -897,37 +932,38 @@ label_settings = SubResource("LabelSettings_hrxwa")
 horizontal_alignment = 2
 
 [node name="Investigate" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
-offset_left = 913.0
-offset_top = 205.0
-offset_right = 1222.0
-offset_bottom = 254.0
+offset_left = 903.0
+offset_top = 208.99998
+offset_right = 1212.0
+offset_bottom = 258.0
 scale = Vector2(0.6213164, 0.6213164)
 text = "▢ Investigate the noise.
   "
 label_settings = SubResource("LabelSettings_6wadg")
 
 [node name="GetMedkit" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
-offset_left = 913.0
-offset_top = 206.0
-offset_right = 1222.0
-offset_bottom = 229.0
+offset_left = 903.0
+offset_top = 208.99998
+offset_right = 1212.0
+offset_bottom = 231.99998
 scale = Vector2(0.6213164, 0.6213164)
 text = "▢ Find a Medkit at Public Market."
 label_settings = SubResource("LabelSettings_6wadg")
 
 [node name="BringMedkit" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
-offset_left = 913.0
-offset_top = 205.0
-offset_right = 1222.0
-offset_bottom = 228.0
+visible = false
+offset_left = 903.00006
+offset_top = 209.00002
+offset_right = 1212.0
+offset_bottom = 232.00002
 scale = Vector2(0.6213164, 0.6213164)
 text = "▢ Bring medkit to the survivor."
 label_settings = SubResource("LabelSettings_6wadg")
 
 [node name="Continue" type="Label" parent="SubViewportContainer/ObjectiveArrow/objective_marker_1"]
-offset_left = 912.99994
+offset_left = 903.99994
 offset_top = 201.0
-offset_right = 1222.0
+offset_right = 1213.0
 offset_bottom = 250.0
 scale = Vector2(0.6213164, 0.6213164)
 text = "▢ Continue with your journey. Turn 
@@ -1024,7 +1060,7 @@ transform = Transform3D(-0.17672539, 0, -0.36360884, 0, 0.3716094, 0, 0.34080678
 transform = Transform3D(-0.30114055, 0, -0.2540391, 0, 0.37160942, 0, 0.2381082, 0, -0.32128865, -3918.584, -9.0005045, 170.18771)
 
 [node name="vegetation6" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
-transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -2672.8186, -9.0005045, 153.88794)
+transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -2648.4531, -9.0005045, 68.51765)
 
 [node name="vegetation7" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
 transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -2878.7537, -9.0005045, 118.32187)
@@ -1051,7 +1087,7 @@ transform = Transform3D(0.9341571, 0, 1.7545311, 0, 1.9000003, 0, -1.4203348, 0,
 transform = Transform3D(1.209949, 0, 9.72971, 0, 15.477442, 0, -1.194714, 0, 9.853784, -1163.3096, 6.283781, 295.62842)
 rotation_edit_mode = 2
 script = ExtResource("1_m0bgb")
-next_scene_path = "uid://dkypqxajt04lt"
+next_scene_path = "uid://dq3wfchxuk8s6"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/SceneTransferScene4"]
 transform = Transform3D(0.081903934, 0, -0.9966414, 0, 1, 0, 0.9966403, 0, 0.081903726, 5.0339355, 0.8657838, 1.3222198)
@@ -4594,10 +4630,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qs8eo")
 
 [node name="SubViewport" type="SubViewportContainer" parent="HUD/MinimapFrame"]
 layout_mode = 0
-offset_left = -16.0
-offset_top = -9.0
-offset_right = 496.0
-offset_bottom = 503.0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 490.0
+offset_bottom = 505.0
 scale = Vector2(0.3600029, 0.31999922)
 
 [node name="MinimapViewport" type="SubViewport" parent="HUD/MinimapFrame/SubViewport"]
@@ -4675,6 +4711,98 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1181.9506, 0, 276.2427)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(223.49532, 0, 0, 0, 149.84792, 0, 0, 0, 205.89648, 143.59953, 179.9444, 0)
 shape = SubResource("ConvexPolygonShape3D_2ywxs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="NotificationLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 149.0
+offset_right = 72.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "Objective Updated"
+label_settings = SubResource("LabelSettings_5f7ld")
+horizontal_alignment = 1
+
+[node name="InstructionOverlay" type="Control" parent="CanvasLayer"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/InstructionOverlay"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 1190.0
+offset_top = 79.0
+offset_right = 1196.3264
+offset_bottom = 93.74662
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(54.21682, 7.6627736)
+color = Color(0, 0, 0, 0.75686276)
+
+[node name="CountdownLabel" type="Label" parent="CanvasLayer/InstructionOverlay"]
+layout_mode = 0
+offset_left = 1398.0
+offset_top = 194.0
+offset_right = 1438.0
+offset_bottom = 217.0
+scale = Vector2(0.45981458, 0.45981458)
+
+[node name="Label3D" type="Label" parent="CanvasLayer/InstructionOverlay"]
+layout_mode = 0
+offset_left = 1283.9999
+offset_top = 103.0
+offset_right = 1771.0
+offset_bottom = 386.0
+scale = Vector2(0.5872628, 0.6705186)
+text = "Navigation: Use the Minimap to make navigation easier.
+Movement: [WASD] to Walk | [SHIFT] to Sprint
+Camera: [C] to change Camera style
+Companion: [T] to make your Dog stay in place
+Inventory: [I] to open Inventory"
+label_settings = SubResource("LabelSettings_n80bx")
+
+[node name="ContinueLabel" type="Label" parent="CanvasLayer/InstructionOverlay"]
+process_mode = 3
+layout_mode = 0
+offset_left = 1362.0
+offset_top = 195.0
+offset_right = 1564.0
+offset_bottom = 218.0
+scale = Vector2(0.41981578, 0.41981578)
+text = "Press Any Key to Continue"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Crosshair" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -10.0
+offset_top = -24.0
+offset_right = 11.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 23
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [editable path="SubViewportContainer/SubViewport/entities/playerMain/PlayerPackage"]
 [editable path="SubViewportContainer/SubViewport/mapEnvironment/poste/post"]

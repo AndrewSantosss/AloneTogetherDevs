@@ -47,6 +47,8 @@ var story_triggered := false
 # Tracks if we picked up a specific medkit in THIS scene
 var medkit_acquired_in_scene := false 
 
+@onready var notification_label = $CanvasLayer/NotificationLabel
+
 # --- Preload Voice Lines ---
 const VO_INTRO_0 = preload("res://dialogues/NPC/npc_intro_0.wav")
 const VO_INTRO_1 = preload("res://dialogues/NPC/npc_intro_1.wav")
@@ -82,7 +84,8 @@ func _ready():
 			
 	# 2. Find UI
 	dialogue_ui = find_child("DialogueUI", true, false)
-
+	
+	setup_notification_ui()
 	# 3. Find Audio Player
 	voice_player = find_child("VoicePlayer", true, false)
 	if not voice_player:
@@ -185,6 +188,7 @@ func _process(_delta):
 				if lbl_investigate: lbl_investigate.visible = false
 				if lbl_bring_medkit: lbl_bring_medkit.visible = false
 				if lbl_continue: lbl_continue.visible = false
+				
 
 func _on_quest_item_picked_up():
 	print("DEBUG: Quest Medkit collected!")
@@ -224,6 +228,20 @@ func _on_npc_area_entered(body):
 		if npc_node and npc_node.has_method("play_idle"): npc_node.play_idle()
 
 	is_interacting = false 
+	
+func setup_notification_ui():
+	if notification_label:
+		notification_label.text = "Objective Updated"
+		notification_label.visible = true
+		notification_label.modulate.a = 0.0 # Start hidden
+
+func show_objective_update_notif():
+	if notification_label:
+		var tween = create_tween()
+		notification_label.modulate.a = 0.0 # Force reset
+		tween.tween_property(notification_label, "modulate:a", 1.0, 0.5) # Fade in
+		tween.tween_interval(2.0)                                     # Stay
+		tween.tween_property(notification_label, "modulate:a", 0.0, 0.5) # Fade out
 
 func run_intro_dialogue():
 	print("--- STARTING SURVIVOR INTRO ---")
@@ -530,7 +548,8 @@ func _on_pan_trigger_2_activated():
 			if lbl_bring_medkit: lbl_bring_medkit.visible = false
 			
 	await run_dialogue_step("Unknown: HELP!", 2.0, true, VO_INTRO_0)
-	apply_camera_shake(0.5, 0.2)
+	apply_camera_shake(0.5, 1)
+	show_objective_update_notif() # Call notification
 	await run_dialogue_step(p_name + ": Oh no I think I heard it there!", 3.0, true)
 
 func start_arrow_bounce():

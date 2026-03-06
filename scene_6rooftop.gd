@@ -40,18 +40,18 @@ func start_ending_sequence():
 	
 	# 3. DIALOGUE SEQUENCE
 	if dialogue_ui:
-		dialogue_ui.show_text("The Chopper! It's here!", 3.0, true)
+		dialogue_ui.show_text("The Chopper! It's here! \n (Press Enter to Continue)", 1.0, true)
 		await dialogue_ui.finished 
 		
 		force_player_idle()
-		dialogue_ui.show_text("We are safe now... we finally made it.", 3.0, true)
+		dialogue_ui.show_text("We are safe now... we finally made it. \n (Press Enter to Continue)", 1.0, true)
 		await dialogue_ui.finished
 		
 		force_player_idle()
-		dialogue_ui.show_text("Let's get out of here.", 2.5, true)
+		dialogue_ui.show_text("Let's get out of here. \n (Press Enter to Continue)", 2, true)
 		await dialogue_ui.finished # <--- HIHINTO DITO HANGGAT DI TAPOS ANG SALITA
 	else:
-		await get_tree().create_timer(3.0).timeout 
+		await get_tree().create_timer(1.0).timeout 
 
 	# 4. THE 5-SECOND FADE IN (HIHINTO ANG CODE DITO HANGGAT DI TAPOS ANG 5 SECONDS)
 	if fade_rect and end_screen_label:

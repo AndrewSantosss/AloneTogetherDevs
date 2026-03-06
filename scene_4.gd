@@ -34,6 +34,8 @@ var key_spawned := false
 var truck_moved := false
 var gate_opened := false
 
+@onready var notification_label = $CanvasLayer/NotificationLabel
+
 func _ready():
 	print("DEBUG: Scene 4 Initializing...")
 	
@@ -47,6 +49,8 @@ func _ready():
 			else: cam = pivot.find_child("Camera3D", true, false)
 			
 	dialogue_ui = find_child("DialogueUI", true, false)
+	
+	setup_notification_ui()
 	
 	minimap_cam = find_child("MinimapCamera", true, false)
 	
@@ -103,6 +107,20 @@ func _process(_delta):
 	if battle_active and not key_spawned:
 		if enemy_container and enemy_container.get_child_count() == 0:
 			spawn_truck_key()
+			
+func setup_notification_ui():
+	if notification_label:
+		notification_label.text = "Objective Updated"
+		notification_label.visible = true
+		notification_label.modulate.a = 0.0 # Start hidden
+
+func show_objective_update_notif():
+	if notification_label:
+		var tween = create_tween()
+		notification_label.modulate.a = 0.0 # Force reset
+		tween.tween_property(notification_label, "modulate:a", 1.0, 0.5) # Fade in
+		tween.tween_interval(2.0)                                     # Stay
+		tween.tween_property(notification_label, "modulate:a", 0.0, 0.5) # Fade out
 
 func start_level_intro():
 	if Global.has_seen("scene4_intro"):
@@ -141,15 +159,12 @@ func _on_truck_trigger_entered(body):
 		elif not truck_objective_active:
 			truck_objective_active = true
 			await run_dialogue_step(p_name + ": Damn, this truck is blocking the only way out.", 3.0, true)
+			show_objective_update_notif() # Call notification() # Call notification
+			# --- SHOW "FindKey" LABEL ---
+			if find_key_label:find_key_label.visible = true
 			await run_dialogue_step(p_name + ": Wait... I recognize that logo. 'Victory Liner'.", 3.5, true)
 			await run_dialogue_step(p_name + ": The terminal is nearby. If the driver ran, the keys might be there.", 4.0, true)
-			dialogue_ui.show_text("Objective: Search Victory Liner Terminal", 5.0, false)
 			
-			# --- SHOW "FindKey" LABEL ---
-			if find_key_label:
-				find_key_label.visible = true
-			
-			spawn_guide_path(guide_target) 
 
 func _on_victory_area_entered(body):
 	if body == player and truck_objective_active and not battle_active and not key_spawned:
@@ -191,8 +206,8 @@ func _on_key_pickup(body):
 			truck_marker.visible = true
 			
 		var p_name = GameManager.player_name
-		await run_dialogue_step(p_name + ": Got it. Now to move that truck and get out of here.", 3.5, true)
-		spawn_guide_path(truck_target)
+		await run_dialogue_step(p_name + ": Got it. Now i need to move that truck and get out of here.", 3.5, true)
+		show_objective_update_notif() # Call notification() # Call notification
 
 func move_truck_animation():
 	if not truck_obstacle: return
@@ -208,7 +223,6 @@ func move_truck_animation():
 	tween.tween_property(truck_obstacle, "global_position", target_pos, 5.0).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
 	await tween.finished
 	dialogue_ui.show_text("Objective: Proceed to Extraction Point", 4.0, false)
-	spawn_guide_path(gate_target)
 
 # ... (Helper functions below remain unchanged: spawn_guide_path, spawn_arrows_between, run_dialogue_step, apply_camera_shake)
 func spawn_guide_path(target_node):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=3 uid="uid://b22ef5ijugjbq"]
+[gd_scene load_steps=177 format=3 uid="uid://b22ef5ijugjbq"]
 
 [ext_resource type="Script" uid="uid://cur4i6l2ihdte" path="res://scene_1.gd" id="1_5x68o"]
 [ext_resource type="PackedScene" uid="uid://c7psjp33u27si" path="res://PlayerPackage.tscn" id="1_uhspm"]
@@ -652,9 +652,64 @@ corner_radius_top_right = 1000
 corner_radius_bottom_right = 1000
 corner_radius_bottom_left = 1000
 
+[sub_resource type="FontFile" id="FontFile_yj075"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/17/0/ascent = 0.0
+cache/0/17/0/descent = 0.0
+cache/0/17/0/underline_position = 0.0
+cache/0/17/0/underline_thickness = 0.0
+cache/0/17/0/scale = 1.0
+cache/0/18/0/ascent = 0.0
+cache/0/18/0/descent = 0.0
+cache/0/18/0/underline_position = 0.0
+cache/0/18/0/underline_thickness = 0.0
+cache/0/18/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_1xtnh"]
+line_spacing = 6.0
+font = SubResource("FontFile_yj075")
+font_size = 18
+shadow_color = Color(0, 0, 0, 0.44705883)
+
 [sub_resource type="LabelSettings" id="LabelSettings_yexi5"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yj075"]
+font_size = 17
+shadow_size = 0
+shadow_color = Color(0, 0, 0, 0.5803922)
+
+[sub_resource type="FontFile" id="FontFile_hrxwa"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/15/0/ascent = 0.0
+cache/0/15/0/descent = 0.0
+cache/0/15/0/underline_position = 0.0
+cache/0/15/0/underline_thickness = 0.0
+cache/0/15/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_yt52k"]
+font = SubResource("FontFile_hrxwa")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yj075"]
+cull_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+metallic = 0.26
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yt52k"]
+top_radius = 2.583
+cap_top = false
 
 [node name="Scene1" type="Node3D" node_paths=PackedStringArray("city_marker")]
 script = ExtResource("1_5x68o")
@@ -764,6 +819,22 @@ transform = Transform3D(1.8988696, 0, -29.939846, 0, 30, 0, 29.939846, 0, 1.8988
 
 [node name="blockbench_export6" parent="buildings" instance=ExtResource("12_yj075")]
 transform = Transform3D(-1.8988723, 0, 29.939846, 0, 30, 0, -29.939846, 0, -1.8988723, -8506.957, 0, 2610.0784)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4376.1143, 1.5927238, 552.4475)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 0.572
+light_indirect_energy = 0.0
+omni_range = 2.557
+omni_attenuation = -10.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="buildings"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4388.626, 1.5927238, 566.3701)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 0.572
+light_indirect_energy = 0.0
+omni_range = 2.557
+omni_attenuation = -10.0
 
 [node name="fenceRusty" type="Node3D" parent="."]
 
@@ -1628,6 +1699,7 @@ transform = Transform3D(1, 0, 0, 0, 1.31867, 0, 0, 0, 1, 26.0317, 0, 0)
 
 [node name="Label3D" type="Label3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
 transform = Transform3D(2.04, 0, 0, 0, 1.19945, 0.030207, 0, -0.0362484, 0.999543, -873.545, 163.157, -88.97)
+visible = false
 pixel_size = 0.09
 text = "OLONGAPO PUBLIC MARKET
 "
@@ -1871,18 +1943,18 @@ transform = Transform3D(-0.13540137, -0.28769493, -0.9481023, 0.23197974, 0.9211
 
 [node name="MinimapFrame2" type="Panel" parent="HUD"]
 material = SubResource("ShaderMaterial_yj075")
-offset_left = 911.0
-offset_top = 10.0
-offset_right = 1072.0
-offset_bottom = 168.0
+offset_left = 899.0
+offset_top = 11.0
+offset_right = 1060.0
+offset_bottom = 169.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_p2wow")
 
 [node name="MinimapFrame" type="Panel" parent="HUD"]
 clip_children = 1
-offset_left = 915.0
-offset_top = 14.0
-offset_right = 1068.0
-offset_bottom = 164.0
+offset_left = 903.0
+offset_top = 15.0
+offset_right = 1056.0
+offset_bottom = 165.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_p2wow")
 
 [node name="SubViewport" type="SubViewportContainer" parent="HUD/MinimapFrame"]
@@ -2004,7 +2076,19 @@ vertical_alignment = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
-visible = false
+
+[node name="NotificationLabel" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -72.0
+offset_top = 149.0
+offset_right = 72.0
+offset_bottom = 172.0
+grow_horizontal = 2
+text = "Objective Updated"
+label_settings = SubResource("LabelSettings_1xtnh")
+horizontal_alignment = 1
 
 [node name="InstructionOverlay" type="Control" parent="CanvasLayer"]
 process_mode = 3
@@ -2021,10 +2105,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -73.0
-offset_top = 54.0
-offset_right = -66.67355
-offset_bottom = 68.74662
+offset_left = 1190.0
+offset_top = 79.0
+offset_right = 1196.3264
+offset_bottom = 93.74662
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(54.21682, 7.6627736)
@@ -2032,18 +2116,18 @@ color = Color(0, 0, 0, 0.75686276)
 
 [node name="CountdownLabel" type="Label" parent="CanvasLayer/InstructionOverlay"]
 layout_mode = 0
-offset_left = 135.0
-offset_top = 169.0
-offset_right = 175.0
-offset_bottom = 192.0
+offset_left = 1398.0
+offset_top = 194.0
+offset_right = 1438.0
+offset_bottom = 217.0
 scale = Vector2(0.45981458, 0.45981458)
 
 [node name="Label3D" type="Label" parent="CanvasLayer/InstructionOverlay"]
 layout_mode = 0
-offset_left = 21.0
-offset_top = 78.0
-offset_right = 508.00006
-offset_bottom = 361.0
+offset_left = 1283.9999
+offset_top = 103.0
+offset_right = 1771.0
+offset_bottom = 386.0
 scale = Vector2(0.5872628, 0.6705186)
 text = "Navigation: Use the Minimap to make navigation easier.
 Movement: [WASD] to Walk | [SHIFT] to Sprint
@@ -2055,10 +2139,10 @@ label_settings = SubResource("LabelSettings_yexi5")
 [node name="ContinueLabel" type="Label" parent="CanvasLayer/InstructionOverlay"]
 process_mode = 3
 layout_mode = 0
-offset_left = 99.0
-offset_top = 170.0
-offset_right = 301.0
-offset_bottom = 193.0
+offset_left = 1362.0
+offset_top = 195.0
+offset_right = 1564.0
+offset_bottom = 218.0
 scale = Vector2(0.41981578, 0.41981578)
 text = "Press Any Key to Continue"
 horizontal_alignment = 1
@@ -2073,6 +2157,98 @@ text = "PARK RUINS"
 font_size = 80
 outline_size = 80
 uppercase = true
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+offset_left = 895.99994
+offset_top = 182.0
+offset_right = 935.99994
+offset_bottom = 196.70589
+scale = Vector2(4.3599997, 1.36)
+color = Color(0.072842635, 0.072842635, 0.072842635, 1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 895.99994
+offset_top = 182.0
+offset_right = 935.99994
+offset_bottom = 222.0
+scale = Vector2(4.3599997, 1.36)
+color = Color(0.13333334, 0.13333334, 0.13333334, 0.8156863)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 919.0
+offset_top = 183.99998
+offset_right = 1090.0
+offset_bottom = 240.99998
+scale = Vector2(0.6558331, 0.6558331)
+text = "✓ Main Objectives:
+ "
+label_settings = SubResource("LabelSettings_yj075")
+horizontal_alignment = 2
+
+[node name="Objective" type="Label" parent="."]
+visible = false
+offset_left = 905.0
+offset_top = 209.0
+offset_right = 1214.0
+offset_bottom = 258.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Investigate the area.
+  "
+label_settings = SubResource("LabelSettings_yt52k")
+
+[node name="ObjectiveKill" type="Label" parent="."]
+visible = false
+offset_left = 905.0
+offset_top = 209.0
+offset_right = 1214.0
+offset_bottom = 258.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Kill all the enemies.
+  "
+label_settings = SubResource("LabelSettings_yt52k")
+
+[node name="ObjectiveGate" type="Label" parent="."]
+visible = false
+offset_left = 905.0
+offset_top = 202.0
+offset_right = 1230.0
+offset_bottom = 277.0
+scale = Vector2(0.6213164, 0.6213164)
+text = "▢ Kill all the enemies and then
+enter the gate.
+  "
+label_settings = SubResource("LabelSettings_yt52k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.230931, 0, 0, 0, 18.322247, 0, 0, 0, 3.9349554, -4337.3345, -14.566711, 514.0526)
+material_override = SubResource("StandardMaterial3D_yj075")
+transparency = 0.99
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("CylinderMesh_yt52k")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4337.7393, 2.4079475, 513.379)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 16.0
+light_indirect_energy = 0.0
+omni_range = 11.508458
+omni_attenuation = 0.362
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4352.6504, 1.5927238, 527.96)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 0.572
+light_indirect_energy = 0.0
+omni_range = 2.557
+omni_attenuation = -10.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4365.162, 1.5927238, 541.8826)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 0.572
+light_indirect_energy = 0.0
+omni_range = 2.557
+omni_attenuation = -10.0
 
 [editable path="SubViewportContainer/SubViewport/entities/playerMain/PlayerPackage"]
 [editable path="PanTrigger"]

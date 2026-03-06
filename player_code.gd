@@ -9,7 +9,7 @@ enum Weapon { SHOTGUN }
 var current_weapon = Weapon.SHOTGUN
 
 # --- Player Stats ---
-@export var speed = 10.0 
+@export var speed = 55.0 
 @export var sprint_speed = 20.0
 @export var jump_velocity = 120.0 
 @export var health = 100.0
@@ -594,7 +594,7 @@ func update_ui():
 			ammo_label.text = "Reloading..."
 		else:
 			var reserve = Inventory.get_item_count("ammo")
-			ammo_label.text = "Ammo: " + str(current_ammo) + " / " + str(reserve)
+			ammo_label.text = "" + str(current_ammo) + " / " + str(reserve)
 
 func check_dog_health():
 	if is_instance_valid(dog_companion):

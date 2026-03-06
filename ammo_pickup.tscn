@@ -4,7 +4,7 @@
 script/source = "extends Area3D
 
 @export var item_name: String = \"ammo\"
-@export var quantity: int = 5 # Gives 5 bullets per pickup, change as needed
+@export var quantity: int = 20 # Gives 5 bullets per pickup, change as needed
 @export var rotate_speed: float = 2.0
 
 @onready var visual_node = $Visuals
