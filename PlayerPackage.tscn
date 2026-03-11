@@ -1,4 +1,4 @@
-[gd_scene load_steps=100 format=3 uid="uid://c7psjp33u27si"]
+[gd_scene load_steps=105 format=3 uid="uid://c7psjp33u27si"]
 
 [ext_resource type="Script" uid="uid://depaygkgmdkuo" path="res://player_code.gd" id="1_ikdwn"]
 [ext_resource type="Texture2D" uid="uid://drn4hjsejhec3" path="res://character/shoot_back.png" id="2_2tgtl"]
@@ -129,6 +129,26 @@ region = Rect2(128, 64, 64, 64)
 [sub_resource type="AtlasTexture" id="AtlasTexture_k44gi"]
 atlas = ExtResource("3_x2ql6")
 region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5l11"]
+atlas = ExtResource("2_2tgtl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fadt"]
+atlas = ExtResource("5_q0icc")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipthv"]
+atlas = ExtResource("9_pbjcl")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0tfn"]
+atlas = ExtResource("2_2tgtl")
+region = Rect2(64, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_quhte"]
+atlas = ExtResource("2_2tgtl")
+region = Rect2(64, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gfulj"]
 atlas = ExtResource("4_bgcur")
@@ -396,6 +416,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y5l11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fadt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipthv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0tfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_quhte")
+}],
+"loop": false,
+"name": &"melee",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_gfulj")
 }, {
 "duration": 1.0,
@@ -659,6 +699,9 @@ animations = [{
 }]
 
 [sub_resource type="FontFile" id="FontFile_yo8xh"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -711,6 +754,10 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 0.9998792, 0.015550286, 0, -0.015550286, 0.9998792, -12.01445, 2.85493, -9.820068)
 script = ExtResource("1_ikdwn")
 sprint_speed = 120.0
+melee_damage = 40.0
+melee_range = 50.0
+melee_cooldown = 0.0
+reload_time = 4
 stamina_drain_rate = 10.0
 footstep_frames = Array[int]([2, 6])
 camera_pivot = NodePath("../CameraPivot")
@@ -744,8 +791,8 @@ shaded = true
 alpha_cut = 2
 texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_mrrh4")
-animation = &"pickup"
-frame = 5
+animation = &"melee"
+frame = 4
 frame_progress = 1.0
 
 [node name="AttackRayOrigin" type="Marker3D" parent="Player"]

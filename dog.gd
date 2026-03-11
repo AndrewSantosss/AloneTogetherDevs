@@ -8,7 +8,7 @@ extends CharacterBody3D
 
 # --- Combat Settings ---
 @export var health := 90.0 
-@export var damage := 20
+@export var damage := 1
 @export var attack_range := 6.0 
 @export var attack_cooldown := 3
 

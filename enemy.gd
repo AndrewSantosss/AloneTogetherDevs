@@ -38,7 +38,7 @@ var flash_material: ShaderMaterial
 @export var attack_range := 25.0
 @export var attack_damage := 10.0
 @export var attack_cooldown := 2.0
-@export var health := 1000.0
+@export var health := 70.0
 
 # --- Audio Settings (FAKE 3D) ---
 @export var hearing_distance: float = 600

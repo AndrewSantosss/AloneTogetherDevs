@@ -5851,7 +5851,7 @@ transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -564.18085, 3.585
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 1190.7048)
 
 [node name="Enemy3" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 1283.8441)
+transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 1091.8951)
 
 [node name="Enemy4" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -359.41464, 3.58561, 939.1959)
@@ -5867,24 +5867,6 @@ transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -445.5302, 3.5856
 
 [node name="Enemy8" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -534.5862, 3.58561, 1376.5714)
-
-[node name="Enemy9" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -186.3155, 3.58561, 1376.5714)
-
-[node name="Enemy10" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -106.45447, 3.58561, 1275.5265)
-
-[node name="Enemy11" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -243.16197, 3.58561, 1275.5265)
-
-[node name="Enemy12" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -725.61475, 3.58561, 1321.3511)
-
-[node name="Enemy13" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -893.0874, 3.58561, 1321.3511)
-
-[node name="Enemy14" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
-transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -320.0782, 3.58561, 871.3064)
 
 [node name="Enemy15" parent="EnemyContainer" instance=ExtResource("1_w1pb7")]
 transform = Transform3D(5.52972, 0, 0, 0, 5.97979, 0, 0, 0, 1, -320.0782, 3.58561, 1067.0621)

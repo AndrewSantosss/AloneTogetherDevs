@@ -5784,6 +5784,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4078.292, 15.176565, 265.973
 [node name="campfire" parent="SubViewportContainer" instance=ExtResource("36_8aa3y")]
 transform = Transform3D(3.5919702, 0, 0, 0, 4.4868855, 0, 0, 0, 3.5823936, -4050.677, 6.950798, 311.0197)
 
+[node name="v0_0_1" type="Label" parent="."]
+layout_mode = 0
+offset_left = 972.0
+offset_top = 18.0
+offset_right = 1061.0
+offset_bottom = 41.0
+text = "v.0.0.1 Beta"
+
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_left = 82.00001

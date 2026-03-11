@@ -5,7 +5,7 @@ signal player_health_low
 signal dog_health_low
 
 # --- Weapon System ---
-enum Weapon { SHOTGUN }
+enum Weapon { SHOTGUN, MELEE } # Idinagdag ang MELEE
 var current_weapon = Weapon.SHOTGUN
 
 # --- Player Stats ---
@@ -26,6 +26,11 @@ var current_weapon = Weapon.SHOTGUN
 @export var min_attack_damage = 10.0 
 @export var attack_range = 300.0
 @export var attack_hit_frame := 1
+
+# --- NEW: Melee Stats ---
+@export var melee_damage = 60.0
+@export var melee_range = 5.0
+@export var melee_cooldown = 0.4 # Mas mabilis kaysa shotgun/reload logic
 
 # --- Ammo ---
 @export var max_ammo := 5
@@ -171,6 +176,7 @@ func _on_hit_timer_timeout():
 		hit_label.hide()
 
 func start_reload():
+	if current_weapon == Weapon.MELEE: return # Bawal mag-reload kung melee
 	if is_reloading or is_executing or is_picking_up: return
 	
 	# Prevent reloading if the gun is already full
@@ -270,6 +276,8 @@ func apply_cinematic_shake(amount: float):
 	shake_strength = amount
 
 func _physics_process(delta):
+	if is_dying: return # Huwag mag-process kung patay na
+	
 	if get_tree().paused or is_executing: 
 		velocity.x = 0
 		velocity.z = 0
@@ -332,32 +340,51 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor() and not is_attacking and not is_picking_up:
 		y_velocity = jump_velocity
 
+	# --- WEAPON ATTACK LOGIC (SHOTGUN & MELEE) ---
 	if Input.is_action_just_pressed("attack") and not is_attacking and not is_reloading and not is_picking_up:
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			if current_ammo > 0:
+			if current_weapon == Weapon.SHOTGUN:
+				if current_ammo > 0:
+					is_attacking = true
+					damage_dealt = false 
+					velocity.x = 0
+					velocity.z = 0
+					current_ammo -= 1
+					update_ui()
+					if shotgun_sound: shotgun_sound.play()
+					if animated_sprite and animated_sprite.animation != "attack": animated_sprite.play("attack")
+					if current_ammo <= 0: 
+						await get_tree().create_timer(0.2).timeout
+						start_reload()
+				else:
+					if Inventory.get_item_count("ammo") > 0:
+						start_reload()
+					else:
+						spawn_floating_text("NO AMMO!")
+			
+			elif current_weapon == Weapon.MELEE:
 				is_attacking = true
-				damage_dealt = false 
+				damage_dealt = false
 				velocity.x = 0
 				velocity.z = 0
-				current_ammo -= 1
-				update_ui()
-				if shotgun_sound: shotgun_sound.play()
-				if animated_sprite and animated_sprite.animation != "attack": animated_sprite.play("attack")
-				if current_ammo <= 0: 
-					await get_tree().create_timer(0.2).timeout
-					start_reload()
-			else:
-				if Inventory.get_item_count("ammo") > 0:
-					start_reload()
+				if animated_sprite and animated_sprite.sprite_frames.has_animation("melee"):
+					animated_sprite.play("melee")
 				else:
-					spawn_floating_text("NO AMMO!")
+					animated_sprite.play("attack") # Fallback sa normal attack kung walang melee anim
 
 	if is_attacking:
-		if animated_sprite and animated_sprite.frame == attack_hit_frame and not damage_dealt:
-			if camera_pivot and camera_pivot.has_method("apply_shake"):
-				camera_pivot.apply_shake(3.0) 
-			deal_damage()
-			damage_dealt = true 
+		# Shotgun Damage
+		if current_weapon == Weapon.SHOTGUN:
+			if animated_sprite and animated_sprite.frame == attack_hit_frame and not damage_dealt:
+				if camera_pivot and camera_pivot.has_method("apply_shake"):
+					camera_pivot.apply_shake(3.0) 
+				deal_damage()
+				damage_dealt = true 
+		# Melee Damage
+		elif current_weapon == Weapon.MELEE:
+			if animated_sprite and animated_sprite.frame == 1 and not damage_dealt:
+				deal_melee_damage()
+				damage_dealt = true
 
 	if not is_attacking and not is_picking_up:
 		var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
@@ -415,6 +442,7 @@ func _physics_process(delta):
 	
 	# --- UPDATE SILHOUETTE TEXTURE ---
 	if animated_sprite and silhouette_material:
+		# Disable silhouette kapag umaatake (shotgun or melee), nagre-reload, o pumupulot
 		if is_attacking or is_reloading or is_picking_up:
 			silhouette_material.set_shader_parameter("silhouette_color", Color(0, 0, 0, 0))
 		else:
@@ -509,7 +537,7 @@ func end_ultimate_sequence():
 		await tween.finished
 	freeze_enemies(false)
 	shake_strength = 0.0
-	if camera: camera.make_current()
+	if camera: camera.current = true
 	if health_bar and health_bar.get_parent(): health_bar.get_parent().visible = true
 	if camera_pivot:
 		camera_pivot.set_process(true)
@@ -551,6 +579,21 @@ func try_to_heal():
 func _unhandled_input(event):
 	if is_dying: return
 
+	# --- WEAPON SWITCHING (SCROLL WHEEL) ---
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP or event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			if current_weapon == Weapon.SHOTGUN:
+				current_weapon = Weapon.MELEE
+				spawn_floating_text("Melee Mode")
+				is_first_person = false 
+				if camera: camera.current = true
+			else:
+				current_weapon = Weapon.SHOTGUN
+				spawn_floating_text("Shotgun Mode")
+				is_first_person = true 
+				if camera: camera.current = true
+			update_ui()
+
 	# Manual Reload
 	if event is InputEventKey and event.pressed and event.keycode == KEY_R:
 		start_reload()
@@ -577,7 +620,10 @@ func _unhandled_input(event):
 func _on_animation_finished():
 	if is_executing or not animated_sprite: return 
 	
-	if animated_sprite.animation in ["attack"]:
+	if animated_sprite.animation in ["attack", "melee"]: 
+		if animated_sprite.animation == "melee":
+			await get_tree().create_timer(melee_cooldown).timeout
+			
 		is_attacking = false
 		damage_dealt = false 
 		_update_animation_state(Input.get_vector("move_left", "move_right", "move_forward", "move_backward"))
@@ -590,7 +636,9 @@ func update_ui():
 	if health_bar: health_bar.value = health
 	if stamina_bar: stamina_bar.value = current_stamina
 	if ammo_label:
-		if is_reloading: 
+		if current_weapon == Weapon.MELEE:
+			ammo_label.text = "MELEE"
+		elif is_reloading: 
 			ammo_label.text = "Reloading..."
 		else:
 			var reserve = Inventory.get_item_count("ammo")
@@ -696,6 +744,33 @@ func deal_damage():
 					hit_sound.pitch_scale = randf_range(0.9, 1.1)
 					hit_sound.play()
 
+# --- MELEE DAMAGE LOGIC (Pinatapat sa Cursor) ---
+func deal_melee_damage():
+	var active_cam = camera
+	if not active_cam: return
+	
+	var space_state = get_world_3d().direct_space_state
+	var mouse_pos = get_viewport().get_visible_rect().size / 2 # Center of screen/cursor
+	
+	# 1. Project ray mula sa camera kung saan nakatapat ang mouse
+	var ray_origin = active_cam.project_ray_origin(mouse_pos)
+	var ray_end = ray_origin + active_cam.project_ray_normal(mouse_pos) * melee_range
+	
+	var query = PhysicsRayQueryParameters3D.create(ray_origin, ray_end)
+	var exclusions = [self]
+	if is_instance_valid(dog_companion): exclusions.append(dog_companion)
+	query.exclude = exclusions
+	
+	var hit_result = space_state.intersect_ray(query)
+	
+	if hit_result:
+		var collider = hit_result.collider
+		if collider.is_in_group("enemies") and collider.has_method("take_damage"):
+			collider.take_damage(melee_damage)
+			if hit_sound:
+				hit_sound.pitch_scale = randf_range(1.2, 1.4)
+				hit_sound.play()
+
 func show_warning(text: String):
 	if popup_label:
 		popup_label.text = text
@@ -707,27 +782,25 @@ func show_warning(text: String):
 		tween.tween_callback(popup_label.hide)
 
 func die():
+	if is_dying: return
+	is_dying = true
 	print("Player has died!")
-	get_tree().reload_current_scene()
+	get_tree().call_deferred("reload_current_scene")
 
 func take_damage(amount):
-	health -= amount
+	if is_dying: return 
 	
-	# 1. VISION SHAKE
+	health -= amount
 	apply_cinematic_shake(50.0) 
 	
-	# 2. RED GLOW FLASH (Solid Red Silhouette Logic)
 	if animated_sprite and silhouette_material:
 		var flash_tween = create_tween()
-		
 		var blue_color = Color(0.0, 0.6, 1.0, 0.5) 
 		var red_flash_solid = Color(5.0, 0.0, 0.0, 1.0) 
 		
-		# Gawing SOLID RED agad ang silhouette at itago ang main texture
 		silhouette_material.set_shader_parameter("silhouette_color", red_flash_solid)
 		animated_sprite.modulate.a = 0.0
 		
-		# Fade back ang silhouette at ang main texture
 		flash_tween.tween_method(
 			func(c): silhouette_material.set_shader_parameter("silhouette_color", c),
 			red_flash_solid, 
@@ -737,15 +810,11 @@ func take_damage(amount):
 		
 		flash_tween.parallel().tween_property(animated_sprite, "modulate:a", 1.0, 0.4)
 
-	# 3. HEALTH BAR RED FLASH
 	if health_bar:
 		var bar_tween = create_tween()
-		# Gawing pula ang buong health bar node agad
-		health_bar.modulate = Color(0.5, 0, 0, 1) # Overbright Red para sa UI glow
-		# I-fade pabalik sa normal na kulay (White modulate = normal color)
+		health_bar.modulate = Color(0.5, 0, 0, 1) 
 		bar_tween.tween_property(health_bar, "modulate", Color.WHITE, 0.4).set_trans(Tween.TRANS_SINE)
 
-	# --- REST OF THE BASE CODE (No changes) ---
 	if hit_label:
 		hit_label.show()
 	if hit_timer:

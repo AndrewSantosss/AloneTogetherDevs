@@ -1,4 +1,4 @@
-[gd_scene load_steps=259 format=3 uid="uid://dbhbpksppw7fv"]
+[gd_scene load_steps=266 format=3 uid="uid://dbhbpksppw7fv"]
 
 [ext_resource type="PackedScene" uid="uid://dkf7vpr6fkkya" path="res://enemy.tscn" id="1_blb5u"]
 [ext_resource type="Script" uid="uid://htaojc2j0wk5" path="res://gate.gd" id="1_m0bgb"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b6qhg5ft75eud" path="res://vegetation.tscn" id="6_x6wma"]
 [ext_resource type="PackedScene" uid="uid://dk33wivr52j32" path="res://grass_plant.tscn" id="7_6jkb7"]
 [ext_resource type="Texture2D" uid="uid://c1yyocgex8bqh" path="res://buildings/Celtech_College_Asset.png" id="7_a2krc"]
+[ext_resource type="PackedScene" uid="uid://0xl84n1o4d0y" path="res://ammo_pickup.tscn" id="7_hrxwa"]
+[ext_resource type="PackedScene" uid="uid://doqkbldrkgs5p" path="res://medkit.tscn" id="8_6wadg"]
 [ext_resource type="Texture2D" uid="uid://cboj0y7ylxpjy" path="res://buildings/Shop_Asset_3.png" id="8_b02gy"]
 [ext_resource type="Texture2D" uid="uid://c63uxeb7ju1j3" path="res://buildings/Jollibee_asset.png" id="9_m0bgb"]
 [ext_resource type="Texture2D" uid="uid://dwwxtq605b2fm" path="res://buildings/Dialisis_Center_Asset.png" id="10_liwt8"]
@@ -35,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://ciepx3w5fd2gg" path="res://vines.tscn" id="30_pggkj"]
 [ext_resource type="PackedScene" uid="uid://crme6l84ntp3f" path="res://moss.tscn" id="31_s3kfw"]
 [ext_resource type="PackedScene" uid="uid://c546e1alfgay3" path="res://truck.tscn" id="33_a2krc"]
+[ext_resource type="Texture2D" uid="uid://cxay8etle71we" path="res://models/lilim_0.png" id="34_6wadg"]
 [ext_resource type="PackedScene" uid="uid://dupq2o50lc8vg" path="res://truckB.tscn" id="34_b02gy"]
 [ext_resource type="PackedScene" uid="uid://uyyk21wmqk72" path="res://post.tscn" id="36_liwt8"]
 [ext_resource type="PackedScene" uid="uid://br1ptgiw23cnr" path="res://NPC.tscn" id="37_6m5ae"]
@@ -720,11 +723,17 @@ data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_pup80"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tkg62"]
+albedo_texture = ExtResource("34_6wadg")
+
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_57iuo"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_keo8b"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ywxs"]
+albedo_texture = ExtResource("34_6wadg")
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_perya"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
@@ -874,6 +883,18 @@ shadow_color = Color(0, 0, 0, 0.44705883)
 [sub_resource type="LabelSettings" id="LabelSettings_n80bx"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6wadg"]
+cull_mode = 2
+albedo_color = Color(1, 1, 0, 1)
+metallic = 0.26
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+emission_energy_multiplier = 16.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tkg62"]
+top_radius = 2.583
+cap_top = false
 
 [node name="Scene3" type="Node3D"]
 script = ExtResource("1_wmkmp")
@@ -1062,9 +1083,6 @@ transform = Transform3D(-0.30114055, 0, -0.2540391, 0, 0.37160942, 0, 0.2381082,
 [node name="vegetation6" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
 transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -2648.4531, -9.0005045, 68.51765)
 
-[node name="vegetation7" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
-transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -2878.7537, -9.0005045, 118.32187)
-
 [node name="vegetation8" parent="SubViewportContainer/SubViewport/vegetations" instance=ExtResource("6_x6wma")]
 transform = Transform3D(0.326343, 0, 0.21571927, 0, 0.3716094, 0, -0.20219138, 0, 0.34817728, -2204.4238, -9.0005045, 153.88794)
 
@@ -1113,11 +1131,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9581.01, 0, 2674.08)
 [node name="PlayerPackage" parent="SubViewportContainer/SubViewport/entities/playerMain" instance=ExtResource("1_vpreu")]
 transform = Transform3D(-0.55620855, 0, 0.83104277, 0, 1, 0, -0.83104277, 0, -0.55620855, 5322.0313, -2.2925987, -2234.7268)
 
+[node name="Player" parent="SubViewportContainer/SubViewport/entities/playerMain/PlayerPackage" index="0"]
+melee_damage = 60.0
+melee_range = 5.0
+melee_cooldown = 0.4
+
 [node name="enemyMain" type="Node3D" parent="SubViewportContainer/SubViewport/entities"]
 
 [node name="Enemy2" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("1_blb5u")]
-transform = Transform3D(13.99733, 0, 0, 0, 16.984245, 0, 0, 0, 1, -3255.6792, 20.7101, 217.01648)
-health = 1000.0
+transform = Transform3D(13.99733, 0, 0, 0, 16.984245, 0, 0, 0, 1, -3159.5645, 20.7101, 286.23785)
+
+[node name="Ammunition" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("7_hrxwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3371.0034, 16.27575, -226.99487)
+
+[node name="Medkit" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("8_6wadg")]
+transform = Transform3D(16.661198, 0, 0, 0, 13.573301, 0, 0, 0, 17.581133, -3372.3608, 14.85902, -275.58484)
+
+[node name="Ammunition2" parent="SubViewportContainer/SubViewport/entities/enemyMain" instance=ExtResource("7_hrxwa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3356.5547, 16.275766, -242.37927)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewportContainer/SubViewport/entities"]
 stream = ExtResource("41_ev1nw")
@@ -3666,6 +3697,7 @@ shape = SubResource("ConcavePolygonShape3D_pup80")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
 transform = Transform3D(17.1727, 0, 0, 0, 121.82, 0, 0, 0, 14.6384, -897.616, 33.5877, -61.2739)
+material_override = SubResource("StandardMaterial3D_tkg62")
 mesh = SubResource("BoxMesh_6nvw1")
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
@@ -3682,6 +3714,7 @@ shape = SubResource("ConcavePolygonShape3D_keo8b")
 
 [node name="MeshInstance3D6" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
 transform = Transform3D(17.1727, 0, 0, 0, 121.82, 0, 0, 0, 14.6384, -580.335, 33.5877, -61.2739)
+material_override = SubResource("StandardMaterial3D_2ywxs")
 mesh = SubResource("BoxMesh_6nvw1")
 
 [node name="CollisionShape3D5" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/mapEnvironment/buildings/Market"]
@@ -4289,6 +4322,15 @@ transform = Transform3D(-0.29289517, -0.58971804, -0.7445215, -0.2138727, 0.8076
 [node name="fenceRusty75" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty" instance=ExtResource("26_xarxi")]
 transform = Transform3D(-0.56973827, -0.61905754, 0.49624404, -0.22789578, 0.7410303, 0.6257733, -0.7067939, 0.26008025, -0.6017885, -2910.1836, 4.001919, 1033.3079)
 
+[node name="fenceRusty23" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty" instance=ExtResource("26_xarxi")]
+transform = Transform3D(-0.8317897, 0, 0.5550913, 0, 1, 0, -0.5550913, 0, -0.8317897, -2564.5754, 20.0115, 183.62825)
+
+[node name="fenceRusty24" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty" instance=ExtResource("26_xarxi")]
+transform = Transform3D(-2.4781218, 0, -0.21991444, 0, 0.99999994, 0, 0.5586509, 0, -0.97551906, -2326.6067, 20.0115, 195.5999)
+
+[node name="fenceRusty34" parent="SubViewportContainer/SubViewport/mapEnvironment/fenceRusty" instance=ExtResource("26_xarxi")]
+transform = Transform3D(-0.99035525, 0, -0.13855097, 0, 1, 0, 0.13855097, 0, -0.99035525, -2492.6565, 8.626524, 225.3197)
+
 [node name="vines" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
 
 [node name="vines" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("30_pggkj")]
@@ -4357,9 +4399,6 @@ transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -3811.5542, -
 [node name="vines22" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("30_pggkj")]
 transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -3295.1995, -44.37491, 11.500641)
 
-[node name="vines23" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("30_pggkj")]
-transform = Transform3D(48.116703, 0, 0, 0, 19.709509, 0, 0, 0, 1, -2639.4963, -44.37491, 11.500641)
-
 [node name="vines24" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("30_pggkj")]
 transform = Transform3D(0.72393286, 0, -1.3470663, 0, 27.860899, 0, 8.944908, 0, 0.1090213, -3491.5217, -74.254105, -179.37405)
 
@@ -4384,6 +4423,15 @@ transform = Transform3D(-8.497882e-07, 0, 0.99999994, 0, 117.92612, 0, -19.44089
 [node name="vines31" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("30_pggkj")]
 transform = Transform3D(-8.497882e-07, 0, 0.99999994, 0, 117.92612, 0, -19.44089, 0, -4.371139e-08, -2777.064, -444.63425, 613.179)
 
+[node name="fenceRusty" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("26_xarxi")]
+transform = Transform3D(0.9328383, 0, -0.8429128, 0, 1, 0, 1.4613905, 0, 0.5380502, -3491.299, 7.460129, -97.08311)
+
+[node name="fenceRusty2" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("26_xarxi")]
+transform = Transform3D(1.7252859, 0, -0.098624915, 0, 1, 0, 0.17099005, 0, 0.9951246, -3354.2517, 7.460129, -10.829376)
+
+[node name="fenceRusty3" parent="SubViewportContainer/SubViewport/mapEnvironment/vines" instance=ExtResource("26_xarxi")]
+transform = Transform3D(1.7252859, 0, -0.098624915, 0, 1, 0, 0.17099005, 0, 0.9951246, -3230.4788, 7.460129, 2.15934)
+
 [node name="trucks" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
 
 [node name="truck15" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
@@ -4396,10 +4444,10 @@ transform = Transform3D(-6.659437, 0, -0.7109426, 0, 5.7986207, 0, 0.9173222, 0,
 transform = Transform3D(6.72232, 0, 0, 0, 5.79862, 0, 0, 0, 5.20993, -3882.295, -2.3234463, 98.15796)
 
 [node name="truck2" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
-transform = Transform3D(3.3337905, 0, 4.524112, 0, 5.79862, 0, -5.837416, 0, 2.583753, -3114.445, 9.266277, 216.09619)
+transform = Transform3D(2.1611521, 0, 4.9333525, 0, 5.79862, 0, -6.3654532, 0, 1.6749353, -3214.3364, 9.266277, 216.09619)
 
 [node name="truck3" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
-transform = Transform3D(6.72232, 0, 0, 0, 5.79862, 0, 0, 0, 5.20993, -2675.924, -3.8860645, 261.16418)
+transform = Transform3D(6.412037, 0, -1.5645747, 0, 5.79862, 0, 2.018755, 0, 4.9694543, -2761.7083, -3.8860645, 157.68106)
 
 [node name="truck4" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
 transform = Transform3D(-6.5478387, 0.5284667, 1.0794945, 0.59924173, 5.774489, -0.09879262, -1.3986814, 0, -5.09591, -2019.5104, -10.887698, 402.6557)
@@ -4442,6 +4490,12 @@ transform = Transform3D(-6.41695, 0, 1.5524272, 0, 5.79862, 0, -2.003081, 0, -4.
 
 [node name="truck19" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
 transform = Transform3D(5.702703, 0.5891711, -2.707274, 0.77203333, 5.35062, 1.9168096, 3.4745808, -2.1558633, 4.0174465, -4321.835, -11.322371, -29.630745)
+
+[node name="bus" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("27_inis0")]
+transform = Transform3D(-6.5270605, -0.32817215, -1.2111934, 0.27174884, 5.328082, -2.04502, 1.5853106, -2.2644777, -4.636192, -3250.5828, -19.590107, 35.383476)
+
+[node name="truck20" parent="SubViewportContainer/SubViewport/mapEnvironment/trucks" instance=ExtResource("34_b02gy")]
+transform = Transform3D(-3.0015836, 0, 4.6617336, 0, 5.79862, 0, -6.014987, 0, -2.3262873, -2810.3518, 9.266277, 109.303406)
 
 [node name="poste" type="Node3D" parent="SubViewportContainer/SubViewport/mapEnvironment"]
 
@@ -4803,6 +4857,40 @@ theme_override_font_sizes/font_size = 23
 text = "+"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="bus" parent="." instance=ExtResource("27_inis0")]
+transform = Transform3D(6.72232, 0, 0, 0, 5.5139394, 1.612378, 0, -1.7945669, 4.95415, -3613.21, -14.870855, 80.84802)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.960491, 0, -2.8111777, 0, 18.322245, 0, 3.022626, 0, 2.7533891, -1149.672, -14.782307, 290.78674)
+material_override = SubResource("StandardMaterial3D_6wadg")
+transparency = 0.99
+gi_lightmap_texel_scale = 0.01
+mesh = SubResource("CylinderMesh_tkg62")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(0.6997257, 0, -0.7144116, 0, 1, 0, 0.7144116, 0, 0.6997257, -1149.4741, 2.1923523, 290.0262)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 16.0
+light_indirect_energy = 0.0
+omni_range = 11.508458
+omni_attenuation = 0.362
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.6997257, 0, -0.7144116, 0, 1, 0, 0.7144116, 0, 0.6997257, -1170.3246, 1.3771286, 289.57623)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 0.572
+light_indirect_energy = 0.0
+omni_range = 2.557
+omni_attenuation = -10.0
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(0.6997257, 0, -0.7144116, 0, 1, 0, 0.7144116, 0, 0.6997257, -1189.0259, 1.3771286, 290.37973)
+light_color = Color(1, 1, 0.24313726, 1)
+light_energy = 0.572
+light_indirect_energy = 0.0
+omni_range = 2.557
+omni_attenuation = -10.0
 
 [editable path="SubViewportContainer/SubViewport/entities/playerMain/PlayerPackage"]
 [editable path="SubViewportContainer/SubViewport/mapEnvironment/poste/post"]
